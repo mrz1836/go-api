@@ -23,7 +23,26 @@
 $ go get -u github.com/mrz1836/go-api
 ```
 
-Updating dependencies in **go-api**:
+Edit the `set_env.sh` file and change the environment variables:
+```bash
+export CACHE_URL=your-cache-url
+```
+
+Once installed, run the service with environment variables set
+```bash
+$ cd ../go-api
+$ . set_env.sh && go run cmd/application/main.go
+$ starting Go API server...
+```
+
+(Optional) Already have environment variables set?
+```bash
+$ cd ../go-api
+$ go run cmd/go-api/main.go
+$ starting Go API server...
+```
+
+(Optional) Updating dependencies in **go-api**:
 ```bash
 $ cd ../go-api
 $ dep ensure -update -v
