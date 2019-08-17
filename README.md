@@ -60,7 +60,6 @@ $ dep ensure -update -v
 - [go-cache](https://github.com/mrz1836/go-cache) - Redis caching made easy
 - [go-api-router](https://github.com/mrz1836/go-api-router) - Fast and slim router
 - [go-sanitize](https://github.com/mrz1836/go-sanitize) - Clean data effortlessly
-- [Authboss](https://github.com/volatiletech/authboss) - Authentication out of the box
 - [SQLBoiler](https://github.com/volatiletech/sqlboiler) - Powerful database ORM
 - [Goose](https://github.com/pressly/goose) - Database migration
 
@@ -72,7 +71,6 @@ You can view the generated [documentation here](https://godoc.org/github.com/mrz
 - The fastest router: Julien Schmidt's [httprouter](https://github.com/julienschmidt/httprouter)
 - The best redis cache package: Gary Burd's [Redigo](https://github.com/gomodule/redigo)
 - Powerful database ORM: VolatileTech's [SQLBoiler](https://github.com/volatiletech/sqlboiler)
-- Complete Authentication: VolatileTech's [Authboss](https://github.com/volatiletech/authboss)
 - Database migration: Pressly's [Goose](https://github.com/pressly/goose)
 - Ready for development or production use
 - Cache dependency management via [go-cache](https://github.com/mrz1836/go-cache)

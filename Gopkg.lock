@@ -8,47 +8,47 @@
     "internal",
     "redis",
   ]
-  pruneopts = "UT"
+  pruneopts = "NUT"
   revision = "9c11da706d9b7902c6da69c592f75637793fe121"
   version = "v2.0.0"
 
 [[projects]]
-  digest = "1:f97285a3b0a496dcf8801072622230d513f69175665d94de60eb042d03387f6c"
+  digest = "1:42be69e2e0f087861268b28425f3d97bb8b5abf4e1b73b330a9c6863bddac1c7"
   name = "github.com/julienschmidt/httprouter"
   packages = ["."]
-  pruneopts = "UT"
+  pruneopts = "NUT"
   revision = "348b672cd90d8190f8240323e372ecd1e66b59dc"
   version = "v1.2.0"
 
 [[projects]]
-  digest = "1:e4c6138585cb98f0e6f9c865036810076cc132cc61cf97c65f59be2fffd80739"
+  digest = "1:ede81b3f338bb9ba08760b4b708fa854473c029783d23ae9fbff1bbfcefa64b1"
   name = "github.com/mrz1836/go-api-router"
   packages = ["."]
-  pruneopts = "UT"
-  revision = "72154fdd7e6c2a9766bda404d8c64c2a37dde71c"
-  version = "v0.0.5"
+  pruneopts = "NUT"
+  revision = "f24ff7cb0e3da43f4bb1e7de532b0330b7f5933f"
+  version = "v0.0.8"
 
 [[projects]]
-  digest = "1:396e40b2f1077f5ef4c4a31c483acc0ef7850de2e5004f9815e643bff106afe6"
+  digest = "1:d6824ae63219447401d8349c1e12db1d1ed41fc4c46373ac74e5786f7e4ce66f"
   name = "github.com/mrz1836/go-cache"
   packages = ["."]
-  pruneopts = "UT"
+  pruneopts = "NUT"
   revision = "855de98ffec1e51e03fe600daa0a086c4e68f2d6"
   version = "v0.0.3"
 
 [[projects]]
-  digest = "1:240c5fd96c8c09463293eeed4142a64c0d806f5e908f1947e39f7baa9ffbadfb"
+  digest = "1:e9752813079877950aa96e8e3771e22771b49be653576000bddc5da78444e215"
   name = "github.com/mrz1836/go-logger"
   packages = ["."]
-  pruneopts = "UT"
+  pruneopts = "NUT"
   revision = "32f02dc12dbefd7ace11a38b43e2b12e4cada1ba"
   version = "v0.0.3"
 
 [[projects]]
-  digest = "1:274f67cb6fed9588ea2521ecdac05a6d62a8c51c074c1fccc6a49a40ba80e925"
+  digest = "1:6bc0652ea6e39e22ccd522458b8bdd8665bf23bdc5a20eec90056e4dc7e273ca"
   name = "github.com/satori/go.uuid"
   packages = ["."]
-  pruneopts = "UT"
+  pruneopts = "NUT"
   revision = "f58768cc1a7a7e77a3bd49e98cdd21419399b6a3"
   version = "v1.2.0"
 

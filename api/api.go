@@ -9,7 +9,16 @@ import (
 
 // Handlers isolated the handlers / router for API (helps with testing)
 func Handlers() *httprouter.Router {
+
+	// Create a new router
 	router := apirouter.New()
+
+	// Create a middleware stack:
+	//s := apirouter.NewStack()
+
+	// Use your middleware:
+	//s.Use(passThrough)
+
 	base.RegisterRoutes(router)
 	return router.HTTPRouter
 }
