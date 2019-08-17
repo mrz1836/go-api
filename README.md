@@ -58,8 +58,8 @@ $ dep ensure -update -v
 ### Package Dependencies
 - [go-logger](https://github.com/mrz1836/go-logger) - Local or remote logging
 - [go-cache](https://github.com/mrz1836/go-cache) - Redis caching made easy
-- [go-api-router](https://github.com/mrz1836/go-api-router) - Fastest router
-- [go-sanitize](https://github.com/mrz1836/go-sanitize) - Clean data easily
+- [go-api-router](https://github.com/mrz1836/go-api-router) - Fast and slim router
+- [go-sanitize](https://github.com/mrz1836/go-sanitize) - Clean data effortlessly
 - [Authboss](https://github.com/volatiletech/authboss) - Authentication out of the box
 - [SQLBoiler](https://github.com/volatiletech/sqlboiler) - Powerful database ORM
 - [Goose](https://github.com/pressly/goose) - Database migration
@@ -68,8 +68,17 @@ $ dep ensure -update -v
 You can view the generated [documentation here](https://godoc.org/github.com/mrz1836/go-api).
 
 ### Features
+- Combination of powerful Go packages all-in-one API solution
 - The fastest router: Julien Schmidt's [httprouter](https://github.com/julienschmidt/httprouter)
 - The best redis cache package: Gary Burd's [Redigo](https://github.com/gomodule/redigo)
+- Powerful database ORM: VolatileTech's [SQLBoiler](https://github.com/volatiletech/sqlboiler)
+- Complete Authentication: VolatileTech's [Authboss](https://github.com/volatiletech/authboss)
+- Database migration: Pressly's [Goose](https://github.com/pressly/goose)
+- Ready for development or production use
+- Cache dependency management via [go-cache](https://github.com/mrz1836/go-cache)
+- Supports different incoming load balancer setups (/health)
+- Logging for each request or when you need it (remote via [LogEntries](https://logentries.com/))
+- Security at the core
 - todo: @mrz
 
 ## Examples & Tests
