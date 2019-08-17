@@ -1,5 +1,5 @@
 # go-api
-**go-api** is a simple example API with support for various implementations
+**go-api** is a simple example API with support for common implementations
 
 | | | | | | | |
 |-|-|-|-|-|-|-|
@@ -30,12 +30,20 @@ $ dep ensure -update -v
 ```
 
 ### Package Dependencies
-- todo: @mrz
+- [go-logger](https://github.com/mrz1836/go-logger) - Local or remote logging
+- [go-cache](https://github.com/mrz1836/go-cache) - Redis caching made easy
+- [go-api-router](https://github.com/mrz1836/go-api-router) - Fastest router
+- [go-sanitize](https://github.com/mrz1836/go-sanitize) - Clean data easily
+- [Authboss](https://github.com/volatiletech/authboss) - Authentication out of the box
+- [SQLBoiler](https://github.com/volatiletech/sqlboiler) - Powerful database ORM
+- [Goose](https://github.com/pressly/goose) - Database migration
 
 ## Documentation
 You can view the generated [documentation here](https://godoc.org/github.com/mrz1836/go-api).
 
 ### Features
+- The fastest router: Julien Schmidt's [httprouter](https://github.com/julienschmidt/httprouter)
+- The best redis cache package: Gary Burd's [Redigo](https://github.com/gomodule/redigo)
 - todo: @mrz
 
 ## Examples & Tests
