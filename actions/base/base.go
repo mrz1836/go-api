@@ -26,7 +26,7 @@ func RegisterRoutes(router *apirouter.Router) {
 
 // index basic request to /
 func index(w http.ResponseWriter, _ *http.Request, _ httprouter.Params) {
-	_, _ = fmt.Fprint(w, "Welcome to the People Finder RESTFul Micro-Service!\nTry using the /search request to get started!\n")
+	_, _ = fmt.Fprint(w, "Welcome to the Go API!\n")
 }
 
 // health basic request to return a health response
