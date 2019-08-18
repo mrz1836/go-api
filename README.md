@@ -21,6 +21,7 @@
 **go-api** requires a [supported release of Go](https://golang.org/doc/devel/release.html#policy) and [dep](https://github.com/golang/dep).
 ```bash
 $ go get -u github.com/mrz1836/go-api
+$ go get -u github.com/pressly/goose/cmd/goose
 ```
 
 Edit the [`set_env.sh`](set_env.sh) file and change the environment variables:
@@ -31,11 +32,11 @@ export CACHE_URL=your-cache-url
 Once installed, run the service with environment variables set
 ```bash
 $ cd ../go-api
-$ . set_env.sh && go run cmd/application/main.go
+$ . set_env.sh && . setup_db.sh && go run cmd/application/main.go
 $ starting Go API server...
 ```
 
-_(Optional)_ Already have environment variables set?
+_(Optional)_ Already have environment variables and database set?
 ```bash
 $ cd ../go-api
 $ go run cmd/go-api/main.go
