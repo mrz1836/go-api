@@ -39,7 +39,7 @@ $ starting Go API server...
 _(Optional)_ Already have environment variables and database set?
 ```bash
 $ cd ../go-api
-$ go run cmd/go-api/main.go
+$ go run cmd/application/main.go
 $ starting Go API server...
 ```
 
@@ -113,19 +113,6 @@ Read more about this Go project's [code standards](CODE_STANDARDS.md).
 
 ## Usage
 View the [examples](examples/examples.go)
-
-Basic implementation:
-```golang
-package main
-
-import (
-	"github.com/mrz1836/go-api"
-)
-
-func main() {
-
-}
-```
 
 ## Maintainers
 
