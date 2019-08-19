@@ -1,0 +1,14 @@
+mysql:
+  pkgname:
+    - models
+  output:
+    - models
+  blacklist:
+    - migrations
+    - goose_db_version
+  dbname: api_example
+  host: localhost
+  port: 3306
+  user: apiDbTestUser
+  pass: ThisIsSecureEnough123
+  sslmode: 'false'
