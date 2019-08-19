@@ -65,6 +65,11 @@ Update the `reset_api_database.sql` if you have issues running the model tests
 GRANT ALL ON `dynamic-database-name-generated-from-sql-boiler`.* to 'apiDbTestUser'@'%';
 ```
 
+Rebuilding the models from the database schema:
+```bash
+$ . rebuild_models.sh
+```
+
 ### Package Dependencies
 - [go-logger](https://github.com/mrz1836/go-logger) - Local or remote logging
 - [go-cache](https://github.com/mrz1836/go-cache) - Redis caching made easy
