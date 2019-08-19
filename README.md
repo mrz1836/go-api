@@ -22,6 +22,10 @@
 ```bash
 $ go get -u github.com/mrz1836/go-api
 $ go get -u github.com/pressly/goose/cmd/goose
+$ go get -u -t github.com/volatiletech/sqlboiler
+$ go get github.com/volatiletech/sqlboiler/drivers/sqlboiler-mysql
+$ go get github.com/volatiletech/null
+$ go get github.com/kat-co/vala
 ```
 
 Edit the [`set_env.sh`](set_env.sh) file and change the environment variables:
@@ -56,6 +60,11 @@ $ cd ../go-api
 $ dep ensure -update -v
 ```
 
+Update the `reset_api_database.sql` if you have issues running the model tests
+```sql
+GRANT ALL ON `dynamic-database-name-generated-from-sql-boiler`.* to 'apiDbTestUser'@'%';
+```
+
 ### Package Dependencies
 - [go-logger](https://github.com/mrz1836/go-logger) - Local or remote logging
 - [go-cache](https://github.com/mrz1836/go-cache) - Redis caching made easy
@@ -76,8 +85,7 @@ You can view the generated [documentation here](https://godoc.org/github.com/mrz
 - Ready for development or production use
 - Cache dependency management via [go-cache](https://github.com/mrz1836/go-cache)
 - Supports different incoming load balancer setups (/health)
-- Logging for each request or when you need it (remote via [LogEntries](https://logentries.com/))
-- Security at the core
+- Logging each request and whenever you need logs (remote via [LogEntries](https://logentries.com/))
 - todo: @mrz
 
 ## Examples & Tests
