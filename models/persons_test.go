@@ -21,17 +21,17 @@ var (
 	_ = queries.Equal
 )
 
-func testPeople(t *testing.T) {
+func testPersons(t *testing.T) {
 	t.Parallel()
 
-	query := People()
+	query := Persons()
 
 	if query.Query == nil {
 		t.Error("expected a query, got nothing")
 	}
 }
 
-func testPeopleDelete(t *testing.T) {
+func testPersonsDelete(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
@@ -54,7 +54,7 @@ func testPeopleDelete(t *testing.T) {
 		t.Error("should only have deleted one row, but affected:", rowsAff)
 	}
 
-	count, err := People().Count(ctx, tx)
+	count, err := Persons().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -64,7 +64,7 @@ func testPeopleDelete(t *testing.T) {
 	}
 }
 
-func testPeopleQueryDeleteAll(t *testing.T) {
+func testPersonsQueryDeleteAll(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
@@ -81,13 +81,13 @@ func testPeopleQueryDeleteAll(t *testing.T) {
 		t.Error(err)
 	}
 
-	if rowsAff, err := People().DeleteAll(ctx, tx); err != nil {
+	if rowsAff, err := Persons().DeleteAll(ctx, tx); err != nil {
 		t.Error(err)
 	} else if rowsAff != 1 {
 		t.Error("should only have deleted one row, but affected:", rowsAff)
 	}
 
-	count, err := People().Count(ctx, tx)
+	count, err := Persons().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -97,7 +97,7 @@ func testPeopleQueryDeleteAll(t *testing.T) {
 	}
 }
 
-func testPeopleSliceDeleteAll(t *testing.T) {
+func testPersonsSliceDeleteAll(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
@@ -122,7 +122,7 @@ func testPeopleSliceDeleteAll(t *testing.T) {
 		t.Error("should only have deleted one row, but affected:", rowsAff)
 	}
 
-	count, err := People().Count(ctx, tx)
+	count, err := Persons().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -132,7 +132,7 @@ func testPeopleSliceDeleteAll(t *testing.T) {
 	}
 }
 
-func testPeopleExists(t *testing.T) {
+func testPersonsExists(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
@@ -158,7 +158,7 @@ func testPeopleExists(t *testing.T) {
 	}
 }
 
-func testPeopleFind(t *testing.T) {
+func testPersonsFind(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
@@ -185,7 +185,7 @@ func testPeopleFind(t *testing.T) {
 	}
 }
 
-func testPeopleBind(t *testing.T) {
+func testPersonsBind(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
@@ -202,12 +202,12 @@ func testPeopleBind(t *testing.T) {
 		t.Error(err)
 	}
 
-	if err = People().Bind(ctx, tx, o); err != nil {
+	if err = Persons().Bind(ctx, tx, o); err != nil {
 		t.Error(err)
 	}
 }
 
-func testPeopleOne(t *testing.T) {
+func testPersonsOne(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
@@ -224,14 +224,14 @@ func testPeopleOne(t *testing.T) {
 		t.Error(err)
 	}
 
-	if x, err := People().One(ctx, tx); err != nil {
+	if x, err := Persons().One(ctx, tx); err != nil {
 		t.Error(err)
 	} else if x == nil {
 		t.Error("expected to get a non nil record")
 	}
 }
 
-func testPeopleAll(t *testing.T) {
+func testPersonsAll(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
@@ -255,7 +255,7 @@ func testPeopleAll(t *testing.T) {
 		t.Error(err)
 	}
 
-	slice, err := People().All(ctx, tx)
+	slice, err := Persons().All(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -265,7 +265,7 @@ func testPeopleAll(t *testing.T) {
 	}
 }
 
-func testPeopleCount(t *testing.T) {
+func testPersonsCount(t *testing.T) {
 	t.Parallel()
 
 	var err error
@@ -289,7 +289,7 @@ func testPeopleCount(t *testing.T) {
 		t.Error(err)
 	}
 
-	count, err := People().Count(ctx, tx)
+	count, err := Persons().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -344,7 +344,7 @@ func personAfterUpsertHook(ctx context.Context, e boil.ContextExecutor, o *Perso
 	return nil
 }
 
-func testPeopleHooks(t *testing.T) {
+func testPersonsHooks(t *testing.T) {
 	t.Parallel()
 
 	var err error
@@ -440,7 +440,7 @@ func testPeopleHooks(t *testing.T) {
 	personAfterUpsertHooks = []PersonHook{}
 }
 
-func testPeopleInsert(t *testing.T) {
+func testPersonsInsert(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
@@ -457,7 +457,7 @@ func testPeopleInsert(t *testing.T) {
 		t.Error(err)
 	}
 
-	count, err := People().Count(ctx, tx)
+	count, err := Persons().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -467,7 +467,7 @@ func testPeopleInsert(t *testing.T) {
 	}
 }
 
-func testPeopleInsertWhitelist(t *testing.T) {
+func testPersonsInsertWhitelist(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
@@ -484,7 +484,7 @@ func testPeopleInsertWhitelist(t *testing.T) {
 		t.Error(err)
 	}
 
-	count, err := People().Count(ctx, tx)
+	count, err := Persons().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -607,7 +607,7 @@ func testPersonOneToOneSetOpAuthUsingAuth(t *testing.T) {
 	}
 }
 
-func testPeopleReload(t *testing.T) {
+func testPersonsReload(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
@@ -629,7 +629,7 @@ func testPeopleReload(t *testing.T) {
 	}
 }
 
-func testPeopleReloadAll(t *testing.T) {
+func testPersonsReloadAll(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
@@ -653,7 +653,7 @@ func testPeopleReloadAll(t *testing.T) {
 	}
 }
 
-func testPeopleSelect(t *testing.T) {
+func testPersonsSelect(t *testing.T) {
 	t.Parallel()
 
 	seed := randomize.NewSeed()
@@ -670,7 +670,7 @@ func testPeopleSelect(t *testing.T) {
 		t.Error(err)
 	}
 
-	slice, err := People().All(ctx, tx)
+	slice, err := Persons().All(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -685,7 +685,7 @@ var (
 	_             = bytes.MinRead
 )
 
-func testPeopleUpdate(t *testing.T) {
+func testPersonsUpdate(t *testing.T) {
 	t.Parallel()
 
 	if 0 == len(personPrimaryKeyColumns) {
@@ -709,7 +709,7 @@ func testPeopleUpdate(t *testing.T) {
 		t.Error(err)
 	}
 
-	count, err := People().Count(ctx, tx)
+	count, err := Persons().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -729,7 +729,7 @@ func testPeopleUpdate(t *testing.T) {
 	}
 }
 
-func testPeopleSliceUpdateAll(t *testing.T) {
+func testPersonsSliceUpdateAll(t *testing.T) {
 	t.Parallel()
 
 	if len(personAllColumns) == len(personPrimaryKeyColumns) {
@@ -750,7 +750,7 @@ func testPeopleSliceUpdateAll(t *testing.T) {
 		t.Error(err)
 	}
 
-	count, err := People().Count(ctx, tx)
+	count, err := Persons().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -796,7 +796,7 @@ func testPeopleSliceUpdateAll(t *testing.T) {
 	}
 }
 
-func testPeopleUpsert(t *testing.T) {
+func testPersonsUpsert(t *testing.T) {
 	t.Parallel()
 
 	if len(personAllColumns) == len(personPrimaryKeyColumns) {
@@ -821,7 +821,7 @@ func testPeopleUpsert(t *testing.T) {
 		t.Errorf("Unable to upsert Person: %s", err)
 	}
 
-	count, err := People().Count(ctx, tx)
+	count, err := Persons().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}
@@ -838,7 +838,7 @@ func testPeopleUpsert(t *testing.T) {
 		t.Errorf("Unable to upsert Person: %s", err)
 	}
 
-	count, err = People().Count(ctx, tx)
+	count, err = Persons().Count(ctx, tx)
 	if err != nil {
 		t.Error(err)
 	}

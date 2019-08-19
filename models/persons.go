@@ -69,14 +69,14 @@ var PersonWhere = struct {
 	ModifiedAt whereHelpertime_Time
 	IsDeleted  whereHelpernull_Bool
 }{
-	ID:         whereHelperuint64{field: "`person`.`id`"},
-	FirstName:  whereHelpernull_String{field: "`person`.`first_name`"},
-	MiddleName: whereHelpernull_String{field: "`person`.`middle_name`"},
-	LastName:   whereHelpernull_String{field: "`person`.`last_name`"},
-	Email:      whereHelperstring{field: "`person`.`email`"},
-	CreatedAt:  whereHelpertime_Time{field: "`person`.`created_at`"},
-	ModifiedAt: whereHelpertime_Time{field: "`person`.`modified_at`"},
-	IsDeleted:  whereHelpernull_Bool{field: "`person`.`is_deleted`"},
+	ID:         whereHelperuint64{field: "`persons`.`id`"},
+	FirstName:  whereHelpernull_String{field: "`persons`.`first_name`"},
+	MiddleName: whereHelpernull_String{field: "`persons`.`middle_name`"},
+	LastName:   whereHelpernull_String{field: "`persons`.`last_name`"},
+	Email:      whereHelperstring{field: "`persons`.`email`"},
+	CreatedAt:  whereHelpertime_Time{field: "`persons`.`created_at`"},
+	ModifiedAt: whereHelpertime_Time{field: "`persons`.`modified_at`"},
+	IsDeleted:  whereHelpernull_Bool{field: "`persons`.`is_deleted`"},
 }
 
 // PersonRels is where relationship names are stored.
@@ -320,7 +320,7 @@ func (q personQuery) One(ctx context.Context, exec boil.ContextExecutor) (*Perso
 		if errors.Cause(err) == sql.ErrNoRows {
 			return nil, sql.ErrNoRows
 		}
-		return nil, errors.Wrap(err, "models: failed to execute a one query for person")
+		return nil, errors.Wrap(err, "models: failed to execute a one query for persons")
 	}
 
 	if err := o.doAfterSelectHooks(ctx, exec); err != nil {
@@ -359,7 +359,7 @@ func (q personQuery) Count(ctx context.Context, exec boil.ContextExecutor) (int6
 
 	err := q.Query.QueryRowContext(ctx, exec).Scan(&count)
 	if err != nil {
-		return 0, errors.Wrap(err, "models: failed to count person rows")
+		return 0, errors.Wrap(err, "models: failed to count persons rows")
 	}
 
 	return count, nil
@@ -375,7 +375,7 @@ func (q personQuery) Exists(ctx context.Context, exec boil.ContextExecutor) (boo
 
 	err := q.Query.QueryRowContext(ctx, exec).Scan(&count)
 	if err != nil {
-		return false, errors.Wrap(err, "models: failed to check if person exists")
+		return false, errors.Wrap(err, "models: failed to check if persons exists")
 	}
 
 	return count > 0, nil
@@ -390,7 +390,7 @@ func (o *Person) Auth(mods ...qm.QueryMod) authQuery {
 	queryMods = append(queryMods, mods...)
 
 	query := Auths(queryMods...)
-	queries.SetFrom(query.Query, "`auth`")
+	queries.SetFrom(query.Query, "`auths`")
 
 	return query
 }
@@ -434,7 +434,7 @@ func (personL) LoadAuth(ctx context.Context, e boil.ContextExecutor, singular bo
 		return nil
 	}
 
-	query := NewQuery(qm.From(`auth`), qm.WhereIn(`person_id in ?`, args...))
+	query := NewQuery(qm.From(`auths`), qm.WhereIn(`person_id in ?`, args...))
 	if mods != nil {
 		mods.Apply(query)
 	}
@@ -450,10 +450,10 @@ func (personL) LoadAuth(ctx context.Context, e boil.ContextExecutor, singular bo
 	}
 
 	if err = results.Close(); err != nil {
-		return errors.Wrap(err, "failed to close results of eager load for auth")
+		return errors.Wrap(err, "failed to close results of eager load for auths")
 	}
 	if err = results.Err(); err != nil {
-		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for auth")
+		return errors.Wrap(err, "error occurred during iteration of eager loaded relations for auths")
 	}
 
 	if len(personAfterSelectHooks) != 0 {
@@ -507,7 +507,7 @@ func (o *Person) SetAuth(ctx context.Context, exec boil.ContextExecutor, insert 
 		}
 	} else {
 		updateQuery := fmt.Sprintf(
-			"UPDATE `auth` SET %s WHERE %s",
+			"UPDATE `auths` SET %s WHERE %s",
 			strmangle.SetParamNames("`", "`", 0, []string{"person_id"}),
 			strmangle.WhereClause("`", "`", 0, authPrimaryKeyColumns),
 		)
@@ -544,9 +544,9 @@ func (o *Person) SetAuth(ctx context.Context, exec boil.ContextExecutor, insert 
 	return nil
 }
 
-// People retrieves all the records using an executor.
-func People(mods ...qm.QueryMod) personQuery {
-	mods = append(mods, qm.From("`person`"))
+// Persons retrieves all the records using an executor.
+func Persons(mods ...qm.QueryMod) personQuery {
+	mods = append(mods, qm.From("`persons`"))
 	return personQuery{NewQuery(mods...)}
 }
 
@@ -560,7 +560,7 @@ func FindPerson(ctx context.Context, exec boil.ContextExecutor, iD uint64, selec
 		sel = strings.Join(strmangle.IdentQuoteSlice(dialect.LQ, dialect.RQ, selectCols), ",")
 	}
 	query := fmt.Sprintf(
-		"select %s from `person` where `id`=?", sel,
+		"select %s from `persons` where `id`=?", sel,
 	)
 
 	q := queries.Raw(query, iD)
@@ -570,7 +570,7 @@ func FindPerson(ctx context.Context, exec boil.ContextExecutor, iD uint64, selec
 		if errors.Cause(err) == sql.ErrNoRows {
 			return nil, sql.ErrNoRows
 		}
-		return nil, errors.Wrap(err, "models: unable to select from person")
+		return nil, errors.Wrap(err, "models: unable to select from persons")
 	}
 
 	return personObj, nil
@@ -580,7 +580,7 @@ func FindPerson(ctx context.Context, exec boil.ContextExecutor, iD uint64, selec
 // See boil.Columns.InsertColumnSet documentation to understand column list inference for inserts.
 func (o *Person) Insert(ctx context.Context, exec boil.ContextExecutor, columns boil.Columns) error {
 	if o == nil {
-		return errors.New("models: no person provided for insertion")
+		return errors.New("models: no persons provided for insertion")
 	}
 
 	var err error
@@ -620,15 +620,15 @@ func (o *Person) Insert(ctx context.Context, exec boil.ContextExecutor, columns 
 			return err
 		}
 		if len(wl) != 0 {
-			cache.query = fmt.Sprintf("INSERT INTO `person` (`%s`) %%sVALUES (%s)%%s", strings.Join(wl, "`,`"), strmangle.Placeholders(dialect.UseIndexPlaceholders, len(wl), 1, 1))
+			cache.query = fmt.Sprintf("INSERT INTO `persons` (`%s`) %%sVALUES (%s)%%s", strings.Join(wl, "`,`"), strmangle.Placeholders(dialect.UseIndexPlaceholders, len(wl), 1, 1))
 		} else {
-			cache.query = "INSERT INTO `person` () VALUES ()%s%s"
+			cache.query = "INSERT INTO `persons` () VALUES ()%s%s"
 		}
 
 		var queryOutput, queryReturning string
 
 		if len(cache.retMapping) != 0 {
-			cache.retQuery = fmt.Sprintf("SELECT `%s` FROM `person` WHERE %s", strings.Join(returnColumns, "`,`"), strmangle.WhereClause("`", "`", 0, personPrimaryKeyColumns))
+			cache.retQuery = fmt.Sprintf("SELECT `%s` FROM `persons` WHERE %s", strings.Join(returnColumns, "`,`"), strmangle.WhereClause("`", "`", 0, personPrimaryKeyColumns))
 		}
 
 		cache.query = fmt.Sprintf(cache.query, queryOutput, queryReturning)
@@ -645,7 +645,7 @@ func (o *Person) Insert(ctx context.Context, exec boil.ContextExecutor, columns 
 	result, err := exec.ExecContext(ctx, cache.query, vals...)
 
 	if err != nil {
-		return errors.Wrap(err, "models: unable to insert into person")
+		return errors.Wrap(err, "models: unable to insert into persons")
 	}
 
 	var lastID int64
@@ -676,7 +676,7 @@ func (o *Person) Insert(ctx context.Context, exec boil.ContextExecutor, columns 
 
 	err = exec.QueryRowContext(ctx, cache.retQuery, identifierCols...).Scan(queries.PtrsFromMapping(value, cache.retMapping)...)
 	if err != nil {
-		return errors.Wrap(err, "models: unable to populate default values for person")
+		return errors.Wrap(err, "models: unable to populate default values for persons")
 	}
 
 CacheNoHooks:
@@ -712,10 +712,10 @@ func (o *Person) Update(ctx context.Context, exec boil.ContextExecutor, columns 
 			wl = strmangle.SetComplement(wl, []string{"created_at"})
 		}
 		if len(wl) == 0 {
-			return 0, errors.New("models: unable to update person, could not build whitelist")
+			return 0, errors.New("models: unable to update persons, could not build whitelist")
 		}
 
-		cache.query = fmt.Sprintf("UPDATE `person` SET %s WHERE %s",
+		cache.query = fmt.Sprintf("UPDATE `persons` SET %s WHERE %s",
 			strmangle.SetParamNames("`", "`", 0, wl),
 			strmangle.WhereClause("`", "`", 0, personPrimaryKeyColumns),
 		)
@@ -735,12 +735,12 @@ func (o *Person) Update(ctx context.Context, exec boil.ContextExecutor, columns 
 	var result sql.Result
 	result, err = exec.ExecContext(ctx, cache.query, values...)
 	if err != nil {
-		return 0, errors.Wrap(err, "models: unable to update person row")
+		return 0, errors.Wrap(err, "models: unable to update persons row")
 	}
 
 	rowsAff, err := result.RowsAffected()
 	if err != nil {
-		return 0, errors.Wrap(err, "models: failed to get rows affected by update for person")
+		return 0, errors.Wrap(err, "models: failed to get rows affected by update for persons")
 	}
 
 	if !cached {
@@ -758,12 +758,12 @@ func (q personQuery) UpdateAll(ctx context.Context, exec boil.ContextExecutor, c
 
 	result, err := q.Query.ExecContext(ctx, exec)
 	if err != nil {
-		return 0, errors.Wrap(err, "models: unable to update all for person")
+		return 0, errors.Wrap(err, "models: unable to update all for persons")
 	}
 
 	rowsAff, err := result.RowsAffected()
 	if err != nil {
-		return 0, errors.Wrap(err, "models: unable to retrieve rows affected for person")
+		return 0, errors.Wrap(err, "models: unable to retrieve rows affected for persons")
 	}
 
 	return rowsAff, nil
@@ -796,7 +796,7 @@ func (o PersonSlice) UpdateAll(ctx context.Context, exec boil.ContextExecutor, c
 		args = append(args, pkeyArgs...)
 	}
 
-	sql := fmt.Sprintf("UPDATE `person` SET %s WHERE %s",
+	sql := fmt.Sprintf("UPDATE `persons` SET %s WHERE %s",
 		strmangle.SetParamNames("`", "`", 0, colNames),
 		strmangle.WhereClauseRepeated(string(dialect.LQ), string(dialect.RQ), 0, personPrimaryKeyColumns, len(o)))
 
@@ -826,7 +826,7 @@ var mySQLPersonUniqueColumns = []string{
 // See boil.Columns documentation for how to properly use updateColumns and insertColumns.
 func (o *Person) Upsert(ctx context.Context, exec boil.ContextExecutor, updateColumns, insertColumns boil.Columns) error {
 	if o == nil {
-		return errors.New("models: no person provided for upsert")
+		return errors.New("models: no persons provided for upsert")
 	}
 	if !boil.TimestampsAreSkipped(ctx) {
 		currTime := time.Now().In(boil.GetLocation())
@@ -888,13 +888,13 @@ func (o *Person) Upsert(ctx context.Context, exec boil.ContextExecutor, updateCo
 		)
 
 		if len(update) == 0 {
-			return errors.New("models: unable to upsert person, could not build update column list")
+			return errors.New("models: unable to upsert persons, could not build update column list")
 		}
 
 		ret = strmangle.SetComplement(ret, nzUniques)
-		cache.query = buildUpsertQueryMySQL(dialect, "person", update, insert)
+		cache.query = buildUpsertQueryMySQL(dialect, "persons", update, insert)
 		cache.retQuery = fmt.Sprintf(
-			"SELECT %s FROM `person` WHERE %s",
+			"SELECT %s FROM `persons` WHERE %s",
 			strings.Join(strmangle.IdentQuoteSlice(dialect.LQ, dialect.RQ, ret), ","),
 			strmangle.WhereClause("`", "`", 0, nzUniques),
 		)
@@ -926,7 +926,7 @@ func (o *Person) Upsert(ctx context.Context, exec boil.ContextExecutor, updateCo
 	result, err := exec.ExecContext(ctx, cache.query, vals...)
 
 	if err != nil {
-		return errors.Wrap(err, "models: unable to upsert for person")
+		return errors.Wrap(err, "models: unable to upsert for persons")
 	}
 
 	var lastID int64
@@ -949,7 +949,7 @@ func (o *Person) Upsert(ctx context.Context, exec boil.ContextExecutor, updateCo
 
 	uniqueMap, err = queries.BindMapping(personType, personMapping, nzUniques)
 	if err != nil {
-		return errors.Wrap(err, "models: unable to retrieve unique values for person")
+		return errors.Wrap(err, "models: unable to retrieve unique values for persons")
 	}
 	nzUniqueCols = queries.ValuesFromMapping(reflect.Indirect(reflect.ValueOf(o)), uniqueMap)
 
@@ -960,7 +960,7 @@ func (o *Person) Upsert(ctx context.Context, exec boil.ContextExecutor, updateCo
 
 	err = exec.QueryRowContext(ctx, cache.retQuery, nzUniqueCols...).Scan(returns...)
 	if err != nil {
-		return errors.Wrap(err, "models: unable to populate default values for person")
+		return errors.Wrap(err, "models: unable to populate default values for persons")
 	}
 
 CacheNoHooks:
@@ -985,7 +985,7 @@ func (o *Person) Delete(ctx context.Context, exec boil.ContextExecutor) (int64, 
 	}
 
 	args := queries.ValuesFromMapping(reflect.Indirect(reflect.ValueOf(o)), personPrimaryKeyMapping)
-	sql := "DELETE FROM `person` WHERE `id`=?"
+	sql := "DELETE FROM `persons` WHERE `id`=?"
 
 	if boil.DebugMode {
 		fmt.Fprintln(boil.DebugWriter, sql)
@@ -994,12 +994,12 @@ func (o *Person) Delete(ctx context.Context, exec boil.ContextExecutor) (int64, 
 
 	result, err := exec.ExecContext(ctx, sql, args...)
 	if err != nil {
-		return 0, errors.Wrap(err, "models: unable to delete from person")
+		return 0, errors.Wrap(err, "models: unable to delete from persons")
 	}
 
 	rowsAff, err := result.RowsAffected()
 	if err != nil {
-		return 0, errors.Wrap(err, "models: failed to get rows affected by delete for person")
+		return 0, errors.Wrap(err, "models: failed to get rows affected by delete for persons")
 	}
 
 	if err := o.doAfterDeleteHooks(ctx, exec); err != nil {
@@ -1019,12 +1019,12 @@ func (q personQuery) DeleteAll(ctx context.Context, exec boil.ContextExecutor) (
 
 	result, err := q.Query.ExecContext(ctx, exec)
 	if err != nil {
-		return 0, errors.Wrap(err, "models: unable to delete all from person")
+		return 0, errors.Wrap(err, "models: unable to delete all from persons")
 	}
 
 	rowsAff, err := result.RowsAffected()
 	if err != nil {
-		return 0, errors.Wrap(err, "models: failed to get rows affected by deleteall for person")
+		return 0, errors.Wrap(err, "models: failed to get rows affected by deleteall for persons")
 	}
 
 	return rowsAff, nil
@@ -1050,7 +1050,7 @@ func (o PersonSlice) DeleteAll(ctx context.Context, exec boil.ContextExecutor) (
 		args = append(args, pkeyArgs...)
 	}
 
-	sql := "DELETE FROM `person` WHERE " +
+	sql := "DELETE FROM `persons` WHERE " +
 		strmangle.WhereClauseRepeated(string(dialect.LQ), string(dialect.RQ), 0, personPrimaryKeyColumns, len(o))
 
 	if boil.DebugMode {
@@ -1065,7 +1065,7 @@ func (o PersonSlice) DeleteAll(ctx context.Context, exec boil.ContextExecutor) (
 
 	rowsAff, err := result.RowsAffected()
 	if err != nil {
-		return 0, errors.Wrap(err, "models: failed to get rows affected by deleteall for person")
+		return 0, errors.Wrap(err, "models: failed to get rows affected by deleteall for persons")
 	}
 
 	if len(personAfterDeleteHooks) != 0 {
@@ -1105,7 +1105,7 @@ func (o *PersonSlice) ReloadAll(ctx context.Context, exec boil.ContextExecutor) 
 		args = append(args, pkeyArgs...)
 	}
 
-	sql := "SELECT `person`.* FROM `person` WHERE " +
+	sql := "SELECT `persons`.* FROM `persons` WHERE " +
 		strmangle.WhereClauseRepeated(string(dialect.LQ), string(dialect.RQ), 0, personPrimaryKeyColumns, len(*o))
 
 	q := queries.Raw(sql, args...)
@@ -1123,7 +1123,7 @@ func (o *PersonSlice) ReloadAll(ctx context.Context, exec boil.ContextExecutor) 
 // PersonExists checks if the Person row exists.
 func PersonExists(ctx context.Context, exec boil.ContextExecutor, iD uint64) (bool, error) {
 	var exists bool
-	sql := "select exists(select 1 from `person` where `id`=? limit 1)"
+	sql := "select exists(select 1 from `persons` where `id`=? limit 1)"
 
 	if boil.DebugMode {
 		fmt.Fprintln(boil.DebugWriter, sql)
@@ -1134,7 +1134,7 @@ func PersonExists(ctx context.Context, exec boil.ContextExecutor, iD uint64) (bo
 
 	err := row.Scan(&exists)
 	if err != nil {
-		return false, errors.Wrap(err, "models: unable to check if person exists")
+		return false, errors.Wrap(err, "models: unable to check if persons exists")
 	}
 
 	return exists, nil

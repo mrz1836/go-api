@@ -1,6 +1,6 @@
 -- +goose Up
 -- +goose StatementBegin
-CREATE TABLE `auth` (
+CREATE TABLE `auths` (
     `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID of the record',
     `person_id` bigint(20) unsigned NOT NULL COMMENT 'ID of the related person record',
     `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT 'Time the record was created',
@@ -24,18 +24,21 @@ CREATE TABLE `auth` (
     `locked_time` timestamp NULL DEFAULT NULL COMMENT 'Time when lock out occurred',
     `locked_by_user_id` bigint(20) unsigned DEFAULT NULL COMMENT 'User ID who created the record',
     `is_deleted` tinyint(1) DEFAULT 0 COMMENT 'Flag for if the record is deleted',
-    PRIMARY KEY (`id`),
+    PRIMARY KEY `auths_pkey` (`id`),
     UNIQUE KEY `email` (`email`),
     UNIQUE KEY `person_id` (`person_id`),
     KEY `is_deleted` (`is_deleted`),
     KEY `reset_password_token` (`reset_password_token`),
     KEY `email_confirm_token` (`email_confirm_token`),
-    KEY `email_auth` (`email`,`password_digest`(255)),
-    CONSTRAINT `auth_fk1` FOREIGN KEY (`person_id`) REFERENCES `person` (`id`)
+    KEY `email_auth` (`email`,`password_digest`(255))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Auth record for person model';
+-- +goose StatementEnd
+
+-- +goose StatementBegin
+ALTER TABLE auths ADD CONSTRAINT auths_fk_1 FOREIGN KEY (person_id) REFERENCES persons(id);
 -- +goose StatementEnd
 
 -- +goose Down
 -- +goose StatementBegin
-DROP TABLE `auth`;
+DROP TABLE `auths`;
 -- +goose StatementEnd

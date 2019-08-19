@@ -8,5 +8,5 @@ import "testing"
 func TestUpsert(t *testing.T) {
 	t.Run("Auths", testAuthsUpsert)
 
-	t.Run("People", testPeopleUpsert)
+	t.Run("Persons", testPersonsUpsert)
 }

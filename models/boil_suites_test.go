@@ -13,64 +13,64 @@ import "testing"
 // Separating the tests thusly grants avoidance of Postgres deadlocks.
 func TestParent(t *testing.T) {
 	t.Run("Auths", testAuths)
-	t.Run("People", testPeople)
+	t.Run("Persons", testPersons)
 }
 
 func TestDelete(t *testing.T) {
 	t.Run("Auths", testAuthsDelete)
-	t.Run("People", testPeopleDelete)
+	t.Run("Persons", testPersonsDelete)
 }
 
 func TestQueryDeleteAll(t *testing.T) {
 	t.Run("Auths", testAuthsQueryDeleteAll)
-	t.Run("People", testPeopleQueryDeleteAll)
+	t.Run("Persons", testPersonsQueryDeleteAll)
 }
 
 func TestSliceDeleteAll(t *testing.T) {
 	t.Run("Auths", testAuthsSliceDeleteAll)
-	t.Run("People", testPeopleSliceDeleteAll)
+	t.Run("Persons", testPersonsSliceDeleteAll)
 }
 
 func TestExists(t *testing.T) {
 	t.Run("Auths", testAuthsExists)
-	t.Run("People", testPeopleExists)
+	t.Run("Persons", testPersonsExists)
 }
 
 func TestFind(t *testing.T) {
 	t.Run("Auths", testAuthsFind)
-	t.Run("People", testPeopleFind)
+	t.Run("Persons", testPersonsFind)
 }
 
 func TestBind(t *testing.T) {
 	t.Run("Auths", testAuthsBind)
-	t.Run("People", testPeopleBind)
+	t.Run("Persons", testPersonsBind)
 }
 
 func TestOne(t *testing.T) {
 	t.Run("Auths", testAuthsOne)
-	t.Run("People", testPeopleOne)
+	t.Run("Persons", testPersonsOne)
 }
 
 func TestAll(t *testing.T) {
 	t.Run("Auths", testAuthsAll)
-	t.Run("People", testPeopleAll)
+	t.Run("Persons", testPersonsAll)
 }
 
 func TestCount(t *testing.T) {
 	t.Run("Auths", testAuthsCount)
-	t.Run("People", testPeopleCount)
+	t.Run("Persons", testPersonsCount)
 }
 
 func TestHooks(t *testing.T) {
 	t.Run("Auths", testAuthsHooks)
-	t.Run("People", testPeopleHooks)
+	t.Run("Persons", testPersonsHooks)
 }
 
 func TestInsert(t *testing.T) {
 	t.Run("Auths", testAuthsInsert)
 	t.Run("Auths", testAuthsInsertWhitelist)
-	t.Run("People", testPeopleInsert)
-	t.Run("People", testPeopleInsertWhitelist)
+	t.Run("Persons", testPersonsInsert)
+	t.Run("Persons", testPersonsInsertWhitelist)
 }
 
 // TestToOne tests cannot be run in parallel
@@ -123,25 +123,25 @@ func TestToManyRemove(t *testing.T) {}
 
 func TestReload(t *testing.T) {
 	t.Run("Auths", testAuthsReload)
-	t.Run("People", testPeopleReload)
+	t.Run("Persons", testPersonsReload)
 }
 
 func TestReloadAll(t *testing.T) {
 	t.Run("Auths", testAuthsReloadAll)
-	t.Run("People", testPeopleReloadAll)
+	t.Run("Persons", testPersonsReloadAll)
 }
 
 func TestSelect(t *testing.T) {
 	t.Run("Auths", testAuthsSelect)
-	t.Run("People", testPeopleSelect)
+	t.Run("Persons", testPersonsSelect)
 }
 
 func TestUpdate(t *testing.T) {
 	t.Run("Auths", testAuthsUpdate)
-	t.Run("People", testPeopleUpdate)
+	t.Run("Persons", testPersonsUpdate)
 }
 
 func TestSliceUpdateAll(t *testing.T) {
 	t.Run("Auths", testAuthsSliceUpdateAll)
-	t.Run("People", testPeopleSliceUpdateAll)
+	t.Run("Persons", testPersonsSliceUpdateAll)
 }
