@@ -1,14 +1,12 @@
 package models
 
 import (
-	"fmt"
+	"context"
+	"database/sql"
 
-	"github.com/mrz1836/go-logger"
+	"github.com/mrz1836/go-api/models/schema"
 )
 
-var test string
-
-func init() {
-	test = "this"
-	logger.Data(2, logger.DEBUG, fmt.Sprintf("Testing! %s", test))
+func PersonExists(ctx context.Context, db *sql.DB, p *schema.Person) (bool, error) {
+	return schema.PersonExists(ctx, db, p.ID)
 }

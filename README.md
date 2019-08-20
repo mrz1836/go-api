@@ -69,7 +69,7 @@ Update the `reset_api_database.sql` if you have issues running the model tests
 GRANT ALL ON `dynamic-database-name-generated-from-sql-boiler`.* to 'apiDbTestUser'@'%';
 ```
 
-Rebuilding the generated models from the database schema:
+Rebuilding the generated models/schema from the database schema:
 ```bash
 $ . scripts/rebuild_models.sh
 ```
