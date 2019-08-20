@@ -5,6 +5,7 @@ import (
 	"github.com/julienschmidt/httprouter"
 	"github.com/mrz1836/go-api-router"
 	"github.com/mrz1836/go-api/actions/base"
+	"github.com/mrz1836/go-api/actions/person"
 )
 
 // Handlers isolated the handlers / router for API (helps with testing)
@@ -19,6 +20,12 @@ func Handlers() *httprouter.Router {
 	// Use your middleware:
 	//s.Use(passThrough)
 
+	// The base api routes
 	base.RegisterRoutes(router)
+
+	// The person actions
+	person.RegisterRoutes(router)
+
+	// Return the router
 	return router.HTTPRouter
 }
