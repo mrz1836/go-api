@@ -2,95 +2,96 @@
 package config
 
 import (
-	"os"
+	"fmt"
 
+	"github.com/go-ozzo/ozzo-validation"
 	"github.com/mrz1836/go-api/database"
 	"github.com/mrz1836/go-cache"
 	"github.com/mrz1836/go-logger"
+	"github.com/spf13/viper"
 )
 
-// Set the global configuration
-var (
-	// ServerPort is for the API server
-	ServerPort = "3000"
+// Global configuration (config.Values)
+var Values appConfig
 
-	// CacheURL is the redis url connection string
-	CacheURL = os.Getenv("CACHE_URL")
+// appConfig are the configuration values and env vars
+type appConfig struct {
+	CacheEnabled                    bool   `env:"-" json:"-" mapstructure:"-"`
+	CacheMaxActiveConnections       int    `env:"API_CACHE_MAX_ACTIVE_CONNECTIONS" json:"cache_max_active_connections" mapstructure:"cache_max_active_connections"`    // (0 is unlimited)
+	CacheMaxConnectionLifetime      int    `env:"API_CACHE_MAX_CONNECTION_LIFETIME" json:"cache_max_connection_lifetime" mapstructure:"cache_max_connection_lifetime"` // (0 is unlimited)
+	CacheMaxIdleConnections         int    `env:"API_CACHE_MAX_IDLE_CONNECTIONS" json:"cache_max_idle_connections" mapstructure:"cache_max_idle_connections"`          // (0 is unlimited)
+	CacheMaxIdleTimeout             int    `env:"API_CACHE_MAX_IDLE_TIMEOUT" json:"cache_max_idle_timeout" mapstructure:"cache_max_idle_timeout"`                      // (0 is unlimited)
+	CacheURL                        string `env:"API_CACHE_URL" json:"cache_url" mapstructure:"cache_url"`
+	DatabaseMaxConnTime             int    `env:"API_DATABASE_MAX_CONN_TIME" json:"database_max_conn_time" mapstructure:"database_max_conn_time"` // (0 is unlimited)
+	DatabaseReadHost                string `env:"API_DATABASE_READ_HOST" json:"database_read_host" mapstructure:"database_read_host"`
+	DatabaseReadMaxIdleConnections  int    `env:"API_DATABASE_READ_MAX_IDLE_CONNECTIONS" json:"database_read_max_idle_connections" mapstructure:"database_read_max_idle_connections"` // (0 is unlimited)
+	DatabaseReadMaxOpenConnections  int    `env:"API_DATABASE_READ_MAX_OPEN_CONNECTIONS" json:"database_read_max_open_connections" mapstructure:"database_read_max_open_connections"` // (0 is unlimited)
+	DatabaseReadName                string `env:"API_DATABASE_READ_NAME" json:"database_read_name" mapstructure:"database_read_name"`
+	DatabaseReadPassword            string `env:"API_DATABASE_READ_PASSWORD" json:"database_read_password" mapstructure:"database_read_password"`
+	DatabaseReadPort                string `env:"API_DATABASE_READ_PORT" json:"database_read_port" mapstructure:"database_read_port"`
+	DatabaseReadUser                string `env:"API_DATABASE_READ_USER" json:"database_read_user" mapstructure:"database_read_user"`
+	DatabaseWriteHost               string `env:"API_DATABASE_WRITE_HOST" json:"database_write_host" mapstructure:"database_write_host"`
+	DatabaseWriteMaxIdleConnections int    `env:"API_DATABASE_WRITE_MAX_IDLE_CONNECTIONS" json:"database_write_max_idle_connections" mapstructure:"database_write_max_idle_connections"` // (0 is unlimited)
+	DatabaseWriteMaxOpenConnections int    `env:"API_DATABASE_WRITE_MAX_OPEN_CONNECTIONS" json:"database_write_max_open_connections" mapstructure:"database_write_max_open_connections"` // (0 is unlimited)
+	DatabaseWriteName               string `env:"API_DATABASE_WRITE_NAME" json:"database_write_name" mapstructure:"database_write_name"`
+	DatabaseWritePassword           string `env:"API_DATABASE_WRITE_PASSWORD" json:"database_write_password" mapstructure:"database_write_password"`
+	DatabaseWritePort               string `env:"API_DATABASE_WRITE_PORT" json:"database_write_port" mapstructure:"database_write_port"`
+	DatabaseWriteUser               string `env:"API_DATABASE_WRITE_USER" json:"database_write_user" mapstructure:"database_write_user"`
+	ServerPort                      string `env:"API_SERVER_PORT" json:"server_port" mapstructure:"server_port"`
+}
 
-	// CacheEnabled is a flag for caching (uses redis) (env: REDIS_URL)
-	CacheEnabled = false
-
-	// CacheMaxActiveConnections is the max active connections (0 is unlimited)
-	CacheMaxActiveConnections = 0
-
-	// CacheMaxIdleConnections is the max idle connections (0 is unlimited)
-	CacheMaxIdleConnections = 10
-
-	// CacheMaxConnectionLifetime is the max time in a connection (0 is unlimited)
-	CacheMaxConnectionLifetime = 0
-
-	// CacheMaxIdleTimeout is the max idle time (0 is unlimited)
-	CacheMaxIdleTimeout = 240
-
-	// DatabaseMaxConnLifetime max connection time
-	DatabaseMaxConnLifetime = 60
-
-	// DatabaseReadHost is the read hostname
-	DatabaseReadHost = "localhost"
-
-	// DatabaseReadPort is the read port
-	DatabaseReadPort = "3306"
-
-	// DatabaseReadName is the name of the database
-	DatabaseReadName = "api_example"
-
-	// DatabaseReadUser is the username
-	DatabaseReadUser = "apiDbTestUser"
-
-	// DatabaseReadPassword is the password for the user
-	DatabaseReadPassword = "ThisIsSecureEnough123"
-
-	// DatabaseReadMaxIdleConnections max idle connections
-	DatabaseReadMaxIdleConnections = 5
-
-	// DatabaseReadMaxOpenConnections max open connection
-	DatabaseReadMaxOpenConnections = 5
-
-	// DatabaseWriteHost is the read hostname
-	DatabaseWriteHost = "localhost"
-
-	// DatabaseWritePort is the read port
-	DatabaseWritePort = "3306"
-
-	// DatabaseWriteName is the name of the database
-	DatabaseWriteName = "api_example"
-
-	// DatabaseWriteUser is the username
-	DatabaseWriteUser = "apiDbTestUser"
-
-	// DatabaseWritePassword is the password for the user
-	DatabaseWritePassword = "ThisIsSecureEnough123"
-
-	// DatabaseWriteMaxIdleConnections max idle connections
-	DatabaseWriteMaxIdleConnections = 5
-
-	// DatabaseWriteMaxOpenConnections max open connections
-	DatabaseWriteMaxOpenConnections = 5
-)
+// Validate checks the configuration for specific rules
+func (c appConfig) Validate() error {
+	return validation.ValidateStruct(&c,
+		validation.Field(&c.ServerPort, validation.Required),
+		validation.Field(&c.DatabaseReadHost, validation.Required),
+		validation.Field(&c.DatabaseReadName, validation.Required),
+		validation.Field(&c.DatabaseReadPassword, validation.Required),
+		validation.Field(&c.DatabaseReadUser, validation.Required),
+		validation.Field(&c.DatabaseReadPort, validation.Required),
+		validation.Field(&c.DatabaseWriteHost, validation.Required),
+		validation.Field(&c.DatabaseWriteName, validation.Required),
+		validation.Field(&c.DatabaseWritePassword, validation.Required),
+		validation.Field(&c.DatabaseWriteUser, validation.Required),
+		validation.Field(&c.DatabaseWritePort, validation.Required),
+	)
+}
 
 // init load all environment variables
 func Load() {
 
+	// Load configuration from json first, then env
+	viper.SetConfigFile("./config/env.json")
+	viper.SetEnvPrefix("api")
+	viper.AutomaticEnv()
+
+	// Read the configuration
+	if err := viper.ReadInConfig(); err != nil {
+		logger.Data(2, logger.ERROR, fmt.Sprintf("error reading env configuration: %s", err.Error()))
+	} else {
+		logger.Data(2, logger.INFO, "configuration env file processed")
+	}
+
+	// Unmarshal into values struct
+	if err := viper.Unmarshal(&Values); err != nil {
+		logger.Data(2, logger.ERROR, fmt.Sprintf("error in unmarshal into values: %s", err.Error()))
+	}
+
+	// Validate the configuration file
+	if err := Values.Validate(); err != nil {
+		logger.Data(2, logger.ERROR, fmt.Sprintf("error in configuration validation: %s", err.Error()))
+	}
+
 	// Check the environment and use caching if set
-	if len(CacheURL) > 0 {
+	if len(Values.CacheURL) > 0 {
 
 		// Attempt to connect to the cache (redis)
-		err := cache.Connect(CacheURL, CacheMaxActiveConnections, CacheMaxIdleConnections, CacheMaxConnectionLifetime, CacheMaxIdleTimeout)
+		err := cache.Connect(Values.CacheURL, Values.CacheMaxActiveConnections, Values.CacheMaxIdleConnections, Values.CacheMaxConnectionLifetime, Values.CacheMaxIdleTimeout)
 		if err != nil {
 			logger.Data(2, logger.ERROR, "failed to enable cache: "+err.Error())
 		} else {
-			CacheEnabled = true
-			logger.Data(2, logger.INFO, "cache enabled at: "+CacheURL)
+			Values.CacheEnabled = true
+			logger.Data(2, logger.INFO, "cache enabled at: "+Values.CacheURL)
 		}
 	} else {
 		logger.Data(2, logger.INFO, "caching: disabled")
@@ -98,22 +99,22 @@ func Load() {
 
 	// Load the database configuration
 	dbConfig := database.Configuration{
-		DatabaseDriver:                  "mysql",
-		DatabaseMaxConnLifetime:         DatabaseMaxConnLifetime,
-		DatabaseReadHost:                DatabaseReadHost,
-		DatabaseReadMaxIdleConnections:  DatabaseReadMaxIdleConnections,
-		DatabaseReadMaxOpenConnections:  DatabaseReadMaxOpenConnections,
-		DatabaseReadName:                DatabaseReadName,
-		DatabaseReadPort:                DatabaseReadPort,
-		DatabaseReadUser:                DatabaseReadUser,
-		DatabaseReadPassword:            DatabaseReadPassword,
-		DatabaseWriteHost:               DatabaseWriteHost,
-		DatabaseWriteMaxIdleConnections: DatabaseWriteMaxIdleConnections,
-		DatabaseWriteMaxOpenConnections: DatabaseWriteMaxOpenConnections,
-		DatabaseWriteName:               DatabaseWriteName,
-		DatabaseWritePort:               DatabaseWritePort,
-		DatabaseWriteUser:               DatabaseWriteUser,
-		DatabaseWritePassword:           DatabaseWritePassword,
+		DatabaseDriver:                  database.MySQLDriver,
+		DatabaseMaxConnLifetime:         Values.DatabaseMaxConnTime,
+		DatabaseReadHost:                Values.DatabaseReadHost,
+		DatabaseReadMaxIdleConnections:  Values.DatabaseReadMaxIdleConnections,
+		DatabaseReadMaxOpenConnections:  Values.DatabaseReadMaxOpenConnections,
+		DatabaseReadName:                Values.DatabaseReadName,
+		DatabaseReadPort:                Values.DatabaseReadPort,
+		DatabaseReadUser:                Values.DatabaseReadUser,
+		DatabaseReadPassword:            Values.DatabaseReadPassword,
+		DatabaseWriteHost:               Values.DatabaseWriteHost,
+		DatabaseWriteMaxIdleConnections: Values.DatabaseWriteMaxIdleConnections,
+		DatabaseWriteMaxOpenConnections: Values.DatabaseWriteMaxOpenConnections,
+		DatabaseWriteName:               Values.DatabaseWriteName,
+		DatabaseWritePort:               Values.DatabaseWritePort,
+		DatabaseWriteUser:               Values.DatabaseWriteUser,
+		DatabaseWritePassword:           Values.DatabaseWritePassword,
 	}
 	database.SetConfiguration(dbConfig)
 
