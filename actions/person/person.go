@@ -1,3 +1,4 @@
+// Package person are the actions associated with the person model
 package person
 
 import (
@@ -28,7 +29,7 @@ func create(w http.ResponseWriter, _ *http.Request, _ httprouter.Params) {
 	u := &schema.Person{Email: email + "@gmail.com"}
 
 	// Try to insert the model
-	err := u.Insert(context.Background(), database.WriteConnection, boil.Greylist(schema.PersonColumns.Email))
+	err := u.Insert(context.Background(), database.WriteDatabase, boil.Greylist(schema.PersonColumns.Email))
 	if err != nil {
 		logger.Data(2, logger.ERROR, fmt.Sprintf("error: %s", err))
 		apirouter.ReturnResponse(w, http.StatusExpectationFailed, fmt.Sprintf("error creating person: %s", err), true)

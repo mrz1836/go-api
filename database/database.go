@@ -1,3 +1,4 @@
+// Package database provides a layer for interacting with read/write databases
 package database
 
 import (
@@ -14,14 +15,13 @@ import (
 const (
 	MySQLDriver      = "mysql"
 	PostgreSQLDriver = "postgresql"
-	defaultTimeout   = 10 * time.Second
 )
 
 // Global database instances
 var (
-	config          Configuration
-	ReadConnection  *ApiDatabase
-	WriteConnection *ApiDatabase
+	config        Configuration
+	ReadDatabase  *ApiDatabase
+	WriteDatabase *ApiDatabase
 )
 
 // ApiDatabase Extends sql.DB
@@ -74,6 +74,34 @@ func NewApiDatabase(read, write *sql.DB) *ApiDatabase {
 	return databaseQueue
 }
 
+// OpenConnection opens the database connection (read / write)
+func OpenConnection() {
+	var dB *sql.DB      // I am read only but cheap.  Please use me when possible.
+	var dBWrite *sql.DB // I am read-write, but expensive.  Please only use me for writing.
+
+	//Open the main database connection (read)
+	openDatabaseConnection(config.DatabaseReadHost+":"+config.DatabaseReadPort, config.DatabaseReadName, config.DatabaseReadUser, config.DatabaseReadPassword, &dB, config.DatabaseReadMaxOpenConnections, config.DatabaseReadMaxIdleConnections)
+
+	//Open a write connection if found and different from the read
+	if len(config.DatabaseWriteHost) == 0 || (config.DatabaseWriteHost+":"+config.DatabaseWritePort) == (config.DatabaseReadHost+":"+config.DatabaseReadPort) {
+		dBWrite = dB
+	} else {
+		openDatabaseConnection(config.DatabaseWriteHost+":"+config.DatabaseWritePort, config.DatabaseWriteName, config.DatabaseWriteUser, config.DatabaseWritePassword, &dBWrite, config.DatabaseWriteMaxOpenConnections, config.DatabaseWriteMaxIdleConnections)
+	}
+	ReadDatabase = NewApiDatabase(dB, dBWrite)
+	WriteDatabase = NewApiDatabase(dBWrite, dBWrite)
+}
+
+// CloseAllConnections closes the current database connections
+func CloseAllConnections() {
+	WriteDatabase.waitGroup.Wait()
+	WriteDatabase.Close()
+	WriteDatabase = nil
+	ReadDatabase.waitGroup.Wait()
+	ReadDatabase.Close()
+	ReadDatabase = nil
+}
+
 // startWorker starts a worker for the Throttled Query
 func (d *ApiDatabase) startWorker() {
 	for handle := range d.worker {
@@ -111,34 +139,6 @@ func (d *ApiDatabase) GetReadDatabase() *sql.DB {
 // GetWriteDatabase gets the write database connection
 func (d *ApiDatabase) GetWriteDatabase() *sql.DB {
 	return d.dBWrite
-}
-
-// CloseAllConnections closes the current database connections
-func CloseAllConnections() {
-	WriteConnection.waitGroup.Wait()
-	WriteConnection.Close()
-	WriteConnection = nil
-	ReadConnection.waitGroup.Wait()
-	ReadConnection.Close()
-	ReadConnection = nil
-}
-
-// OpenConnection opens the database connection (read / write)
-func OpenConnection() {
-	var dB *sql.DB      // I am read only but cheap.  Please use me when possible.
-	var dBWrite *sql.DB // I am read-write, but expensive.  Please only use me for writing.
-
-	//Open the main database connection (read)
-	openDatabaseConnection(config.DatabaseReadHost+":"+config.DatabaseReadPort, config.DatabaseReadName, config.DatabaseReadUser, config.DatabaseReadPassword, &dB, config.DatabaseReadMaxOpenConnections, config.DatabaseReadMaxIdleConnections)
-
-	//Open a write connection if found and different from the read
-	if len(config.DatabaseWriteHost) == 0 || (config.DatabaseWriteHost+":"+config.DatabaseWritePort) == (config.DatabaseReadHost+":"+config.DatabaseReadPort) {
-		dBWrite = dB
-	} else {
-		openDatabaseConnection(config.DatabaseWriteHost+":"+config.DatabaseWritePort, config.DatabaseWriteName, config.DatabaseWriteUser, config.DatabaseWritePassword, &dBWrite, config.DatabaseWriteMaxOpenConnections, config.DatabaseWriteMaxIdleConnections)
-	}
-	ReadConnection = NewApiDatabase(dB, dBWrite)
-	WriteConnection = NewApiDatabase(dBWrite, dBWrite)
 }
 
 // openDatabaseConnection opens a new database connection

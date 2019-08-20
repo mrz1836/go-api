@@ -1,4 +1,4 @@
-// Package main is the main application for the People Finder Service
+// Package main is the main application
 package main
 
 import (

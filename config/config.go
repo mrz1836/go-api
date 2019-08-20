@@ -1,4 +1,4 @@
-// Package config provides a configuration for the People Finder Service
+// Package config provides a configuration for the API
 package config
 
 import (
