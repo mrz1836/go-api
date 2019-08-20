@@ -22,7 +22,7 @@
 - [MySQL](https://www.mysql.com/) or [MariaDB](https://mariadb.org/) with no password set
 - [Redis](https://redis.io/)
 
-**go-api** requires a [supported release of Go](https://golang.org/doc/devel/release.html#policy) and [dep](https://github.com/golang/dep).
+1) **go-api** requires a [supported release of Go](https://golang.org/doc/devel/release.html#policy) and [dep](https://github.com/golang/dep).
 ```bash
 $ go get -u github.com/mrz1836/go-api
 $ go get -u github.com/pressly/goose/cmd/goose
@@ -30,17 +30,19 @@ $ go get -u -t github.com/volatiletech/sqlboiler
 $ go get github.com/volatiletech/sqlboiler/drivers/sqlboiler-mysql
 ```
 
-Once installed, run the service with environment variables set
+2) Set you environment variables (or add to your bash profile):
 ```bash
 $ cd ../go-api
-$ . scripts/set_env.sh && . scripts/setup_db.sh && go run cmd/application/main.go
-
-    starting Go API server...
+$ . scripts/set_env.sh
 ```
 
-_(Optional)_ Already have environment variables and database set?
+3) Setup a fresh database (if you don't have one already)
 ```bash
-$ cd ../go-api
+$ . scripts/setup_db.sh
+```
+
+4) Run the API!
+```bash
 $ go run cmd/application/main.go
 
     starting Go API server...
@@ -53,16 +55,23 @@ $ curl -X GET 'http://localhost:3000'
   Welcome to the Go API!
 ```
 
-_(Optional)_ Updating dependencies in **go-api**:
+### Managing Dependencies
+
+Updating dependencies in **go-api**:
 ```bash
 $ cd ../go-api
 $ dep ensure -update -v
 ```
 
-Edit the [`scripts/set_env.sh`](scripts/set_env.sh) file and modify the environment variables:
+### Managing Environment Variables
+All environment variables are referenced in the [config](config/config.go).
+
+Edit the [`scripts/set_env.sh`](scripts/set_env.sh) file and modify the environment variables - IE:
 ```bash
 export API_SERVER_PORT=3000
 ```
+
+### Managing Model Generation
 
 Update the `reset_api_database.sql` if you have issues running the model tests
 ```sql
