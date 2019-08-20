@@ -107,12 +107,12 @@
   version = "v1.1.2"
 
 [[projects]]
-  digest = "1:ad8355a444905e24290641d282b9b974423dc25a02171a6cb440fb78411e6e78"
+  digest = "1:ffcb3b6d21f4e19ea59402efe26a17515c2130885cfa5cb4657bf66e8c0bbdef"
   name = "github.com/mrz1836/go-api-router"
   packages = ["."]
   pruneopts = "NUT"
-  revision = "95fe48151992c99e8ea9b36d94265946bbd2e59d"
-  version = "v0.0.9"
+  revision = "253016fdf1639cfec8b14a42d2e975959ebea3f4"
+  version = "v0.0.13"
 
 [[projects]]
   digest = "1:d6824ae63219447401d8349c1e12db1d1ed41fc4c46373ac74e5786f7e4ce66f"

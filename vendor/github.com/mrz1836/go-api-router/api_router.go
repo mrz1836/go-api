@@ -182,20 +182,3 @@ func (r *Router) SetCrossOriginHeaders(w http.ResponseWriter, req *http.Request,
 	// Allowed headers to accept
 	w.Header().Set("Access-Control-Allow-Headers", r.CrossOriginAllowHeaders)
 }
-
-// ReturnResponse helps return a status code and message to the end user
-func ReturnResponse(w http.ResponseWriter, code int, message string, json bool) {
-
-	// Set the content if JSON
-	if json {
-		w.Header().Set("Content-Type", "application/json")
-	}
-
-	// Set the header status code
-	w.WriteHeader(code)
-
-	// Write the content, log error if occurs
-	if _, err := w.Write([]byte(message)); err != nil {
-		logger.Data(2, logger.WARN, err.Error())
-	}
-}

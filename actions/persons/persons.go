@@ -10,8 +10,6 @@ import (
 	"github.com/julienschmidt/httprouter"
 	"github.com/mrz1836/go-api-router"
 	"github.com/mrz1836/go-api/models"
-	"github.com/mrz1836/go-api/models/schema"
-	"github.com/volatiletech/sqlboiler/boil"
 )
 
 // RegisterRoutes register all the package specific routes
@@ -34,20 +32,13 @@ func create(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 	person.FirstName = params.Get("first_name")
 	person.LastName = params.Get("last_name")
 
-	// Save will insert a new person
-	err := person.Save(context.Background(), boil.Greylist(schema.PersonColumns.Email, schema.PersonColumns.FirstName, schema.PersonColumns.LastName))
+	// Save will insert a new person since we are creating a new model
+	err := person.Save(context.Background(), models.PersonCreateColumns)
 	if err != nil {
 		apirouter.ReturnResponse(w, http.StatusExpectationFailed, fmt.Sprintf("failed to save person: %s", err), false)
 		return
 	}
 
-	// Encode the model for return
-	b, err := json.Marshal(person)
-	if err != nil {
-		apirouter.ReturnResponse(w, http.StatusExpectationFailed, fmt.Sprintf("encoding person failed: %s", err), false)
-		return
-	}
-
-	// Send the model back
-	apirouter.ReturnResponse(w, http.StatusCreated, string(b), true)
+	// This should not fail on the encode
+	_ = apirouter.ReturnJSONEncode(w, http.StatusCreated, json.NewEncoder(w), person, models.PersonAllFields)
 }

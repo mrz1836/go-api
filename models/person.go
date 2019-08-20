@@ -11,6 +11,26 @@ import (
 	"github.com/volatiletech/sqlboiler/boil"
 )
 
+var (
+	// Columns only allowed in create
+	PersonCreateColumns = boil.Greylist(
+		schema.PersonColumns.Email,
+		schema.PersonColumns.FirstName,
+		schema.PersonColumns.LastName,
+		schema.PersonColumns.MiddleName,
+	)
+
+	// All fields that can be displayed
+	PersonAllFields = []string{
+		schema.PersonColumns.Email,
+		schema.PersonColumns.FirstName,
+		schema.PersonColumns.ID,
+		schema.PersonColumns.LastName,
+		schema.PersonColumns.MiddleName,
+		schema.PersonColumns.ModifiedAt,
+	}
+)
+
 // Person extends the schema model
 type Person struct {
 	schema.Person
