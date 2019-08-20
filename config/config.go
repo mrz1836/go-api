@@ -4,6 +4,7 @@ package config
 import (
 	"os"
 
+	"github.com/mrz1836/go-api/database"
 	"github.com/mrz1836/go-cache"
 	"github.com/mrz1836/go-logger"
 )
@@ -30,10 +31,55 @@ var (
 
 	// CacheMaxIdleTimeout is the max idle time (0 is unlimited)
 	CacheMaxIdleTimeout = 240
+
+	// DatabaseMaxConnLifetime max connection time
+	DatabaseMaxConnLifetime = 60
+
+	// DatabaseReadHost is the read hostname
+	DatabaseReadHost = "localhost"
+
+	// DatabaseReadPort is the read port
+	DatabaseReadPort = "3306"
+
+	// DatabaseReadName is the name of the database
+	DatabaseReadName = "api_example"
+
+	// DatabaseReadUser is the username
+	DatabaseReadUser = "apiDbTestUser"
+
+	// DatabaseReadPassword is the password for the user
+	DatabaseReadPassword = "ThisIsSecureEnough123"
+
+	// DatabaseReadMaxIdleConnections max idle connections
+	DatabaseReadMaxIdleConnections = 5
+
+	// DatabaseReadMaxOpenConnections max open connection
+	DatabaseReadMaxOpenConnections = 5
+
+	// DatabaseWriteHost is the read hostname
+	DatabaseWriteHost = "localhost"
+
+	// DatabaseWritePort is the read port
+	DatabaseWritePort = "3306"
+
+	// DatabaseWriteName is the name of the database
+	DatabaseWriteName = "api_example"
+
+	// DatabaseWriteUser is the username
+	DatabaseWriteUser = "apiDbTestUser"
+
+	// DatabaseWritePassword is the password for the user
+	DatabaseWritePassword = "ThisIsSecureEnough123"
+
+	// DatabaseWriteMaxIdleConnections max idle connections
+	DatabaseWriteMaxIdleConnections = 5
+
+	// DatabaseWriteMaxOpenConnections max open connections
+	DatabaseWriteMaxOpenConnections = 5
 )
 
 // init load all environment variables
-func init() {
+func Load() {
 
 	// Check the environment and use caching if set
 	if len(CacheURL) > 0 {
@@ -49,4 +95,28 @@ func init() {
 	} else {
 		logger.Data(2, logger.INFO, "caching: disabled")
 	}
+
+	// Load the database configuration
+	dbConfig := database.Configuration{
+		DatabaseDriver:                  "mysql",
+		DatabaseMaxConnLifetime:         DatabaseMaxConnLifetime,
+		DatabaseReadHost:                DatabaseReadHost,
+		DatabaseReadMaxIdleConnections:  DatabaseReadMaxIdleConnections,
+		DatabaseReadMaxOpenConnections:  DatabaseReadMaxOpenConnections,
+		DatabaseReadName:                DatabaseReadName,
+		DatabaseReadPort:                DatabaseReadPort,
+		DatabaseReadUser:                DatabaseReadUser,
+		DatabaseReadPassword:            DatabaseReadPassword,
+		DatabaseWriteHost:               DatabaseWriteHost,
+		DatabaseWriteMaxIdleConnections: DatabaseWriteMaxIdleConnections,
+		DatabaseWriteMaxOpenConnections: DatabaseWriteMaxOpenConnections,
+		DatabaseWriteName:               DatabaseWriteName,
+		DatabaseWritePort:               DatabaseWritePort,
+		DatabaseWriteUser:               DatabaseWriteUser,
+		DatabaseWritePassword:           DatabaseWritePassword,
+	}
+	database.SetConfiguration(dbConfig)
+
+	// Open the connections
+	database.OpenConnection()
 }
