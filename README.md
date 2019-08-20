@@ -73,13 +73,14 @@ $ . scripts/rebuild_models.sh
 ```
 
 ### Package Dependencies
-- [go-logger](https://github.com/mrz1836/go-logger) - Local or remote logging
+- [go-api-router](https://github.com/mrz1836/go-api-router) - Fast and lightweight router
 - [go-cache](https://github.com/mrz1836/go-cache) - Redis caching made easy
-- [go-api-router](https://github.com/mrz1836/go-api-router) - Fast and slim router
+- [go-logger](https://github.com/mrz1836/go-logger) - Local or remote logging
 - [go-sanitize](https://github.com/mrz1836/go-sanitize) - Clean data effortlessly
-- [ozzo-validation](https://github.com/go-ozzo/ozzo-validation) - Extensible data validation
 - [goose](https://github.com/pressly/goose) - Database migration
-- [SQLBoiler](https://github.com/volatiletech/sqlboiler) - Powerful database ORM
+- [ozzo-validation](https://github.com/go-ozzo/ozzo-validation) - Extensible data validation
+- [viper](https://github.com/spf13/viper) - Go configuration with fangs
+- [SQLBoiler](https://github.com/volatiletech/sqlboiler) - Powerful database ORM & model generation
 
 ## Documentation
 You can view the generated [documentation here](https://godoc.org/github.com/mrz1836/go-api).
@@ -94,7 +95,7 @@ You can view the generated [documentation here](https://godoc.org/github.com/mrz
 - Cache dependency management via [go-cache](https://github.com/mrz1836/go-cache)
 - Supports different incoming load balancer setups (/health)
 - Logging each request and whenever you need logs (remote via [LogEntries](https://logentries.com/))
-- todo: @mrz
+- Flexible environment & configuration management using [viper](https://github.com/spf13/viper)
 
 ## Examples & Tests
 All unit tests and [examples](examples/examples.go) run via [Travis CI](https://travis-ci.com/mrz1836/go-api) and uses [Go version 1.12.x](https://golang.org/doc/go1.12). View the [deployment configuration file](.travis.yml).
