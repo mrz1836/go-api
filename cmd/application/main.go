@@ -21,7 +21,7 @@ func main() {
 	defer func() {
 
 		// Close the cache connection on exit
-		if config.CacheEnabled {
+		if config.Values.CacheEnabled {
 			cache.Disconnect()
 		}
 
@@ -30,6 +30,6 @@ func main() {
 	}()
 
 	// Load the server
-	logger.Data(2, logger.DEBUG, "starting Go API server...", logger.MakeParameter("port", config.ServerPort))
-	logger.Fatalln(http.ListenAndServe(":"+config.ServerPort, api.Handlers()))
+	logger.Data(2, logger.DEBUG, "starting Go API server...", logger.MakeParameter("port", config.Values.ServerPort))
+	logger.Fatalln(http.ListenAndServe(":"+config.Values.ServerPort, api.Handlers()))
 }
