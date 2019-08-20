@@ -28,7 +28,7 @@ $ go get github.com/volatiletech/null
 $ go get github.com/kat-co/vala
 ```
 
-Edit the [`set_env.sh`](set_env.sh) file and change the environment variables:
+Edit the [`scripts/set_env.sh`](scripts/set_env.sh) file and change the environment variables:
 ```bash
 export CACHE_URL=your-cache-url
 ```
@@ -36,7 +36,7 @@ export CACHE_URL=your-cache-url
 Once installed, run the service with environment variables set
 ```bash
 $ cd ../go-api
-$ . set_env.sh && . setup_db.sh && go run cmd/application/main.go
+$ . scripts/set_env.sh && . scripts/setup_db.sh && go run cmd/application/main.go
 $ starting Go API server...
 ```
 
@@ -67,7 +67,7 @@ GRANT ALL ON `dynamic-database-name-generated-from-sql-boiler`.* to 'apiDbTestUs
 
 Rebuilding the models from the database schema:
 ```bash
-$ . rebuild_models.sh
+$ . scripts/rebuild_models.sh
 ```
 
 ### Package Dependencies
