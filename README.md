@@ -28,8 +28,6 @@ $ go get -u github.com/mrz1836/go-api
 $ go get -u github.com/pressly/goose/cmd/goose
 $ go get -u -t github.com/volatiletech/sqlboiler
 $ go get github.com/volatiletech/sqlboiler/drivers/sqlboiler-mysql
-$ go get github.com/volatiletech/null
-$ go get github.com/kat-co/vala
 ```
 
 Edit the [`scripts/set_env.sh`](scripts/set_env.sh) file and change the environment variables:
@@ -79,8 +77,9 @@ $ . scripts/rebuild_models.sh
 - [go-cache](https://github.com/mrz1836/go-cache) - Redis caching made easy
 - [go-api-router](https://github.com/mrz1836/go-api-router) - Fast and slim router
 - [go-sanitize](https://github.com/mrz1836/go-sanitize) - Clean data effortlessly
+- [ozzo-validation](https://github.com/go-ozzo/ozzo-validation) - Extensible data validation
+- [goose](https://github.com/pressly/goose) - Database migration
 - [SQLBoiler](https://github.com/volatiletech/sqlboiler) - Powerful database ORM
-- [Goose](https://github.com/pressly/goose) - Database migration
 
 ## Documentation
 You can view the generated [documentation here](https://godoc.org/github.com/mrz1836/go-api).
