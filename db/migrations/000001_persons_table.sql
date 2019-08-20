@@ -2,9 +2,9 @@
 -- +goose StatementBegin
 CREATE TABLE `persons` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID of the record',
-  `first_name` varchar(50) DEFAULT NULL COMMENT 'First name of person',
-  `middle_name` varchar(50) DEFAULT NULL COMMENT 'Middle name of person',
-  `last_name` varchar(50) DEFAULT NULL COMMENT 'Last name of person',
+  `first_name` varchar(50) NOT NULL DEFAULT '' COMMENT 'First name of person',
+  `middle_name` varchar(50) NOT NULL DEFAULT '' COMMENT 'Middle name of person',
+  `last_name` varchar(50) NOT NULL DEFAULT '' COMMENT 'Last name of person',
   `email` varchar(100) NOT NULL COMMENT 'Unique email address for the person',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp() COMMENT 'Time the record was created',
   `modified_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() COMMENT 'Time the record was last modified',

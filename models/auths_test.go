@@ -677,7 +677,7 @@ func testAuthsSelect(t *testing.T) {
 }
 
 var (
-	authDBTypes = map[string]string{`ID`: `bigint`, `PersonID`: `bigint`, `CreatedAt`: `timestamp`, `ModifiedAt`: `timestamp`, `PasswordDigest`: `varchar`, `YubikeyDigest`: `varchar`, `YubikeyBackupDigest`: `varchar`, `Email`: `varchar`, `EmailConfirmToken`: `varchar`, `EmailConfirmed`: `tinyint`, `EmailConfirmTime`: `timestamp`, `LastIPAddress`: `varchar`, `LastLoginAt`: `timestamp`, `LastUserAgent`: `varchar`, `LoginCount`: `int`, `ResetForce`: `tinyint`, `ResetPasswordTime`: `timestamp`, `ResetPasswordToken`: `char`, `ResetTokenExpiresAt`: `timestamp`, `Locked`: `tinyint`, `LockedTime`: `timestamp`, `LockedByUserID`: `bigint`, `IsDeleted`: `tinyint`}
+	authDBTypes = map[string]string{`ID`: `bigint`, `PersonID`: `bigint`, `CreatedAt`: `timestamp`, `ModifiedAt`: `timestamp`, `PasswordDigest`: `varchar`, `YubikeyDigest`: `varchar`, `YubikeyBackupDigest`: `varchar`, `Email`: `varchar`, `EmailConfirmToken`: `char`, `EmailConfirmed`: `tinyint`, `EmailConfirmTime`: `timestamp`, `LastIPAddress`: `varchar`, `LastLoginAt`: `timestamp`, `LastUserAgent`: `varchar`, `LoginCount`: `int`, `ResetForce`: `tinyint`, `ResetPasswordTime`: `timestamp`, `ResetPasswordToken`: `char`, `ResetTokenExpiresAt`: `timestamp`, `Locked`: `tinyint`, `LockedTime`: `timestamp`, `LockedByUserID`: `bigint`, `IsDeleted`: `tinyint`}
 	_           = bytes.MinRead
 )
 

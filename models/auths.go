@@ -28,20 +28,20 @@ type Auth struct {
 	PersonID            uint64      `boil:"person_id" json:"person_id" toml:"person_id" yaml:"person_id"`
 	CreatedAt           time.Time   `boil:"created_at" json:"created_at" toml:"created_at" yaml:"created_at"`
 	ModifiedAt          time.Time   `boil:"modified_at" json:"modified_at" toml:"modified_at" yaml:"modified_at"`
-	PasswordDigest      null.String `boil:"password_digest" json:"password_digest,omitempty" toml:"password_digest" yaml:"password_digest,omitempty"`
-	YubikeyDigest       null.String `boil:"yubikey_digest" json:"yubikey_digest,omitempty" toml:"yubikey_digest" yaml:"yubikey_digest,omitempty"`
-	YubikeyBackupDigest null.String `boil:"yubikey_backup_digest" json:"yubikey_backup_digest,omitempty" toml:"yubikey_backup_digest" yaml:"yubikey_backup_digest,omitempty"`
+	PasswordDigest      string      `boil:"password_digest" json:"password_digest" toml:"password_digest" yaml:"password_digest"`
+	YubikeyDigest       string      `boil:"yubikey_digest" json:"yubikey_digest" toml:"yubikey_digest" yaml:"yubikey_digest"`
+	YubikeyBackupDigest string      `boil:"yubikey_backup_digest" json:"yubikey_backup_digest" toml:"yubikey_backup_digest" yaml:"yubikey_backup_digest"`
 	Email               string      `boil:"email" json:"email" toml:"email" yaml:"email"`
-	EmailConfirmToken   null.String `boil:"email_confirm_token" json:"email_confirm_token,omitempty" toml:"email_confirm_token" yaml:"email_confirm_token,omitempty"`
+	EmailConfirmToken   string      `boil:"email_confirm_token" json:"email_confirm_token" toml:"email_confirm_token" yaml:"email_confirm_token"`
 	EmailConfirmed      null.Bool   `boil:"email_confirmed" json:"email_confirmed,omitempty" toml:"email_confirmed" yaml:"email_confirmed,omitempty"`
 	EmailConfirmTime    null.Time   `boil:"email_confirm_time" json:"email_confirm_time,omitempty" toml:"email_confirm_time" yaml:"email_confirm_time,omitempty"`
-	LastIPAddress       null.String `boil:"last_ip_address" json:"last_ip_address,omitempty" toml:"last_ip_address" yaml:"last_ip_address,omitempty"`
+	LastIPAddress       string      `boil:"last_ip_address" json:"last_ip_address" toml:"last_ip_address" yaml:"last_ip_address"`
 	LastLoginAt         null.Time   `boil:"last_login_at" json:"last_login_at,omitempty" toml:"last_login_at" yaml:"last_login_at,omitempty"`
-	LastUserAgent       null.String `boil:"last_user_agent" json:"last_user_agent,omitempty" toml:"last_user_agent" yaml:"last_user_agent,omitempty"`
+	LastUserAgent       string      `boil:"last_user_agent" json:"last_user_agent" toml:"last_user_agent" yaml:"last_user_agent"`
 	LoginCount          null.Uint   `boil:"login_count" json:"login_count,omitempty" toml:"login_count" yaml:"login_count,omitempty"`
 	ResetForce          null.Bool   `boil:"reset_force" json:"reset_force,omitempty" toml:"reset_force" yaml:"reset_force,omitempty"`
 	ResetPasswordTime   null.Time   `boil:"reset_password_time" json:"reset_password_time,omitempty" toml:"reset_password_time" yaml:"reset_password_time,omitempty"`
-	ResetPasswordToken  null.String `boil:"reset_password_token" json:"reset_password_token,omitempty" toml:"reset_password_token" yaml:"reset_password_token,omitempty"`
+	ResetPasswordToken  string      `boil:"reset_password_token" json:"reset_password_token" toml:"reset_password_token" yaml:"reset_password_token"`
 	ResetTokenExpiresAt null.Time   `boil:"reset_token_expires_at" json:"reset_token_expires_at,omitempty" toml:"reset_token_expires_at" yaml:"reset_token_expires_at,omitempty"`
 	Locked              null.Bool   `boil:"locked" json:"locked,omitempty" toml:"locked" yaml:"locked,omitempty"`
 	LockedTime          null.Time   `boil:"locked_time" json:"locked_time,omitempty" toml:"locked_time" yaml:"locked_time,omitempty"`
@@ -131,29 +131,6 @@ func (w whereHelpertime_Time) GT(x time.Time) qm.QueryMod {
 	return qmhelper.Where(w.field, qmhelper.GT, x)
 }
 func (w whereHelpertime_Time) GTE(x time.Time) qm.QueryMod {
-	return qmhelper.Where(w.field, qmhelper.GTE, x)
-}
-
-type whereHelpernull_String struct{ field string }
-
-func (w whereHelpernull_String) EQ(x null.String) qm.QueryMod {
-	return qmhelper.WhereNullEQ(w.field, false, x)
-}
-func (w whereHelpernull_String) NEQ(x null.String) qm.QueryMod {
-	return qmhelper.WhereNullEQ(w.field, true, x)
-}
-func (w whereHelpernull_String) IsNull() qm.QueryMod    { return qmhelper.WhereIsNull(w.field) }
-func (w whereHelpernull_String) IsNotNull() qm.QueryMod { return qmhelper.WhereIsNotNull(w.field) }
-func (w whereHelpernull_String) LT(x null.String) qm.QueryMod {
-	return qmhelper.Where(w.field, qmhelper.LT, x)
-}
-func (w whereHelpernull_String) LTE(x null.String) qm.QueryMod {
-	return qmhelper.Where(w.field, qmhelper.LTE, x)
-}
-func (w whereHelpernull_String) GT(x null.String) qm.QueryMod {
-	return qmhelper.Where(w.field, qmhelper.GT, x)
-}
-func (w whereHelpernull_String) GTE(x null.String) qm.QueryMod {
 	return qmhelper.Where(w.field, qmhelper.GTE, x)
 }
 
@@ -263,20 +240,20 @@ var AuthWhere = struct {
 	PersonID            whereHelperuint64
 	CreatedAt           whereHelpertime_Time
 	ModifiedAt          whereHelpertime_Time
-	PasswordDigest      whereHelpernull_String
-	YubikeyDigest       whereHelpernull_String
-	YubikeyBackupDigest whereHelpernull_String
+	PasswordDigest      whereHelperstring
+	YubikeyDigest       whereHelperstring
+	YubikeyBackupDigest whereHelperstring
 	Email               whereHelperstring
-	EmailConfirmToken   whereHelpernull_String
+	EmailConfirmToken   whereHelperstring
 	EmailConfirmed      whereHelpernull_Bool
 	EmailConfirmTime    whereHelpernull_Time
-	LastIPAddress       whereHelpernull_String
+	LastIPAddress       whereHelperstring
 	LastLoginAt         whereHelpernull_Time
-	LastUserAgent       whereHelpernull_String
+	LastUserAgent       whereHelperstring
 	LoginCount          whereHelpernull_Uint
 	ResetForce          whereHelpernull_Bool
 	ResetPasswordTime   whereHelpernull_Time
-	ResetPasswordToken  whereHelpernull_String
+	ResetPasswordToken  whereHelperstring
 	ResetTokenExpiresAt whereHelpernull_Time
 	Locked              whereHelpernull_Bool
 	LockedTime          whereHelpernull_Time
@@ -287,20 +264,20 @@ var AuthWhere = struct {
 	PersonID:            whereHelperuint64{field: "`auths`.`person_id`"},
 	CreatedAt:           whereHelpertime_Time{field: "`auths`.`created_at`"},
 	ModifiedAt:          whereHelpertime_Time{field: "`auths`.`modified_at`"},
-	PasswordDigest:      whereHelpernull_String{field: "`auths`.`password_digest`"},
-	YubikeyDigest:       whereHelpernull_String{field: "`auths`.`yubikey_digest`"},
-	YubikeyBackupDigest: whereHelpernull_String{field: "`auths`.`yubikey_backup_digest`"},
+	PasswordDigest:      whereHelperstring{field: "`auths`.`password_digest`"},
+	YubikeyDigest:       whereHelperstring{field: "`auths`.`yubikey_digest`"},
+	YubikeyBackupDigest: whereHelperstring{field: "`auths`.`yubikey_backup_digest`"},
 	Email:               whereHelperstring{field: "`auths`.`email`"},
-	EmailConfirmToken:   whereHelpernull_String{field: "`auths`.`email_confirm_token`"},
+	EmailConfirmToken:   whereHelperstring{field: "`auths`.`email_confirm_token`"},
 	EmailConfirmed:      whereHelpernull_Bool{field: "`auths`.`email_confirmed`"},
 	EmailConfirmTime:    whereHelpernull_Time{field: "`auths`.`email_confirm_time`"},
-	LastIPAddress:       whereHelpernull_String{field: "`auths`.`last_ip_address`"},
+	LastIPAddress:       whereHelperstring{field: "`auths`.`last_ip_address`"},
 	LastLoginAt:         whereHelpernull_Time{field: "`auths`.`last_login_at`"},
-	LastUserAgent:       whereHelpernull_String{field: "`auths`.`last_user_agent`"},
+	LastUserAgent:       whereHelperstring{field: "`auths`.`last_user_agent`"},
 	LoginCount:          whereHelpernull_Uint{field: "`auths`.`login_count`"},
 	ResetForce:          whereHelpernull_Bool{field: "`auths`.`reset_force`"},
 	ResetPasswordTime:   whereHelpernull_Time{field: "`auths`.`reset_password_time`"},
-	ResetPasswordToken:  whereHelpernull_String{field: "`auths`.`reset_password_token`"},
+	ResetPasswordToken:  whereHelperstring{field: "`auths`.`reset_password_token`"},
 	ResetTokenExpiresAt: whereHelpernull_Time{field: "`auths`.`reset_token_expires_at`"},
 	Locked:              whereHelpernull_Bool{field: "`auths`.`locked`"},
 	LockedTime:          whereHelpernull_Time{field: "`auths`.`locked_time`"},
@@ -330,8 +307,8 @@ type authL struct{}
 
 var (
 	authAllColumns            = []string{"id", "person_id", "created_at", "modified_at", "password_digest", "yubikey_digest", "yubikey_backup_digest", "email", "email_confirm_token", "email_confirmed", "email_confirm_time", "last_ip_address", "last_login_at", "last_user_agent", "login_count", "reset_force", "reset_password_time", "reset_password_token", "reset_token_expires_at", "locked", "locked_time", "locked_by_user_id", "is_deleted"}
-	authColumnsWithoutDefault = []string{"person_id", "password_digest", "yubikey_digest", "yubikey_backup_digest", "email", "email_confirm_token", "email_confirm_time", "last_ip_address", "last_login_at", "last_user_agent", "reset_password_time", "reset_password_token", "reset_token_expires_at", "locked_time", "locked_by_user_id"}
-	authColumnsWithDefault    = []string{"id", "created_at", "modified_at", "email_confirmed", "login_count", "reset_force", "locked", "is_deleted"}
+	authColumnsWithoutDefault = []string{"person_id", "email", "email_confirm_time", "last_login_at", "reset_password_time", "reset_token_expires_at", "locked_time", "locked_by_user_id"}
+	authColumnsWithDefault    = []string{"id", "created_at", "modified_at", "password_digest", "yubikey_digest", "yubikey_backup_digest", "email_confirm_token", "email_confirmed", "last_ip_address", "last_user_agent", "login_count", "reset_force", "reset_password_token", "locked", "is_deleted"}
 	authPrimaryKeyColumns     = []string{"id"}
 )
 

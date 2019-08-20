@@ -24,14 +24,14 @@ import (
 
 // Person is an object representing the database table.
 type Person struct {
-	ID         uint64      `boil:"id" json:"id" toml:"id" yaml:"id"`
-	FirstName  null.String `boil:"first_name" json:"first_name,omitempty" toml:"first_name" yaml:"first_name,omitempty"`
-	MiddleName null.String `boil:"middle_name" json:"middle_name,omitempty" toml:"middle_name" yaml:"middle_name,omitempty"`
-	LastName   null.String `boil:"last_name" json:"last_name,omitempty" toml:"last_name" yaml:"last_name,omitempty"`
-	Email      string      `boil:"email" json:"email" toml:"email" yaml:"email"`
-	CreatedAt  time.Time   `boil:"created_at" json:"created_at" toml:"created_at" yaml:"created_at"`
-	ModifiedAt time.Time   `boil:"modified_at" json:"modified_at" toml:"modified_at" yaml:"modified_at"`
-	IsDeleted  null.Bool   `boil:"is_deleted" json:"is_deleted,omitempty" toml:"is_deleted" yaml:"is_deleted,omitempty"`
+	ID         uint64    `boil:"id" json:"id" toml:"id" yaml:"id"`
+	FirstName  string    `boil:"first_name" json:"first_name" toml:"first_name" yaml:"first_name"`
+	MiddleName string    `boil:"middle_name" json:"middle_name" toml:"middle_name" yaml:"middle_name"`
+	LastName   string    `boil:"last_name" json:"last_name" toml:"last_name" yaml:"last_name"`
+	Email      string    `boil:"email" json:"email" toml:"email" yaml:"email"`
+	CreatedAt  time.Time `boil:"created_at" json:"created_at" toml:"created_at" yaml:"created_at"`
+	ModifiedAt time.Time `boil:"modified_at" json:"modified_at" toml:"modified_at" yaml:"modified_at"`
+	IsDeleted  null.Bool `boil:"is_deleted" json:"is_deleted,omitempty" toml:"is_deleted" yaml:"is_deleted,omitempty"`
 
 	R *personR `boil:"-" json:"-" toml:"-" yaml:"-"`
 	L personL  `boil:"-" json:"-" toml:"-" yaml:"-"`
@@ -61,18 +61,18 @@ var PersonColumns = struct {
 
 var PersonWhere = struct {
 	ID         whereHelperuint64
-	FirstName  whereHelpernull_String
-	MiddleName whereHelpernull_String
-	LastName   whereHelpernull_String
+	FirstName  whereHelperstring
+	MiddleName whereHelperstring
+	LastName   whereHelperstring
 	Email      whereHelperstring
 	CreatedAt  whereHelpertime_Time
 	ModifiedAt whereHelpertime_Time
 	IsDeleted  whereHelpernull_Bool
 }{
 	ID:         whereHelperuint64{field: "`persons`.`id`"},
-	FirstName:  whereHelpernull_String{field: "`persons`.`first_name`"},
-	MiddleName: whereHelpernull_String{field: "`persons`.`middle_name`"},
-	LastName:   whereHelpernull_String{field: "`persons`.`last_name`"},
+	FirstName:  whereHelperstring{field: "`persons`.`first_name`"},
+	MiddleName: whereHelperstring{field: "`persons`.`middle_name`"},
+	LastName:   whereHelperstring{field: "`persons`.`last_name`"},
 	Email:      whereHelperstring{field: "`persons`.`email`"},
 	CreatedAt:  whereHelpertime_Time{field: "`persons`.`created_at`"},
 	ModifiedAt: whereHelpertime_Time{field: "`persons`.`modified_at`"},
@@ -101,8 +101,8 @@ type personL struct{}
 
 var (
 	personAllColumns            = []string{"id", "first_name", "middle_name", "last_name", "email", "created_at", "modified_at", "is_deleted"}
-	personColumnsWithoutDefault = []string{"first_name", "middle_name", "last_name", "email"}
-	personColumnsWithDefault    = []string{"id", "created_at", "modified_at", "is_deleted"}
+	personColumnsWithoutDefault = []string{"email"}
+	personColumnsWithDefault    = []string{"id", "first_name", "middle_name", "last_name", "created_at", "modified_at", "is_deleted"}
 	personPrimaryKeyColumns     = []string{"id"}
 )
 
