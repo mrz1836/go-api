@@ -18,6 +18,10 @@
 
 ## Installation
 
+### Prerequisites:
+- [MySQL](https://www.mysql.com/) or [MariaDB](https://mariadb.org/)
+- [Redis](https://redis.io/)
+
 **go-api** requires a [supported release of Go](https://golang.org/doc/devel/release.html#policy) and [dep](https://github.com/golang/dep).
 ```bash
 $ go get -u github.com/mrz1836/go-api
@@ -65,7 +69,7 @@ Update the `reset_api_database.sql` if you have issues running the model tests
 GRANT ALL ON `dynamic-database-name-generated-from-sql-boiler`.* to 'apiDbTestUser'@'%';
 ```
 
-Rebuilding the models from the database schema:
+Rebuilding the generated models from the database schema:
 ```bash
 $ . scripts/rebuild_models.sh
 ```
