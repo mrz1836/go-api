@@ -1,11 +1,10 @@
 #!/bin/bash
 
-# If you want to use cache, set the redis url
-# Example: redis://localhost:6379
-export API_CACHE_URL=your-cache-url
-
 # Port for the API http requests
 export API_SERVER_PORT=3000
+
+# Environment to run
+export API_ENVIRONMENT=development
 
 #
 # Read Database
@@ -32,3 +31,7 @@ export API_DATABASE_WRITE_NAME=api_example
 export API_DATABASE_WRITE_PORT=3306
 export API_DATABASE_WRITE_USER=apiDbTestUser
 export API_DATABASE_WRITE_PASSWORD=ThisIsSecureEnough123
+
+# If you want to use cache, set the redis url
+# Example: redis://localhost:6379
+export API_CACHE_URL=your-cache-url

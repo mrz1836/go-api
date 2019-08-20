@@ -3,6 +3,7 @@ package config
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/go-ozzo/ozzo-validation"
 	"github.com/mrz1836/go-api/database"
@@ -37,39 +38,58 @@ type appConfig struct {
 	DatabaseWritePassword           string `env:"API_DATABASE_WRITE_PASSWORD" json:"database_write_password" mapstructure:"database_write_password"`
 	DatabaseWritePort               string `env:"API_DATABASE_WRITE_PORT" json:"database_write_port" mapstructure:"database_write_port"`
 	DatabaseWriteUser               string `env:"API_DATABASE_WRITE_USER" json:"database_write_user" mapstructure:"database_write_user"`
+	Environment                     string `env:"API_ENVIRONMENT" json:"environment" mapstructure:"environment"`
 	ServerPort                      string `env:"API_SERVER_PORT" json:"server_port" mapstructure:"server_port"`
 }
 
 // Validate checks the configuration for specific rules
 func (c appConfig) Validate() error {
 	return validation.ValidateStruct(&c,
-		validation.Field(&c.ServerPort, validation.Required),
+		validation.Field(&c.ServerPort, validation.Required, validation.Length(2, 6)),
 		validation.Field(&c.DatabaseReadHost, validation.Required),
 		validation.Field(&c.DatabaseReadName, validation.Required),
 		validation.Field(&c.DatabaseReadPassword, validation.Required),
 		validation.Field(&c.DatabaseReadUser, validation.Required),
-		validation.Field(&c.DatabaseReadPort, validation.Required),
+		validation.Field(&c.DatabaseReadPort, validation.Required, validation.Length(2, 6)),
 		validation.Field(&c.DatabaseWriteHost, validation.Required),
 		validation.Field(&c.DatabaseWriteName, validation.Required),
 		validation.Field(&c.DatabaseWritePassword, validation.Required),
 		validation.Field(&c.DatabaseWriteUser, validation.Required),
-		validation.Field(&c.DatabaseWritePort, validation.Required),
+		validation.Field(&c.DatabaseWritePort, validation.Required, validation.Length(2, 6)),
+		validation.Field(&c.Environment, validation.Required, validation.In("development", "staging", "production")),
 	)
 }
 
 // init load all environment variables
 func Load() {
 
-	// Load configuration from json first, then env
-	viper.SetConfigFile("./config/env.json")
+	// Check the environment we are running
+	environment := os.Getenv("API_ENVIRONMENT")
+	if len(environment) == 0 {
+		logger.Data(2, logger.ERROR, "missing required environment var: API_ENVIRONMENT")
+		logger.Fatalln("exiting...")
+	}
+
+	// Load configuration from json based on the environment
+	if environment == "production" {
+		viper.SetConfigFile("./config/production.json")
+	} else if environment == "staging" {
+		viper.SetConfigFile("./config/staging.json")
+	} else {
+		viper.SetConfigFile("./config/development.json")
+	}
+
+	// Set the prefix
 	viper.SetEnvPrefix("api")
+
+	// Use env vars
 	viper.AutomaticEnv()
 
 	// Read the configuration
 	if err := viper.ReadInConfig(); err != nil {
 		logger.Data(2, logger.ERROR, fmt.Sprintf("error reading env configuration: %s", err.Error()))
 	} else {
-		logger.Data(2, logger.INFO, "configuration env file processed")
+		logger.Data(2, logger.INFO, environment+" configuration env file processed")
 	}
 
 	// Unmarshal into values struct
