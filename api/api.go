@@ -5,7 +5,7 @@ import (
 	"github.com/julienschmidt/httprouter"
 	"github.com/mrz1836/go-api-router"
 	"github.com/mrz1836/go-api/actions/base"
-	"github.com/mrz1836/go-api/actions/person"
+	"github.com/mrz1836/go-api/actions/persons"
 )
 
 // Handlers isolated the handlers / router for API (helps with testing)
@@ -24,7 +24,7 @@ func Handlers() *httprouter.Router {
 	base.RegisterRoutes(router)
 
 	// The person actions
-	person.RegisterRoutes(router)
+	persons.RegisterRoutes(router)
 
 	// Return the router
 	return router.HTTPRouter
