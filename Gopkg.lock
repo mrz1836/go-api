@@ -265,6 +265,7 @@
     "github.com/mrz1836/go-cache",
     "github.com/mrz1836/go-logger",
     "github.com/pkg/errors",
+    "github.com/satori/go.uuid",
     "github.com/spf13/viper",
     "github.com/volatiletech/null",
     "github.com/volatiletech/sqlboiler/boil",

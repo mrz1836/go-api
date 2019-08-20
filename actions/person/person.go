@@ -5,11 +5,11 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/deliverydudes/go-library/utils/logger"
 	"github.com/julienschmidt/httprouter"
 	"github.com/mrz1836/go-api-router"
 	"github.com/mrz1836/go-api/database"
 	"github.com/mrz1836/go-api/models/schema"
+	"github.com/mrz1836/go-logger"
 	"github.com/satori/go.uuid"
 	"github.com/volatiletech/sqlboiler/boil"
 )
