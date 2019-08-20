@@ -18,8 +18,8 @@
 
 ## Installation
 
-### Prerequisites:
-- [MySQL](https://www.mysql.com/) or [MariaDB](https://mariadb.org/)
+### Prerequisite Applications:
+- [MySQL](https://www.mysql.com/) or [MariaDB](https://mariadb.org/) with no password set
 - [Redis](https://redis.io/)
 
 **go-api** requires a [supported release of Go](https://golang.org/doc/devel/release.html#policy) and [dep](https://github.com/golang/dep).
@@ -30,23 +30,20 @@ $ go get -u -t github.com/volatiletech/sqlboiler
 $ go get github.com/volatiletech/sqlboiler/drivers/sqlboiler-mysql
 ```
 
-Edit the [`scripts/set_env.sh`](scripts/set_env.sh) file and change the environment variables:
-```bash
-export CACHE_URL=your-cache-url
-```
-
 Once installed, run the service with environment variables set
 ```bash
 $ cd ../go-api
 $ . scripts/set_env.sh && . scripts/setup_db.sh && go run cmd/application/main.go
-$ starting Go API server...
+
+    starting Go API server...
 ```
 
 _(Optional)_ Already have environment variables and database set?
 ```bash
 $ cd ../go-api
 $ go run cmd/application/main.go
-$ starting Go API server...
+
+    starting Go API server...
 ```
 
 Test your connection to **go-api**
@@ -62,6 +59,11 @@ $ cd ../go-api
 $ dep ensure -update -v
 ```
 
+Edit the [`scripts/set_env.sh`](scripts/set_env.sh) file and modify the environment variables:
+```bash
+export API_SERVER_PORT=3000
+```
+
 Update the `reset_api_database.sql` if you have issues running the model tests
 ```sql
 GRANT ALL ON `dynamic-database-name-generated-from-sql-boiler`.* to 'apiDbTestUser'@'%';
@@ -69,6 +71,7 @@ GRANT ALL ON `dynamic-database-name-generated-from-sql-boiler`.* to 'apiDbTestUs
 
 Rebuilding the generated models/schema from the database schema:
 ```bash
+$ cd ../go-api
 $ . scripts/rebuild_models.sh
 ```
 
