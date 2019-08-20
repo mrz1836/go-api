@@ -1,8 +1,6 @@
+output: "models/generated"
 mysql:
-  pkgname:
-    - models
-  output:
-    - models
+  pkgname: "models"
   blacklist:
     - migrations
     - goose_db_version
