@@ -19,12 +19,12 @@ var Values appConfig
 type appConfig struct {
 	BasicAuth         basicAuthConfig `json:"basic_auth" mapstructure:"basic_auth"`
 	Cache             cacheConfig     `json:"cache" mapstructure:"cache"`
-	CacheEnabled      bool            `env:"-" json:"-" mapstructure:"-"`
+	CacheEnabled      bool            `json:"-" mapstructure:"-"`
 	DatabaseRead      databaseConfig  `json:"database_read" mapstructure:"database_read"`
 	DatabaseWrite     databaseConfig  `json:"database_write" mapstructure:"database_write"`
-	Environment       string          `env:"API_ENVIRONMENT" json:"environment" mapstructure:"environment"`
-	ServerPort        string          `env:"API_SERVER_PORT" json:"server_port" mapstructure:"server_port"`
-	UnauthorizedError string          `env:"API_UNAUTHORIZED_ERROR" json:"unauthorized_error" mapstructure:"unauthorized_error"`
+	Environment       string          `json:"environment" mapstructure:"environment"`
+	ServerPort        string          `json:"server_port" mapstructure:"server_port"`
+	UnauthorizedError string          `json:"unauthorized_error" mapstructure:"unauthorized_error"`
 }
 
 // Validate checks the configuration for specific rules
@@ -90,7 +90,7 @@ type basicAuthConfig struct {
 func (b basicAuthConfig) Validate() error {
 	return validation.ValidateStruct(&b,
 		validation.Field(&b.Password, validation.Required, validation.Length(3, 100)),
-		validation.Field(&b.User, validation.Required, validation.Length(3, 100)),
+		validation.Field(&b.User, validation.Required, is.Alphanumeric, validation.Length(3, 100)),
 	)
 }
 

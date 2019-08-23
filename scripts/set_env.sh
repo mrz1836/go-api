@@ -20,6 +20,13 @@ export API_DATABASE_WRITE__HOST=localhost
 export API_DATABASE_WRITE__USER=apiDbTestUser
 export API_DATABASE_WRITE__PASSWORD=ThisIsSecureEnough123
 
+#
 # If you want to use cache, set the redis url
 # Example: redis://localhost:6379
 export API_CACHE__URL='redis://localhost:6379'
+
+#
+# Basic Authentication
+#
+export API_BASIC_AUTH__USER=testUser
+export API_BASIC_AUTH__PASSWORD=replaceThisPassword567
