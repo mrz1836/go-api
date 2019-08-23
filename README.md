@@ -27,10 +27,10 @@
 $ go get -u github.com/mrz1836/go-api
 $ go get -u github.com/pressly/goose/cmd/goose
 $ go get -u -t github.com/volatiletech/sqlboiler
-$ go get github.com/volatiletech/sqlboiler/drivers/sqlboiler-mysql
+$ go get -u github.com/volatiletech/sqlboiler/drivers/sqlboiler-mysql
 ```
 
-2) Set you environment variables (or add to your bash profile):
+2) Set your environment variables (or add to your bash profile):
 ```bash
 $ cd ../go-api
 $ . scripts/set_env.sh
