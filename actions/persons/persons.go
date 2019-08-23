@@ -9,12 +9,14 @@ import (
 
 	"github.com/julienschmidt/httprouter"
 	"github.com/mrz1836/go-api-router"
+	"github.com/mrz1836/go-api/config"
 	"github.com/mrz1836/go-api/models"
+	"github.com/mrz1836/go-api/models/schema"
 )
 
 // RegisterRoutes register all the package specific routes
 func RegisterRoutes(router *apirouter.Router) {
-	router.HTTPRouter.POST("/persons", router.Request(create))
+	router.HTTPRouter.POST("/persons", router.BasicAuth(router.Request(create), config.Values.BasicAuth.User, config.Values.BasicAuth.Password, config.Values.UnauthorizedError))
 	router.HTTPRouter.OPTIONS("/persons", router.SetCrossOriginHeaders)
 }
 
@@ -28,9 +30,10 @@ func create(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 	person := models.NewPerson()
 
 	// Set the values
-	person.Email = params.Get("email")
-	person.FirstName = params.Get("first_name")
-	person.LastName = params.Get("last_name")
+	person.Email = params.Get(schema.PersonColumns.Email)
+	person.FirstName = params.Get(schema.PersonColumns.FirstName)
+	person.MiddleName = params.Get(schema.PersonColumns.MiddleName)
+	person.LastName = params.Get(schema.PersonColumns.LastName)
 
 	// Save will insert a new person since we are creating a new model
 	err := person.Save(context.Background(), models.PersonCreateColumns)

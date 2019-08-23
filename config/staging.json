@@ -1,6 +1,11 @@
 {
   "environment": "staging",
   "server_port": "3000",
+  "unauthorized_error": "unauthorized access",
+  "basic_auth": {
+    "user": "testUser",
+    "password": "replaceThisPassword567"
+  },
   "cache": {
     "max_active_connections": 0,
     "max_connection_lifetime": 0,

@@ -17,17 +17,20 @@ var Values appConfig
 
 // appConfig is the configuration values and associated env vars
 type appConfig struct {
-	Cache         cacheConfig    `json:"cache" mapstructure:"cache"`
-	CacheEnabled  bool           `env:"-" json:"-" mapstructure:"-"`
-	DatabaseRead  databaseConfig `json:"database_read" mapstructure:"database_read"`
-	DatabaseWrite databaseConfig `json:"database_write" mapstructure:"database_write"`
-	Environment   string         `env:"API_ENVIRONMENT" json:"environment" mapstructure:"environment"`
-	ServerPort    string         `env:"API_SERVER_PORT" json:"server_port" mapstructure:"server_port"`
+	BasicAuth         basicAuthConfig `json:"basic_auth" mapstructure:"basic_auth"`
+	Cache             cacheConfig     `json:"cache" mapstructure:"cache"`
+	CacheEnabled      bool            `env:"-" json:"-" mapstructure:"-"`
+	DatabaseRead      databaseConfig  `json:"database_read" mapstructure:"database_read"`
+	DatabaseWrite     databaseConfig  `json:"database_write" mapstructure:"database_write"`
+	Environment       string          `env:"API_ENVIRONMENT" json:"environment" mapstructure:"environment"`
+	ServerPort        string          `env:"API_SERVER_PORT" json:"server_port" mapstructure:"server_port"`
+	UnauthorizedError string          `env:"API_UNAUTHORIZED_ERROR" json:"unauthorized_error" mapstructure:"unauthorized_error"`
 }
 
 // Validate checks the configuration for specific rules
 func (c appConfig) Validate() error {
 	return validation.ValidateStruct(&c,
+		validation.Field(&c.BasicAuth),     // Runs validations on the child struct level
 		validation.Field(&c.Cache),         // Runs validations on the child struct level
 		validation.Field(&c.DatabaseRead),  // Runs validations on the child struct level
 		validation.Field(&c.DatabaseWrite), // Runs validations on the child struct level
@@ -74,6 +77,20 @@ type cacheConfig struct {
 func (c cacheConfig) Validate() error {
 	return validation.ValidateStruct(&c,
 		validation.Field(&c.URL, validation.Length(0, 250)), // Testing
+	)
+}
+
+// basicAuthConfig is a basic HTTP auth user
+type basicAuthConfig struct {
+	Password string `json:"password" mapstructure:"password"` // pass876
+	User     string `json:"user" mapstructure:"user"`         // john
+}
+
+// Validate checks the configuration for specific rules
+func (b basicAuthConfig) Validate() error {
+	return validation.ValidateStruct(&b,
+		validation.Field(&b.Password, validation.Required, validation.Length(3, 100)),
+		validation.Field(&b.User, validation.Required, validation.Length(3, 100)),
 	)
 }
 
