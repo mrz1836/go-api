@@ -26,7 +26,9 @@ const (
 
 // Package variables
 var (
-	paramKey paramRequestKey = "params"
+	paramKey     paramRequestKey = "params"
+	ipAddressKey paramRequestKey = "ip_address"
+	requestIDKey paramRequestKey = "request_id"
 )
 
 // paramRequestKey for context key
@@ -91,11 +93,15 @@ func (r *Router) Request(h httprouter.Handle) httprouter.Handle {
 			UserAgent:      req.UserAgent(),
 		}
 
+		// Store key information into the request that can be used by other methods
+		req = req.WithContext(context.WithValue(req.Context(), ipAddressKey, writer.IPAddress))
+		req = req.WithContext(context.WithValue(req.Context(), requestIDKey, writer.RequestID))
+
 		// Set cross origin on each request that goes through logging
 		r.SetCrossOriginHeaders(writer, req, ps)
 
 		// Start the log (timer)
-		logger.Printf(logParamsFormat, writer.RequestID, writer.Method, writer.URL, writer.IPAddress, writer.UserAgent, GetParams(req))
+		logger.Printf(logParamsFormat, writer.RequestID, writer.Method, writer.URL, writer.IPAddress, writer.UserAgent, params)
 		start := time.Now()
 
 		// Fire the request
@@ -137,7 +143,7 @@ func (r *Router) RequestNoLogging(h httprouter.Handle) httprouter.Handle {
 }
 
 // BasicAuth wraps a request for Basic Authentication (RFC 2617)
-func (r *Router) BasicAuth(h httprouter.Handle, requiredUser, requiredPassword string, errorMessage string) httprouter.Handle {
+func (r *Router) BasicAuth(h httprouter.Handle, requiredUser, requiredPassword string, errorResponse interface{}) httprouter.Handle {
 
 	// Return the function up the chain
 	return func(w http.ResponseWriter, req *http.Request, ps httprouter.Params) {
@@ -150,7 +156,7 @@ func (r *Router) BasicAuth(h httprouter.Handle, requiredUser, requiredPassword s
 		} else {
 			// Request Basic Authentication otherwise
 			w.Header().Set("WWW-Authenticate", "Basic realm=Restricted")
-			ReturnResponse(w, http.StatusUnauthorized, errorMessage, false)
+			ReturnResponse(w, req, http.StatusUnauthorized, errorResponse)
 		}
 	}
 }

@@ -1,6 +1,9 @@
 package apirouter
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"net/http"
+)
 
 const (
 	// ErrCodeUnknown unknown error code (example)
@@ -19,8 +22,8 @@ type APIError struct {
 	URL             string      `json:"url" url:"url"`                   // Requesting URL
 }
 
-// NewError generates a new error struct using CustomResponseWriter from LogRequest()
-func NewError(w *APIResponseWriter, internalMessage string, publicMessage string, errorCode int, data interface{}) *APIError {
+// ErrorFromResponse generates a new error struct using CustomResponseWriter from LogRequest()
+func ErrorFromResponse(w *APIResponseWriter, internalMessage string, publicMessage string, errorCode int, data interface{}) *APIError {
 	return &APIError{
 		Code:            errorCode,
 		Data:            data,
@@ -30,6 +33,26 @@ func NewError(w *APIResponseWriter, internalMessage string, publicMessage string
 		PublicMessage:   publicMessage,
 		RequestGUID:     w.RequestID,
 		URL:             w.URL,
+	}
+}
+
+// ErrorFromRequest gives an error without a response writer using the request
+func ErrorFromRequest(req *http.Request, internalMessage string, publicMessage string, errorCode int, data interface{}) *APIError {
+
+	// Get values from req if available
+	ip, _ := GetIPFromRequest(req)
+	id, _ := GetRequestID(req)
+
+	// Return an error
+	return &APIError{
+		Code:            errorCode,
+		Data:            data,
+		InternalMessage: internalMessage,
+		IPAddress:       ip,
+		Method:          req.Method,
+		PublicMessage:   publicMessage,
+		RequestGUID:     id,
+		URL:             req.URL.String(),
 	}
 }
 

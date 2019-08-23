@@ -99,6 +99,14 @@
   version = "v1.8.1"
 
 [[projects]]
+  digest = "1:3e6b3527c41056c0e498d709014845cf7c4170fa83868c330ad3ee8bbdb70f4e"
+  name = "github.com/matryer/respond"
+  packages = ["."]
+  pruneopts = "NUT"
+  revision = "7ca2372f541a6f714cc7f2a7118b679795b3952c"
+  version = "v1.0.1"
+
+[[projects]]
   digest = "1:a45ae66dea4c899d79fceb116accfa1892105c251f0dcd9a217ddc276b42ec68"
   name = "github.com/mitchellh/mapstructure"
   packages = ["."]
@@ -107,12 +115,12 @@
   version = "v1.1.2"
 
 [[projects]]
-  digest = "1:ffcb3b6d21f4e19ea59402efe26a17515c2130885cfa5cb4657bf66e8c0bbdef"
+  digest = "1:37f315015e06518020c42f086cbed0735b9c9bfefd958c4a0c1bbd2a3d4b4163"
   name = "github.com/mrz1836/go-api-router"
   packages = ["."]
   pruneopts = "NUT"
-  revision = "253016fdf1639cfec8b14a42d2e975959ebea3f4"
-  version = "v0.0.13"
+  revision = "297d89373a959a63849f5394e218f50fc4d152c5"
+  version = "v0.0.16"
 
 [[projects]]
   digest = "1:d6824ae63219447401d8349c1e12db1d1ed41fc4c46373ac74e5786f7e4ce66f"

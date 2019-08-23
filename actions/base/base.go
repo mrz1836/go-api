@@ -2,7 +2,6 @@
 package base
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
@@ -25,8 +24,9 @@ func RegisterRoutes(router *apirouter.Router) {
 }
 
 // index basic request to /
-func index(w http.ResponseWriter, _ *http.Request, _ httprouter.Params) {
-	_, _ = fmt.Fprint(w, "Welcome to the Go API!\n")
+func index(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
+	var returnResponse = map[string]interface{}{"message": "Welcome to the Go API!"}
+	apirouter.ReturnResponse(w, req, http.StatusOK, returnResponse)
 }
 
 // health basic request to return a health response
@@ -35,7 +35,8 @@ func health(w http.ResponseWriter, _ *http.Request, _ httprouter.Params) {
 }
 
 // notFound handles all 404 requests
-func notFound(w http.ResponseWriter, _ *http.Request) {
-	w.Header().Set("Content-Type", "text/plain; charset=utf-8")
-	apirouter.ReturnResponse(w, http.StatusNotFound, "404 - Request not recognized :-(", false)
+func notFound(w http.ResponseWriter, req *http.Request) {
+	//w.Header().Set("Content-Type", "text/plain; charset=utf-8")
+	var returnResponse = map[string]interface{}{"message": "404 - Request not recognized :-("}
+	apirouter.ReturnResponse(w, req, http.StatusNotFound, returnResponse)
 }

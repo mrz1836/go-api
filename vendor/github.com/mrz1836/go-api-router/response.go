@@ -7,28 +7,31 @@ import (
 	"reflect"
 	"strings"
 
-	"github.com/mrz1836/go-logger"
+	"github.com/matryer/respond"
 )
 
+// AllowedKeys is for allowed keys
+type AllowedKeys map[string]interface{}
+
 // ReturnResponse helps return a status code and message to the end user
-func ReturnResponse(w http.ResponseWriter, code int, message string, json bool) {
+func ReturnResponse(w http.ResponseWriter, req *http.Request, code int, data interface{}) {
+	respond.With(w, req, code, data)
+}
+
+// ReturnJSONEncode is a mixture of ReturnResponse and JSONEncode
+func ReturnJSONEncode(w http.ResponseWriter, code int, e *json.Encoder, objects interface{}, allowed []string) (err error) {
 
 	// Set the content if JSON
-	if json {
-		w.Header().Set("Content-Type", "application/json")
-	}
+	w.Header().Set("Content-Type", "application/json")
 
 	// Set the header status code
 	w.WriteHeader(code)
 
-	// Write the content, log error if occurs
-	if _, err := w.Write([]byte(message)); err != nil {
-		logger.Data(2, logger.WARN, err.Error())
-	}
-}
+	// Attempt to encode the objects
+	err = JSONEncode(e, objects, allowed)
 
-// AllowedKeys is for allowed keys
-type AllowedKeys map[string]interface{}
+	return
+}
 
 // JSONEncodeHierarchy will execute JSONEncode for multiple nested objects
 func JSONEncodeHierarchy(w io.Writer, objects interface{}, allowed interface{}) error {
@@ -63,21 +66,6 @@ func JSONEncodeHierarchy(w io.Writer, objects interface{}, allowed interface{}) 
 		_, _ = w.Write([]byte{'}'})
 	}
 	return nil
-}
-
-// ReturnJSONEncode is a mixture of ReturnResponse and JSONEncode
-func ReturnJSONEncode(w http.ResponseWriter, code int, e *json.Encoder, objects interface{}, allowed []string) (err error) {
-
-	// Set the content if JSON
-	w.Header().Set("Content-Type", "application/json")
-
-	// Set the header status code
-	w.WriteHeader(code)
-
-	// Attempt to encode the objects
-	err = JSONEncode(e, objects, allowed)
-
-	return
 }
 
 // JSONEncodeModels will encode only the allowed fields of the models

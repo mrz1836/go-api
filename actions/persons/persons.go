@@ -12,6 +12,7 @@ import (
 	"github.com/mrz1836/go-api/config"
 	"github.com/mrz1836/go-api/models"
 	"github.com/mrz1836/go-api/models/schema"
+	"github.com/mrz1836/go-logger"
 )
 
 // RegisterRoutes register all the package specific routes
@@ -24,7 +25,10 @@ func RegisterRoutes(router *apirouter.Router) {
 func create(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 
 	// Get the parameters
-	params := apirouter.GetParams(req)
+	params, ok := apirouter.GetParams(req)
+	if !ok {
+		logger.Println("error getting params?")
+	}
 
 	// Create the model
 	person := models.NewPerson()
@@ -38,7 +42,8 @@ func create(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 	// Save will insert a new person since we are creating a new model
 	err := person.Save(context.Background(), models.PersonCreateColumns)
 	if err != nil {
-		apirouter.ReturnResponse(w, http.StatusExpectationFailed, fmt.Sprintf("failed to save person: %s", err), false)
+		apiError := apirouter.ErrorFromRequest(req, "error in save method", fmt.Sprintf("error creating person: %s", err.Error()), http.StatusExpectationFailed, "")
+		apirouter.ReturnResponse(w, req, http.StatusExpectationFailed, apiError)
 		return
 	}
 
