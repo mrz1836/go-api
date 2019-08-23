@@ -39,22 +39,21 @@ type ApiDatabase struct {
 
 // Configuration is the database configuration
 type Configuration struct {
-	DatabaseDriver                  string `env:"DATABASE_DRIVER"`                     //Database driver type (mysql, postgresql)
-	DatabaseMaxConnLifetime         int    `env:"DATABASE_MAX_CONN_LIFETIME"`          //Maximum seconds for a database connection
-	DatabaseReadHost                string `env:"DATABASE_READ_HOST"`                  //Main database host (read) (ip -- 127.0.0.1)
-	DatabaseReadMaxIdleConnections  int    `env:"DATABASE_READ_MAX_IDLE_CONNECTIONS"`  //Maximum amount of idle connections available
-	DatabaseReadMaxOpenConnections  int    `env:"DATABASE_READ_MAX_OPEN_CONNECTIONS"`  //Maximum amount of open connections in pool
-	DatabaseReadName                string `env:"DATABASE_READ_NAME"`                  //Main database name (read)
-	DatabaseReadPort                string `env:"DATABASE_READ_PORT"`                  //Main database port (read)
-	DatabaseReadUser                string `env:"DATABASE_READ_USER"`                  //Database username (read)
-	DatabaseReadPassword            string `env:"DATABASE_READ_PASSWORD"`              //Database user's password (read)
-	DatabaseWriteHost               string `env:"DATABASE_WRITE_HOST"`                 //Main database host (write)
-	DatabaseWriteMaxIdleConnections int    `env:"DATABASE_WRITE_MAX_IDLE_CONNECTIONS"` //Maximum amount of idle connections available
-	DatabaseWriteMaxOpenConnections int    `env:"DATABASE_WRITE_MAX_OPEN_CONNECTIONS"` //Maximum amount of open connections in pool
-	DatabaseWriteName               string `env:"DATABASE_WRITE_NAME"`                 //Main database name (write)
-	DatabaseWritePort               string `env:"DATABASE_WRITE_PORT"`                 //Main database port (write)
-	DatabaseWriteUser               string `env:"DATABASE_WRITE_USER"`                 //Database username (write)
-	DatabaseWritePassword           string `env:"DATABASE_WRITE_PASSWORD"`             //Database user's password (write)
+	DatabaseRead  ConnectionConfig `json:"database_read" mapstructure:"database_read"`   // Read database connection
+	DatabaseWrite ConnectionConfig `json:"database_write" mapstructure:"database_write"` // Write database connection
+}
+
+// ConnectionConfig is a configuration for a SQL connection
+type ConnectionConfig struct {
+	Driver             string `json:"driver" mapstructure:"driver"`                             // mysql or postgresql
+	Host               string `json:"host" mapstructure:"host"`                                 // localhost
+	MaxConnectionTime  int    `json:"max_connection_time" mapstructure:"max_connection_time"`   // 60
+	MaxIdleConnections int    `json:"max_idle_connections" mapstructure:"max_idle_connections"` // 5
+	MaxOpenConnections int    `json:"max_open_connections" mapstructure:"max_open_connections"` // 5
+	Name               string `json:"name" mapstructure:"name"`                                 // database-name
+	Password           string `json:"password" mapstructure:"password"`                         // user-password
+	Port               string `json:"port" mapstructure:"port"`                                 // 3306
+	User               string `json:"user" mapstructure:"user"`                                 // username
 }
 
 // SetConfiguration sets the configuration
@@ -75,21 +74,51 @@ func NewApiDatabase(read, write *sql.DB) *ApiDatabase {
 }
 
 // OpenConnection opens the database connection (read / write)
-func OpenConnection() {
+func OpenConnection() (err error) {
 	var dB *sql.DB      // I am read only but cheap.  Please use me when possible.
 	var dBWrite *sql.DB // I am read-write, but expensive.  Please only use me for writing.
 
-	//Open the main database connection (read)
-	openDatabaseConnection(config.DatabaseReadHost+":"+config.DatabaseReadPort, config.DatabaseReadName, config.DatabaseReadUser, config.DatabaseReadPassword, &dB, config.DatabaseReadMaxOpenConnections, config.DatabaseReadMaxIdleConnections)
+	// Open the main database connection (read)
+	err = openDatabaseConnection(
+		config.DatabaseRead.Host+":"+config.DatabaseRead.Port,
+		config.DatabaseRead.Name,
+		config.DatabaseRead.User,
+		config.DatabaseRead.Password,
+		&dB,
+		config.DatabaseRead.Driver,
+		config.DatabaseRead.MaxOpenConnections,
+		config.DatabaseRead.MaxIdleConnections,
+		config.DatabaseRead.MaxConnectionTime,
+	)
+	if err != nil {
+		return
+	}
 
-	//Open a write connection if found and different from the read
-	if len(config.DatabaseWriteHost) == 0 || (config.DatabaseWriteHost+":"+config.DatabaseWritePort) == (config.DatabaseReadHost+":"+config.DatabaseReadPort) {
+	// Open a write connection if found and different from the read
+	if len(config.DatabaseWrite.Host) == 0 || (config.DatabaseWrite.Host+":"+config.DatabaseWrite.Port) == (config.DatabaseRead.Host+":"+config.DatabaseRead.Port) {
 		dBWrite = dB
 	} else {
-		openDatabaseConnection(config.DatabaseWriteHost+":"+config.DatabaseWritePort, config.DatabaseWriteName, config.DatabaseWriteUser, config.DatabaseWritePassword, &dBWrite, config.DatabaseWriteMaxOpenConnections, config.DatabaseWriteMaxIdleConnections)
+		err = openDatabaseConnection(
+			config.DatabaseWrite.Host+":"+config.DatabaseWrite.Port,
+			config.DatabaseWrite.Name,
+			config.DatabaseWrite.User,
+			config.DatabaseWrite.Password,
+			&dBWrite,
+			config.DatabaseWrite.Driver,
+			config.DatabaseWrite.MaxOpenConnections,
+			config.DatabaseWrite.MaxIdleConnections,
+			config.DatabaseWrite.MaxConnectionTime,
+		)
+		if err != nil {
+			return
+		}
 	}
+
+	// Set the new connections
 	ReadDatabase = NewApiDatabase(dB, dBWrite)
 	WriteDatabase = NewApiDatabase(dBWrite, dBWrite)
+
+	return
 }
 
 // CloseAllConnections closes the current database connections
@@ -142,48 +171,61 @@ func (d *ApiDatabase) GetWriteDatabase() *sql.DB {
 }
 
 // openDatabaseConnection opens a new database connection
-func openDatabaseConnection(databaseAddress, databaseName, databaseUser, databasePassword string, database **sql.DB, maxOpenConnections, maxOpenIdle int) {
-	//Start a connection with the database
+func openDatabaseConnection(databaseAddress, databaseName, databaseUser, databasePassword string, database **sql.DB, driver string, maxOpenConnections, maxOpenIdle, maxConnectionLifetime int) (err error) {
+
+	// Start a connection with the database
 	var db *sql.DB
-	var err error
-	switch config.DatabaseDriver {
+
+	// Switch on the drivers supported
+	switch driver {
 	case MySQLDriver:
-		db, err = sql.Open("mysql", databaseUser+":"+databasePassword+"@tcp("+databaseAddress+")/"+databaseName+"?parseTime=true")
+		db, err = sql.Open(driver, databaseUser+":"+databasePassword+"@tcp("+databaseAddress+")/"+databaseName+"?parseTime=true")
 	case PostgreSQLDriver:
 		db, err = sql.Open("pgx", fmt.Sprintf("postgres://%s:%s@%s/%s", databaseUser, databasePassword, databaseAddress, databaseName))
 		logger.Printf("postgres://%s:%s@%s/%s", databaseUser, databasePassword, databaseAddress, databaseName)
 	default:
-		logger.Fatalln("unknown driver specified:", config.DatabaseDriver)
+		logger.Data(2, logger.ERROR, fmt.Sprintf("unknown driver specified: %s", driver))
+		return
 	}
 
-	//Do we have a fatal error opening
+	// Do we have a fatal error opening
 	if err != nil {
-		logger.Data(2, logger.ERROR, fmt.Sprintf("database open error: %s", databaseAddress), logger.MakeParameter("db_error", err.Error()))
-		logger.Fatalln("database open: ", err)
+		logger.Data(2, logger.ERROR, fmt.Sprintf("database open error: %s at %s", driver, databaseAddress), logger.MakeParameter("db_error", err.Error()))
+		return
 	}
 
-	//Do we have a db connection?
+	// Do we have a valid db
+	if db == nil {
+		logger.Data(2, logger.ERROR, fmt.Sprintf("database connection is nil: %s at %s", driver, databaseAddress))
+		return
+	}
+
+	// Do we have a db connection?
 	if err = db.Ping(); err != nil {
-		logger.Data(2, logger.ERROR, fmt.Sprintf("database ping error: %s", databaseAddress), logger.MakeParameter("db_error", err.Error()))
-		logger.Fatalln("database ping: ", err)
+		logger.Data(2, logger.ERROR, fmt.Sprintf("database ping error: %s at %s", driver, databaseAddress), logger.MakeParameter("db_error", err.Error()))
+		return
 	}
 
-	//Set the max open connections to the DB
+	// Set the max open connections to the DB
 	db.SetMaxOpenConns(maxOpenConnections)
 	db.SetMaxIdleConns(maxOpenIdle)
 
-	//Set the max time a connection will be considered open
-	db.SetConnMaxLifetime(time.Duration(config.DatabaseMaxConnLifetime) * time.Second)
+	// Set the max time a connection will be considered open
+	db.SetConnMaxLifetime(time.Duration(maxConnectionLifetime) * time.Second)
 
-	//Set the global DB
+	// Set the global DB
 	*database = db
 
-	//Done!
-	logger.Data(2, logger.INFO, "database: connected",
+	// Debug statement for connection
+	logger.Data(2, logger.DEBUG, "database: connected",
 		logger.MakeParameter("address", databaseAddress),
-		logger.MakeParameter("name", databaseName),
-		logger.MakeParameter("max_open_connections", maxOpenConnections),
+		logger.MakeParameter("driver", driver),
 		logger.MakeParameter("max_idle_connections", maxOpenIdle),
-		logger.MakeParameter("max_lifetime", config.DatabaseMaxConnLifetime),
+		logger.MakeParameter("max_lifetime", maxConnectionLifetime),
+		logger.MakeParameter("max_open_connections", maxOpenConnections),
+		logger.MakeParameter("name", databaseName),
+		logger.MakeParameter("user", databaseUser),
 	)
+
+	return
 }
