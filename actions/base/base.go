@@ -20,7 +20,11 @@ func RegisterRoutes(router *apirouter.Router) {
 	router.HTTPRouter.HEAD("/health", router.SetCrossOriginHeaders)
 
 	// Set the 404 handler (any request not detected)
+	//router.HTTPRouter.NotFound = http.HandlerFunc(notFound) // todo: logging?
 	router.HTTPRouter.NotFound = http.HandlerFunc(notFound) // todo: logging?
+
+	// Set the method not allowed
+	router.HTTPRouter.MethodNotAllowed = http.HandlerFunc(notAllowed) // todo: logging?
 }
 
 // index basic request to /
@@ -37,6 +41,14 @@ func health(w http.ResponseWriter, _ *http.Request, _ httprouter.Params) {
 // notFound handles all 404 requests
 func notFound(w http.ResponseWriter, req *http.Request) {
 	//w.Header().Set("Content-Type", "text/plain; charset=utf-8")
-	var returnResponse = map[string]interface{}{"message": "404 - Request not recognized :-("}
-	apirouter.ReturnResponse(w, req, http.StatusNotFound, returnResponse)
+	apiError := apirouter.ErrorFromRequest(req, "request is not recognized", "Whoops - this request is not recognized", http.StatusNotFound, "")
+	apirouter.ReturnResponse(w, req, http.StatusNotFound, apiError)
+	return
+}
+
+// notAllowed handles all 405 requests
+func notAllowed(w http.ResponseWriter, req *http.Request) {
+	apiError := apirouter.ErrorFromRequest(req, "request is not allowed", "Whoops - this method is not allowed", http.StatusMethodNotAllowed, "")
+	apirouter.ReturnResponse(w, req, http.StatusMethodNotAllowed, apiError)
+	return
 }

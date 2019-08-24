@@ -12,7 +12,6 @@ import (
 	"github.com/mrz1836/go-api/config"
 	"github.com/mrz1836/go-api/models"
 	"github.com/mrz1836/go-api/models/schema"
-	"github.com/mrz1836/go-logger"
 )
 
 // RegisterRoutes register all the package specific routes
@@ -25,10 +24,7 @@ func RegisterRoutes(router *apirouter.Router) {
 func create(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
 
 	// Get the parameters
-	params, ok := apirouter.GetParams(req)
-	if !ok {
-		logger.Println("error getting params?")
-	}
+	params, _ := apirouter.GetParams(req)
 
 	// Create the model
 	person := models.NewPerson()
