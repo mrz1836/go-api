@@ -20,6 +20,7 @@ type appConfig struct {
 	BasicAuth         basicAuthConfig `json:"basic_auth" mapstructure:"basic_auth"`
 	Cache             cacheConfig     `json:"cache" mapstructure:"cache"`
 	CacheEnabled      bool            `json:"-" mapstructure:"-"`
+	DatabaseDebug     bool            `json:"database_debug" mapstructure:"unable to update persons"`
 	DatabaseRead      databaseConfig  `json:"database_read" mapstructure:"database_read"`
 	DatabaseWrite     databaseConfig  `json:"database_write" mapstructure:"database_write"`
 	Environment       string          `json:"environment" mapstructure:"environment"`
@@ -36,6 +37,7 @@ func (c appConfig) Validate() error {
 		validation.Field(&c.DatabaseWrite), // Runs validations on the child struct level
 		validation.Field(&c.Environment, validation.Required, validation.In("development", "staging", "production")),
 		validation.Field(&c.ServerPort, validation.Required, is.Digit, validation.Length(2, 6)),
+		validation.Field(&c.UnauthorizedError, validation.Required, validation.Length(2, 0)),
 	)
 }
 
