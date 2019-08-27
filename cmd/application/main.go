@@ -9,6 +9,7 @@ import (
 	"github.com/mrz1836/go-api/database"
 	"github.com/mrz1836/go-cache"
 	"github.com/mrz1836/go-logger"
+	"github.com/volatiletech/sqlboiler/boil"
 )
 
 // main application method
@@ -60,6 +61,11 @@ func loadAPI() (err error) {
 		}
 	} else {
 		logger.Data(2, logger.INFO, "caching: disabled")
+	}
+
+	// Turn on database debugging
+	if config.Values.DatabaseDebug {
+		boil.DebugMode = config.Values.DatabaseDebug
 	}
 
 	// Load the database configuration
