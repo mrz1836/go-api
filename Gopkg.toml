@@ -31,7 +31,8 @@
 
 [[constraint]]
   name = "github.com/mrz1836/go-api-router"
-  version = "0.0.5"
+  branch = "master"
+  #version = "0.0.5"
 
 [prune]
   go-tests = true

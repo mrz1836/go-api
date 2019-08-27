@@ -115,12 +115,12 @@
   version = "v1.1.2"
 
 [[projects]]
-  digest = "1:37f315015e06518020c42f086cbed0735b9c9bfefd958c4a0c1bbd2a3d4b4163"
+  branch = "master"
+  digest = "1:f7989bd0e9b31b38946d7a274b53b7ddc612e1489d9d36ed68c0041366276b0e"
   name = "github.com/mrz1836/go-api-router"
   packages = ["."]
   pruneopts = "NUT"
-  revision = "297d89373a959a63849f5394e218f50fc4d152c5"
-  version = "v0.0.16"
+  revision = "964513e93b083dbdf78386778296457c8c01bb29"
 
 [[projects]]
   digest = "1:d6824ae63219447401d8349c1e12db1d1ed41fc4c46373ac74e5786f7e4ce66f"
@@ -233,7 +233,7 @@
   version = "v8.0.0"
 
 [[projects]]
-  digest = "1:e037054a7419268ecb2592f5559b559d2590016334adb7ff50a449a956ed7cbf"
+  digest = "1:7ef5494cb947f0440596ee51c92f2d5b11e4393d604a1942afac7aa422d698ac"
   name = "github.com/volatiletech/sqlboiler"
   packages = [
     "boil",
@@ -247,8 +247,8 @@
     "strmangle",
   ]
   pruneopts = "NUT"
-  revision = "9c8f3844068160cdfa32077e2fec29fbf4a0b237"
-  version = "v3.4.0"
+  revision = "593a7e2d9aeec5e9748e93d7225c95c3896aa558"
+  version = "v3.5.0"
 
 [[projects]]
   branch = "master"
@@ -256,7 +256,7 @@
   name = "golang.org/x/sys"
   packages = ["unix"]
   pruneopts = "NUT"
-  revision = "fde4db37ae7ad8191b03d30d27f258b5291ae4e3"
+  revision = "c7b8b68b14567162c6602a7c5659ee0f26417c18"
 
 [[projects]]
   digest = "1:1093f2eb4b344996604f7d8b29a16c5b22ab9e1b25652140d3fede39f640d5cd"

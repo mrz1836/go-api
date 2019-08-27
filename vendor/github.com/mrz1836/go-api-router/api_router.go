@@ -69,6 +69,10 @@ func New() *Router {
 	// Create the router
 	config.HTTPRouter = new(httprouter.Router)
 
+	// Turn on trailing slash redirect
+	config.HTTPRouter.RedirectTrailingSlash = true
+	config.HTTPRouter.RedirectFixedPath = true
+
 	// return the default configuration
 	return config
 }

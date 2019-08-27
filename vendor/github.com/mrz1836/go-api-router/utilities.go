@@ -37,6 +37,15 @@ func GetParams(req *http.Request) (params url.Values, ok bool) {
 	return
 }
 
+// PermitParams will remove all keys that not allowed
+func PermitParams(params url.Values, allowedKeys []string) {
+	for key, _ := range params {
+		if !contains(allowedKeys, key) {
+			params.Del(key)
+		}
+	}
+}
+
 // GetIPFromRequest gets the stored ip from the request if found
 func GetIPFromRequest(req *http.Request) (ip string, ok bool) {
 	ip, ok = req.Context().Value(ipAddressKey).(string)
@@ -80,4 +89,15 @@ func GetClientIPAddress(req *http.Request) string {
 
 	//Return the ip address
 	return ip
+}
+
+// contains looks in a haystack of slice for a needle string
+func contains(haystack []string, needle string) bool {
+	needle = strings.ToLower(needle)
+	for _, straw := range haystack {
+		if strings.ToLower(straw) == needle {
+			return true
+		}
+	}
+	return false
 }
