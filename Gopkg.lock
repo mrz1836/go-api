@@ -56,6 +56,14 @@
   version = "v2.0.0"
 
 [[projects]]
+  digest = "1:3c8c26bb118e3f02230d4f5f30b972dbfe0c6b371acea8f190aa99ceaaae7028"
+  name = "github.com/gorilla/mux"
+  packages = ["."]
+  pruneopts = "NUT"
+  revision = "00bdffe0f3c77e27d2cf6f5c70232a2d3e4d9c15"
+  version = "v1.7.3"
+
+[[projects]]
   digest = "1:11c6c696067d3127ecf332b10f89394d386d9083f82baf71f40f2da31841a009"
   name = "github.com/hashicorp/hcl"
   packages = [
@@ -116,11 +124,11 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:f7989bd0e9b31b38946d7a274b53b7ddc612e1489d9d36ed68c0041366276b0e"
+  digest = "1:3fa8bd7a5a3eead4112293ef7e99879fe23c289213fdf60f61d3199e6826d101"
   name = "github.com/mrz1836/go-api-router"
   packages = ["."]
   pruneopts = "NUT"
-  revision = "964513e93b083dbdf78386778296457c8c01bb29"
+  revision = "9bfadd7a8aa46896a03e90444192c50382ff9a36"
 
 [[projects]]
   digest = "1:d6824ae63219447401d8349c1e12db1d1ed41fc4c46373ac74e5786f7e4ce66f"
@@ -137,6 +145,14 @@
   pruneopts = "NUT"
   revision = "32f02dc12dbefd7ace11a38b43e2b12e4cada1ba"
   version = "v0.0.3"
+
+[[projects]]
+  branch = "master"
+  digest = "1:77c26cf862c1b0cc6d19472508d358e35db2d5097daf09a721165030ebc8c01d"
+  name = "github.com/mrz1836/go-parameters"
+  packages = ["."]
+  pruneopts = "NUT"
+  revision = "3c5123876d4d2bd1ed3b1bc95b358ce84fd856c0"
 
 [[projects]]
   digest = "1:384110194c19653beafe331244802f8ebf695a9b9dc19b2baa23e493fa87455e"
@@ -212,6 +228,14 @@
   pruneopts = "NUT"
   revision = "b5bf975e5823809fb22c7644d008757f78a4259e"
   version = "v1.4.0"
+
+[[projects]]
+  digest = "1:498d0b37a5c7f5664f2e21de8c85c5694ed197cb25ce245bf25cdd18930035e9"
+  name = "github.com/ugorji/go"
+  packages = ["codec"]
+  pruneopts = "NUT"
+  revision = "23ab95ef5dc3b70286760af84ce2327a2b64ed62"
+  version = "v1.1.7"
 
 [[projects]]
   branch = "master"

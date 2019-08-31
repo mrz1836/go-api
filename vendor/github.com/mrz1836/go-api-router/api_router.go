@@ -13,6 +13,7 @@ import (
 
 	"github.com/julienschmidt/httprouter"
 	"github.com/mrz1836/go-logger"
+	"github.com/mrz1836/go-parameters"
 	"github.com/satori/go.uuid"
 )
 
@@ -82,7 +83,8 @@ func (r *Router) Request(h httprouter.Handle) httprouter.Handle {
 	return func(w http.ResponseWriter, req *http.Request, ps httprouter.Params) {
 
 		// Parse the params (once here, then store in the request)
-		params := req.URL.Query()
+		// params := req.URL.Query()
+		params := parameters.ParseParams(req)
 		req = req.WithContext(context.WithValue(req.Context(), paramKey, params))
 
 		// Start the custom response writer
@@ -123,7 +125,8 @@ func (r *Router) RequestNoLogging(h httprouter.Handle) httprouter.Handle {
 	return func(w http.ResponseWriter, req *http.Request, ps httprouter.Params) {
 
 		// Parse the params (once here, then store in the request)
-		params := req.URL.Query()
+		//params := req.URL.Query()
+		params := parameters.ParseParams(req)
 		req = req.WithContext(context.WithValue(req.Context(), paramKey, params))
 
 		// Start the custom response writer
