@@ -9,7 +9,7 @@ import (
 // Stack is the interface for middleware
 type Stack interface {
 	/*
-		Adds a middleware to the stack. MWs will be
+		Adds a middleware to the InternalStack. MWs will be
 		called in the same order that they are added,
 		such that:
 			Use(Request ID Middleware)
@@ -22,7 +22,7 @@ type Stack interface {
 	Use(Middleware)
 
 	/*
-		Wraps a given handle with the current stack
+		Wraps a given handle with the current InternalStack
 		from the result of Use() calls.
 	*/
 	// Wrap wraps the router
@@ -32,25 +32,25 @@ type Stack interface {
 // Middleware is the Handle implementation
 type Middleware func(httprouter.Handle) httprouter.Handle
 
-// stack internal stack type
-type stack struct {
+// InternalStack internal stack type
+type InternalStack struct {
 	middlewares []Middleware
 }
 
-// NewStack create a new stack
-func NewStack() *stack {
-	return &stack{
+// NewStack create a new InternalStack
+func NewStack() *InternalStack {
+	return &InternalStack{
 		middlewares: []Middleware{},
 	}
 }
 
 // Use adds the middle ware to the list
-func (s *stack) Use(mw Middleware) {
+func (s *InternalStack) Use(mw Middleware) {
 	s.middlewares = append(s.middlewares, mw)
 }
 
 // Wrap wraps the router
-func (s *stack) Wrap(fn httprouter.Handle) httprouter.Handle {
+func (s *InternalStack) Wrap(fn httprouter.Handle) httprouter.Handle {
 	l := len(s.middlewares)
 	if l == 0 {
 		return fn
@@ -62,7 +62,7 @@ func (s *stack) Wrap(fn httprouter.Handle) httprouter.Handle {
 	var result httprouter.Handle
 	result = s.middlewares[l-1](fn)
 
-	// Reverse through the stack for the remaining elements,
+	// Reverse through the InternalStack for the remaining elements,
 	// and wrap the result with each layer:
 	for i := 0; i < (l - 1); i++ {
 		result = s.middlewares[l-(2+i)](result)
@@ -71,14 +71,14 @@ func (s *stack) Wrap(fn httprouter.Handle) httprouter.Handle {
 	return result
 }
 
-// StandardHandlerToHandle converts a standard middleware to julien handle version
+// StandardHandlerToHandle converts a standard middleware to Julien handle version
 func StandardHandlerToHandle(next http.Handler) httprouter.Handle {
 	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		next.ServeHTTP(w, r)
 	}
 }
 
-// StandardHandlerToHandle converts a standard middleware to type Middleware
+// StandardHandlerToMiddleware converts a standard middleware to type Middleware
 func StandardHandlerToMiddleware(next http.Handler) Middleware {
 	return func(fn httprouter.Handle) httprouter.Handle {
 		return func(w http.ResponseWriter, r *http.Request, p httprouter.Params) {

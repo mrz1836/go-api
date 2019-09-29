@@ -123,36 +123,36 @@
   version = "v1.1.2"
 
 [[projects]]
-  branch = "master"
-  digest = "1:3fa8bd7a5a3eead4112293ef7e99879fe23c289213fdf60f61d3199e6826d101"
+  digest = "1:3061e210549ea9377ff0937f49488a5d22c825a0572091021fdbe8c69e97438d"
   name = "github.com/mrz1836/go-api-router"
   packages = ["."]
   pruneopts = "NUT"
-  revision = "9bfadd7a8aa46896a03e90444192c50382ff9a36"
+  revision = "06690e0c085cd56dc1e3b9bbbcaff91593aa56d8"
+  version = "v0.0.18"
 
 [[projects]]
-  digest = "1:d6824ae63219447401d8349c1e12db1d1ed41fc4c46373ac74e5786f7e4ce66f"
+  digest = "1:d235553181d7d2c8a72ef6a9096068e89f573d07e37307e3ab1a1ad776df53f2"
   name = "github.com/mrz1836/go-cache"
   packages = ["."]
   pruneopts = "NUT"
-  revision = "855de98ffec1e51e03fe600daa0a086c4e68f2d6"
-  version = "v0.0.3"
+  revision = "e3e68c27cc049d7026ac2ae88860baa2b5734a14"
+  version = "v0.0.5"
 
 [[projects]]
   digest = "1:e9752813079877950aa96e8e3771e22771b49be653576000bddc5da78444e215"
   name = "github.com/mrz1836/go-logger"
   packages = ["."]
   pruneopts = "NUT"
-  revision = "32f02dc12dbefd7ace11a38b43e2b12e4cada1ba"
-  version = "v0.0.3"
+  revision = "b58212dc2d5fef02ef3281d8b88c01ba96cb9324"
+  version = "v0.0.4"
 
 [[projects]]
-  branch = "master"
-  digest = "1:77c26cf862c1b0cc6d19472508d358e35db2d5097daf09a721165030ebc8c01d"
+  digest = "1:cbf3e4f07c3218afe9099eca4300b2f6e1cb0fd59f2aae3867f6a0339618d207"
   name = "github.com/mrz1836/go-parameters"
   packages = ["."]
   pruneopts = "NUT"
-  revision = "3c5123876d4d2bd1ed3b1bc95b358ce84fd856c0"
+  revision = "0428e1d272c9d810d310a7a0a6056e31877d8c60"
+  version = "v0.0.4"
 
 [[projects]]
   digest = "1:384110194c19653beafe331244802f8ebf695a9b9dc19b2baa23e493fa87455e"
@@ -214,12 +214,12 @@
   version = "v1.1.0"
 
 [[projects]]
-  digest = "1:9d8420bbf131d1618bde6530af37c3799340d3762cc47210c1d9532a4c3a2779"
+  digest = "1:d115708a27806831d1babbc6f28a7478ddf8e32a7095507c816e2515fb03a810"
   name = "github.com/spf13/pflag"
   packages = ["."]
   pruneopts = "NUT"
-  revision = "298182f68c66c05229eb03ac171abe6e309ee79a"
-  version = "v1.0.3"
+  revision = "2e9d26c8c37aae03e3f9d4e90b7116f5accb7cab"
+  version = "v1.0.5"
 
 [[projects]]
   digest = "1:bdc698c2f611bd436789ce42565d172a0fc38fd3f692d20cd4b288ed314788e9"
@@ -276,11 +276,11 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:4296892af119aaeedd6437125dbe67686a9e3043a6e54956fb8425a61d93d764"
+  digest = "1:63fa86776ed0c9ed7711c18db3922d0a1c51f796fff705aa33845bcfbcece9d9"
   name = "golang.org/x/sys"
   packages = ["unix"]
   pruneopts = "NUT"
-  revision = "c7b8b68b14567162c6602a7c5659ee0f26417c18"
+  revision = "c990c680b611ac1aeb7d8f2af94a825f98d69720"
 
 [[projects]]
   digest = "1:1093f2eb4b344996604f7d8b29a16c5b22ab9e1b25652140d3fede39f640d5cd"
@@ -302,8 +302,8 @@
   name = "google.golang.org/appengine"
   packages = ["cloudsql"]
   pruneopts = "NUT"
-  revision = "b2f4a3cf3c67576a2ee09e1fe62656a5086ce880"
-  version = "v1.6.1"
+  revision = "bddb1f54ecfd64b1350fd2dd897fa11d426632bc"
+  version = "v1.6.4"
 
 [[projects]]
   digest = "1:18108594151654e9e696b27b181b953f9a90b16bf14d253dd1b397b025a1487f"

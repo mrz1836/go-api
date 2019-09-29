@@ -22,7 +22,7 @@ func buildDialer(url string) func() (redis.Conn, error) {
 }
 
 // Connect creates a new connection pool connected to the specified url
-func Connect(url string, maxActiveConnections, idleConnections, maxConnLifetime, idleTimeout int) error {
+func Connect(url string, maxActiveConnections, idleConnections, maxConnLifetime, idleTimeout int, dependencyMode bool) (err error) {
 
 	// Create a new pool
 	pool = &redis.Pool{
@@ -31,20 +31,24 @@ func Connect(url string, maxActiveConnections, idleConnections, maxConnLifetime,
 		MaxConnLifetime: time.Duration(maxConnLifetime) * time.Second,
 		MaxIdle:         idleConnections,
 		Dial:            buildDialer(url),
-		TestOnBorrow: func(c redis.Conn, t time.Time) error {
+		TestOnBorrow: func(c redis.Conn, t time.Time) (err error) {
 			if time.Since(t) < time.Minute {
 				return nil
 			}
-			_, err := c.Do(pingCommand)
-			return err
+			_, err = c.Do(pingCommand)
+			return
 		},
 	}
 
 	// Cleanup
 	cleanUp()
 
-	// Register scripts
-	return RegisterScripts()
+	// Register scripts if enabled
+	if dependencyMode {
+		err = RegisterScripts()
+	}
+
+	return
 }
 
 // Disconnect closes the connection pool

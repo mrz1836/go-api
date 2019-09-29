@@ -27,7 +27,6 @@ const (
 
 // Package variables
 var (
-	paramKey     paramRequestKey = "params"
 	ipAddressKey paramRequestKey = "ip_address"
 	requestIDKey paramRequestKey = "request_id"
 )
@@ -80,12 +79,10 @@ func New() *Router {
 
 // Request will write the request to the logs before and after calling the handler
 func (r *Router) Request(h httprouter.Handle) httprouter.Handle {
-	return func(w http.ResponseWriter, req *http.Request, ps httprouter.Params) {
+	return parameters.MakeHTTPRouterParsedReq(func(w http.ResponseWriter, req *http.Request, ps httprouter.Params) {
 
-		// Parse the params (once here, then store in the request)
-		// params := req.URL.Query()
-		params := parameters.ParseParams(req)
-		req = req.WithContext(context.WithValue(req.Context(), paramKey, params))
+		// Get the params from MakeHTTPRouterParsedReq()
+		params := GetParams(req)
 
 		// Start the custom response writer
 		var writer *APIResponseWriter
@@ -116,18 +113,16 @@ func (r *Router) Request(h httprouter.Handle) httprouter.Handle {
 		// Complete the timer and final log
 		elapsed := time.Since(start)
 		logger.Printf(logTimeFormat, writer.RequestID, writer.Method, writer.URL, writer.IPAddress, writer.UserAgent, int64(elapsed/time.Millisecond), writer.Status)
-	}
+	})
 }
 
 // RequestNoLogging will just call the handler without any logging
 // Used for API calls that do not require any logging overhead
 func (r *Router) RequestNoLogging(h httprouter.Handle) httprouter.Handle {
-	return func(w http.ResponseWriter, req *http.Request, ps httprouter.Params) {
+	return parameters.MakeHTTPRouterParsedReq(func(w http.ResponseWriter, req *http.Request, ps httprouter.Params) {
 
-		// Parse the params (once here, then store in the request)
-		//params := req.URL.Query()
-		params := parameters.ParseParams(req)
-		req = req.WithContext(context.WithValue(req.Context(), paramKey, params))
+		// Get the params from MakeHTTPRouterParsedReq()
+		//params := GetParams(req)
 
 		// Start the custom response writer
 		var writer *APIResponseWriter
@@ -146,7 +141,7 @@ func (r *Router) RequestNoLogging(h httprouter.Handle) httprouter.Handle {
 
 		// Fire the request
 		h(writer, req, ps)
-	}
+	})
 }
 
 // BasicAuth wraps a request for Basic Authentication (RFC 2617)
