@@ -110,7 +110,7 @@ You can view the generated [documentation here](https://godoc.org/github.com/mrz
 - Flexible environment & configuration management using [viper](https://github.com/spf13/viper)
 
 ## Examples & Tests
-All unit tests and [examples](examples/examples.go) run via [Travis CI](https://travis-ci.com/mrz1836/go-api) and uses [Go version 1.12.x](https://golang.org/doc/go1.12). View the [deployment configuration file](.travis.yml).
+All unit tests and [examples](examples/examples.go) run via [Travis CI](https://travis-ci.com/mrz1836/go-api) and uses [Go version 1.13.x](https://golang.org/doc/go1.13). View the [deployment configuration file](.travis.yml).
 
 Run all tests (including integration tests)
 ```bash
