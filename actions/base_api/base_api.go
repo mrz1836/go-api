@@ -1,15 +1,25 @@
-// Package base is all the base requests and router configuration
-package base
+// Package baseApi is all the base requests and router configuration
+package baseApi
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
 	"github.com/mrz1836/go-api-router"
+	"github.com/mrz1836/go-api/config"
+	"github.com/mrz1836/go-logger"
 )
 
 // RegisterRoutes register all the package specific routes
 func RegisterRoutes(router *apirouter.Router) {
+
+	// Load the service dependencies
+	err := loadService()
+	if err != nil {
+		logger.Fatalf("failed to load required service dependencies - error: %s", err.Error())
+	}
+
 	// Set the main index page (navigating to slash)
 	router.HTTPRouter.GET("/", router.Request(index))
 	router.HTTPRouter.OPTIONS("/", router.SetCrossOriginHeaders)
@@ -20,16 +30,26 @@ func RegisterRoutes(router *apirouter.Router) {
 	router.HTTPRouter.HEAD("/health", router.SetCrossOriginHeaders)
 
 	// Set the 404 handler (any request not detected)
-	//router.HTTPRouter.NotFound = http.HandlerFunc(notFound) // todo: logging?
-	router.HTTPRouter.NotFound = http.HandlerFunc(notFound) // todo: logging?
+	//router.HTTPRouter.NotFound = http.HandlerFunc(notFound)
+	router.HTTPRouter.NotFound = http.HandlerFunc(notFound)
 
 	// Set the method not allowed
-	router.HTTPRouter.MethodNotAllowed = http.HandlerFunc(notAllowed) // todo: logging?
+	router.HTTPRouter.MethodNotAllowed = http.HandlerFunc(notAllowed)
+}
+
+// loadService will load all dependencies for the service
+func loadService() (err error) {
+
+	// Load jobs or services
+
+	// Done!
+	logger.Data(2, logger.DEBUG, config.ApplicationModeAPI+" dependencies loaded!")
+	return
 }
 
 // index basic request to /
 func index(w http.ResponseWriter, req *http.Request, _ httprouter.Params) {
-	var returnResponse = map[string]interface{}{"message": "Welcome to the Go API!"}
+	var returnResponse = map[string]interface{}{"message": "Welcome to the TonicPow API!"}
 	apirouter.ReturnResponse(w, req, http.StatusOK, returnResponse)
 }
 
@@ -41,14 +61,14 @@ func health(w http.ResponseWriter, _ *http.Request, _ httprouter.Params) {
 // notFound handles all 404 requests
 func notFound(w http.ResponseWriter, req *http.Request) {
 	//w.Header().Set("Content-Type", "text/plain; charset=utf-8")
-	apiError := apirouter.ErrorFromRequest(req, "request is not recognized", "Whoops - this request is not recognized", http.StatusNotFound, "")
-	apirouter.ReturnResponse(w, req, http.StatusNotFound, apiError)
+	apiError := apirouter.ErrorFromRequest(req, fmt.Sprintf("404 occurred: %s", req.RequestURI), "Whoops - this request is not recognized", http.StatusNotFound, "")
+	apirouter.ReturnResponse(w, req, apiError.Code, apiError)
 	return
 }
 
 // notAllowed handles all 405 requests
 func notAllowed(w http.ResponseWriter, req *http.Request) {
-	apiError := apirouter.ErrorFromRequest(req, "request is not allowed", "Whoops - this method is not allowed", http.StatusMethodNotAllowed, "")
-	apirouter.ReturnResponse(w, req, http.StatusMethodNotAllowed, apiError)
+	apiError := apirouter.ErrorFromRequest(req, fmt.Sprintf("405 occurred: %s method: %s", req.RequestURI, req.Method), "Whoops - this method is not allowed", http.StatusMethodNotAllowed, "")
+	apirouter.ReturnResponse(w, req, apiError.Code, apiError)
 	return
 }
