@@ -26,7 +26,7 @@ func Handlers() *httprouter.Router {
 		// Use your middleware:
 		//s.Use(passThrough)
 
-		baseApi.RegisterRoutes(r)
+		baseapi.RegisterRoutes(r)
 		persons.RegisterRoutes(r)
 
 	} else {

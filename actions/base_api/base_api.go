@@ -1,5 +1,5 @@
-// Package baseApi is all the base requests and router configuration
-package baseApi
+// Package baseapi is all the base requests and router configuration
+package baseapi
 
 import (
 	"fmt"

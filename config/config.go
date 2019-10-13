@@ -13,7 +13,7 @@ import (
 	"github.com/spf13/viper"
 )
 
-// Global configuration (config.Values)
+// Values global configuration (config.Values)
 var Values appConfig
 
 // SchedulerConfig is our cron task wrapper
@@ -135,7 +135,7 @@ func (b basicAuthConfig) Validate() error {
 	)
 }
 
-// init load all environment variables
+// Load all environment variables
 func Load() (err error) {
 
 	// Check the environment we are running
@@ -165,9 +165,9 @@ func Load() (err error) {
 	if err = viper.ReadInConfig(); err != nil {
 		logger.Data(2, logger.ERROR, fmt.Sprintf("error reading %s configuration: %s", environment, err.Error()))
 		return
-	} else {
-		logger.Data(2, logger.INFO, environment+" configuration env file processed")
 	}
+
+	logger.Data(2, logger.INFO, environment+" configuration env file processed")
 
 	// Unmarshal into values struct
 	if err = viper.Unmarshal(&Values); err != nil {
