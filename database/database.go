@@ -9,6 +9,8 @@ import (
 	"time"
 
 	"github.com/mrz1836/go-logger"
+
+	//used for the mysql driver
 	_ "github.com/volatiletech/sqlboiler/drivers/sqlboiler-mysql/driver"
 )
 
