@@ -6,6 +6,9 @@ export API_SERVER_PORT=3000
 # Environment to run
 export API_ENVIRONMENT=development
 
+# Application mode to run (api or link_service)
+export API_APPLICATION_MODE=api
+
 #
 # Read Database
 #
