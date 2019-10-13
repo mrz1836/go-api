@@ -31,5 +31,5 @@ before_script:
 # Run scripts in parallel
 script:
  - golint
- - go vet
- - go test -short -v ./...
+# - go vet
+# - go test -short -v ./...
