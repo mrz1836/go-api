@@ -2,6 +2,7 @@
 package database
 
 import (
+	"context"
 	"database/sql"
 	"fmt"
 	"sync"
@@ -131,6 +132,11 @@ func CloseAllConnections() {
 	ReadDatabase = nil
 }
 
+// NewTx creates a new TX
+func NewTx(ctx context.Context) (tx *sql.Tx, err error) {
+	return WriteDatabase.BeginTx(ctx, nil)
+}
+
 // startWorker starts a worker for the Throttled Query
 func (d *ApiDatabase) startWorker() {
 	for handle := range d.worker {
@@ -182,7 +188,6 @@ func openDatabaseConnection(databaseAddress, databaseName, databaseUser, databas
 		db, err = sql.Open(driver, databaseUser+":"+databasePassword+"@tcp("+databaseAddress+")/"+databaseName+"?parseTime=true")
 	case PostgreSQLDriver:
 		db, err = sql.Open("pgx", fmt.Sprintf("postgres://%s:%s@%s/%s", databaseUser, databasePassword, databaseAddress, databaseName))
-		logger.Printf("postgres://%s:%s@%s/%s", databaseUser, databasePassword, databaseAddress, databaseName)
 	default:
 		logger.Data(2, logger.ERROR, fmt.Sprintf("unknown driver specified: %s", driver))
 		return
