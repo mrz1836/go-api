@@ -1,15 +1,16 @@
 {
+  "application_mode": "api",
+  "database_debug": true,
   "environment": "development",
   "server_port": "3000",
   "unauthorized_error": "unauthorized access",
-  "database_debug": true,
   "basic_auth": {
     "user": "testUser",
     "password": "replaceThisPassword567"
   },
   "cache": {
     "max_active_connections": 0,
-    "max_connection_lifetime": 0,
+    "max_connection_lifetime": 60,
     "max_idle_connections": 10,
     "max_idle_timeout": 10,
     "url": ""

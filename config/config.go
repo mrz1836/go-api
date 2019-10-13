@@ -9,21 +9,60 @@ import (
 	"github.com/go-ozzo/ozzo-validation"
 	"github.com/go-ozzo/ozzo-validation/is"
 	"github.com/mrz1836/go-logger"
+	"github.com/robfig/cron"
 	"github.com/spf13/viper"
 )
 
 // Global configuration (config.Values)
 var Values appConfig
 
+// SchedulerConfig is our cron task wrapper
+type SchedulerConfig struct {
+	CronApp *cron.Cron
+}
+
+// AddJob adds a new cron job
+func (s SchedulerConfig) AddJob(name, spec string, cmd func()) (err error) {
+
+	// No name or spec?
+	if spec == "" || name == "" {
+		err = fmt.Errorf("failed adding cron job %s, spec or name was empty", name)
+		logger.Data(2, logger.ERROR, err.Error())
+		return
+	}
+
+	// Add the cron job
+	_, err = s.CronApp.AddFunc(spec, cmd)
+	if err != nil {
+		err = fmt.Errorf("error creating cron job %s spec: %s error: %s", name, spec, err.Error())
+		logger.Data(2, logger.ERROR, err.Error())
+	} else {
+		logger.Data(2, logger.DEBUG, name+" cron job added successfully, spec: "+spec)
+	}
+
+	return
+}
+
+// Config constants used for optimization and value testing
+const (
+	ApplicationModeAPI     = "api"
+	EnvironmentDevelopment = "development"
+	EnvironmentKey         = "API_ENVIRONMENT"
+	EnvironmentProduction  = "production"
+	EnvironmentStaging     = "staging"
+)
+
 // appConfig is the configuration values and associated env vars
 type appConfig struct {
+	ApplicationMode   string          `json:"application_mode" mapstructure:"application_mode"`
 	BasicAuth         basicAuthConfig `json:"basic_auth" mapstructure:"basic_auth"`
 	Cache             cacheConfig     `json:"cache" mapstructure:"cache"`
 	CacheEnabled      bool            `json:"-" mapstructure:"-"`
-	DatabaseDebug     bool            `json:"database_debug" mapstructure:"unable to update persons"`
+	DatabaseDebug     bool            `json:"database_debug" mapstructure:"database_debug"`
 	DatabaseRead      databaseConfig  `json:"database_read" mapstructure:"database_read"`
 	DatabaseWrite     databaseConfig  `json:"database_write" mapstructure:"database_write"`
 	Environment       string          `json:"environment" mapstructure:"environment"`
+	Scheduler         SchedulerConfig `json:"-" mapstructure:"-"`
 	ServerPort        string          `json:"server_port" mapstructure:"server_port"`
 	UnauthorizedError string          `json:"unauthorized_error" mapstructure:"unauthorized_error"`
 }
@@ -35,7 +74,7 @@ func (c appConfig) Validate() error {
 		validation.Field(&c.Cache),         // Runs validations on the child struct level
 		validation.Field(&c.DatabaseRead),  // Runs validations on the child struct level
 		validation.Field(&c.DatabaseWrite), // Runs validations on the child struct level
-		validation.Field(&c.Environment, validation.Required, validation.In("development", "staging", "production")),
+		validation.Field(&c.Environment, validation.Required, validation.In(EnvironmentDevelopment, EnvironmentStaging, EnvironmentProduction)),
 		validation.Field(&c.ServerPort, validation.Required, is.Digit, validation.Length(2, 6)),
 		validation.Field(&c.UnauthorizedError, validation.Required, validation.Length(2, 0)),
 	)
@@ -100,34 +139,31 @@ func (b basicAuthConfig) Validate() error {
 func Load() (err error) {
 
 	// Check the environment we are running
-	environment := os.Getenv("API_ENVIRONMENT")
+	environment := os.Getenv(EnvironmentKey)
 	if len(environment) == 0 {
-		logger.Data(2, logger.ERROR, "missing required environment var: API_ENVIRONMENT")
+		logger.Data(2, logger.ERROR, "missing required environment var: "+EnvironmentKey)
+		logger.Fatalln("exiting...")
+	} else if environment != EnvironmentStaging && environment != EnvironmentProduction && environment != EnvironmentDevelopment {
+		logger.Data(2, logger.ERROR, "invalid environment var: "+EnvironmentKey+" value: "+environment)
 		logger.Fatalln("exiting...")
 	}
 
 	// Load configuration from json based on the environment
-	if environment == "production" {
-		viper.SetConfigFile("./config/production.json")
-	} else if environment == "staging" {
-		viper.SetConfigFile("./config/staging.json")
-	} else {
-		viper.SetConfigFile("./config/development.json")
-	}
+	viper.SetConfigFile("./config/" + environment + ".json")
 
 	// Set a replacer for replacing double underscore with nested period
 	replacer := strings.NewReplacer(".", "__")
 	viper.SetEnvKeyReplacer(replacer)
 
 	// Set the prefix
-	viper.SetEnvPrefix("api")
+	viper.SetEnvPrefix(ApplicationModeAPI)
 
 	// Use env vars
 	viper.AutomaticEnv()
 
 	// Read the configuration
 	if err = viper.ReadInConfig(); err != nil {
-		logger.Data(2, logger.ERROR, fmt.Sprintf("error reading env configuration: %s", err.Error()))
+		logger.Data(2, logger.ERROR, fmt.Sprintf("error reading %s configuration: %s", environment, err.Error()))
 		return
 	} else {
 		logger.Data(2, logger.INFO, environment+" configuration env file processed")
@@ -141,8 +177,18 @@ func Load() (err error) {
 
 	// Validate the configuration file
 	if err = Values.Validate(); err != nil {
-		logger.Data(2, logger.ERROR, fmt.Sprintf("error in configuration validation: %s", err.Error()))
+		logger.Data(2, logger.ERROR, fmt.Sprintf("error in %s configuration validation: %s", environment, err.Error()))
 	}
+
+	// Check application mode
+	if Values.ApplicationMode != ApplicationModeAPI {
+		logger.Data(2, logger.ERROR, "invalid value for application mode")
+		logger.Fatalln("exiting...")
+	}
+
+	// Load the scheduler and start
+	Values.Scheduler.CronApp = cron.New()
+	Values.Scheduler.CronApp.Start()
 
 	return
 }
