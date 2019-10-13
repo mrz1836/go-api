@@ -1,8 +1,8 @@
 # Get Golang
-FROM golang:1.12-alpine
+FROM golang:1.13.1-alpine
 
 # Version
-LABEL version="1.0" name="Go API Docker"
+LABEL version="1.1" name="Go API Example"
 
 # Set the timezone (#RUN echo "UTC" > /etc/timezone)
 RUN apk update && \
@@ -14,7 +14,7 @@ RUN apk update && \
 WORKDIR /go/src/github.com/mrz1836/go-api
 
 # Expose the port to the server
-EXPOSE 3000
+EXPOSE $API_SERVER_PORT
 
 # Move the current code into the directory
 COPY . /go/src/github.com/mrz1836/go-api
