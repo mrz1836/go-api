@@ -83,12 +83,12 @@
   version = "v1.0.0"
 
 [[projects]]
-  digest = "1:42be69e2e0f087861268b28425f3d97bb8b5abf4e1b73b330a9c6863bddac1c7"
+  digest = "1:fcb5f93b1e61b176c9be5008c1e0f5d374791ccff9cf4ca50145e77200d679dc"
   name = "github.com/julienschmidt/httprouter"
   packages = ["."]
   pruneopts = "NUT"
-  revision = "348b672cd90d8190f8240323e372ecd1e66b59dc"
-  version = "v1.2.0"
+  revision = "4eec211fa4e8df74ed978dc5681612131854144f"
+  version = "v1.3.0"
 
 [[projects]]
   digest = "1:bb8f4b6a177a6dab0c83779bd7c1bfcbb1864406750b90f49e298f3492200504"
@@ -123,20 +123,20 @@
   version = "v1.1.2"
 
 [[projects]]
-  digest = "1:3061e210549ea9377ff0937f49488a5d22c825a0572091021fdbe8c69e97438d"
+  digest = "1:1e86a617f6b1d2adf3530e8d3265b6e59a3796facb59d62f7d20ef05bad5ead1"
   name = "github.com/mrz1836/go-api-router"
   packages = ["."]
   pruneopts = "NUT"
-  revision = "06690e0c085cd56dc1e3b9bbbcaff91593aa56d8"
-  version = "v0.0.18"
+  revision = "5685b4b273fd8a8aa48dfe2733312054a6601284"
+  version = "v0.0.19"
 
 [[projects]]
-  digest = "1:d235553181d7d2c8a72ef6a9096068e89f573d07e37307e3ab1a1ad776df53f2"
+  digest = "1:7317a0046aa740108f6af9ab687d0756a317f892fb603162c8c5efe6a616961c"
   name = "github.com/mrz1836/go-cache"
   packages = ["."]
   pruneopts = "NUT"
-  revision = "e3e68c27cc049d7026ac2ae88860baa2b5734a14"
-  version = "v0.0.5"
+  revision = "e9cb71e22140274282589a83312af6c9768d2e18"
+  version = "v0.0.7"
 
 [[projects]]
   digest = "1:e9752813079877950aa96e8e3771e22771b49be653576000bddc5da78444e215"
@@ -163,12 +163,12 @@
   version = "v1.0.7"
 
 [[projects]]
-  digest = "1:4e9827f31d4fc1ddd732a0e3af4e863d281dd405adb2bfb96a25cc5346a77caf"
+  digest = "1:f69389e824367966d302f5bdea902cf906b0e066ad468c4f64a5830c4284f6e4"
   name = "github.com/pelletier/go-toml"
   packages = ["."]
   pruneopts = "NUT"
-  revision = "728039f679cbcd4f6a54e080d2219a4c4928c546"
-  version = "v1.4.0"
+  revision = "8fe62057ea2d46ce44254c98e84e810044dbe197"
+  version = "v1.5.0"
 
 [[projects]]
   digest = "1:14715f705ff5dfe0ffd6571d7d201dd8e921030f8070321a79380d8ca4ec1a24"
@@ -177,6 +177,14 @@
   pruneopts = "NUT"
   revision = "ba968bfe8b2f7e042a574c888954fccecfa385b4"
   version = "v0.8.1"
+
+[[projects]]
+  digest = "1:f1b3e1f7d4169dcd9e2003685383e99f6a4bdea14129bbcfdd80bfe455e0ad05"
+  name = "github.com/robfig/cron"
+  packages = ["."]
+  pruneopts = "NUT"
+  revision = "45fbe1491cdd47d74d1bf1396286d67faee8b8b5"
+  version = "v3.0.0"
 
 [[projects]]
   digest = "1:6bc0652ea6e39e22ccd522458b8bdd8665bf23bdc5a20eec90056e4dc7e273ca"
@@ -276,11 +284,11 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:63fa86776ed0c9ed7711c18db3922d0a1c51f796fff705aa33845bcfbcece9d9"
+  digest = "1:bb63ec37acf9b935e5f611d90151dfc915811b5c7e2e9730fa3982c71642ccc2"
   name = "golang.org/x/sys"
   packages = ["unix"]
   pruneopts = "NUT"
-  revision = "c990c680b611ac1aeb7d8f2af94a825f98d69720"
+  revision = "b09406accb4736d857a32bf9444cd7edae2ffa79"
 
 [[projects]]
   digest = "1:1093f2eb4b344996604f7d8b29a16c5b22ab9e1b25652140d3fede39f640d5cd"
@@ -302,16 +310,16 @@
   name = "google.golang.org/appengine"
   packages = ["cloudsql"]
   pruneopts = "NUT"
-  revision = "bddb1f54ecfd64b1350fd2dd897fa11d426632bc"
-  version = "v1.6.4"
+  revision = "971852bfffca25b069c31162ae8f247a3dba083b"
+  version = "v1.6.5"
 
 [[projects]]
-  digest = "1:18108594151654e9e696b27b181b953f9a90b16bf14d253dd1b397b025a1487f"
+  digest = "1:accc3bfe4e404aa53ac3621470e7cf9fce1efe48f0fabcfe6d12a72579d9d91f"
   name = "gopkg.in/yaml.v2"
   packages = ["."]
   pruneopts = "NUT"
-  revision = "51d6538a90f86fe93ac480b35f37b2be17fef232"
-  version = "v2.2.2"
+  revision = "f221b8435cfb71e54062f6c6e99e9ade30b124d5"
+  version = "v2.2.4"
 
 [solve-meta]
   analyzer-name = "dep"
@@ -320,6 +328,7 @@
     "github.com/go-ozzo/ozzo-validation",
     "github.com/go-ozzo/ozzo-validation/is",
     "github.com/go-sql-driver/mysql",
+    "github.com/gomodule/redigo/redis",
     "github.com/julienschmidt/httprouter",
     "github.com/kat-co/vala",
     "github.com/mrz1836/go-api-router",
@@ -327,6 +336,7 @@
     "github.com/mrz1836/go-logger",
     "github.com/mrz1836/go-sanitize",
     "github.com/pkg/errors",
+    "github.com/robfig/cron",
     "github.com/spf13/viper",
     "github.com/volatiletech/null",
     "github.com/volatiletech/sqlboiler/boil",

@@ -3,6 +3,8 @@ package apirouter
 import (
 	"encoding/json"
 	"net/http"
+
+	"github.com/mrz1836/go-logger"
 )
 
 const (
@@ -24,6 +26,10 @@ type APIError struct {
 
 // ErrorFromResponse generates a new error struct using CustomResponseWriter from LogRequest()
 func ErrorFromResponse(w *APIResponseWriter, internalMessage string, publicMessage string, errorCode int, data interface{}) *APIError {
+
+	// Log the error
+	logError(errorCode, internalMessage)
+
 	return &APIError{
 		Code:            errorCode,
 		Data:            data,
@@ -43,6 +49,9 @@ func ErrorFromRequest(req *http.Request, internalMessage string, publicMessage s
 	ip, _ := GetIPFromRequest(req)
 	id, _ := GetRequestID(req)
 
+	// Log the error
+	logError(errorCode, internalMessage)
+
 	// Return an error
 	return &APIError{
 		Code:            errorCode,
@@ -54,6 +63,25 @@ func ErrorFromRequest(req *http.Request, internalMessage string, publicMessage s
 		RequestGUID:     id,
 		URL:             req.URL.String(),
 	}
+}
+
+// logError will log the internal message and code for diagnosing
+func logError(errorCode int, internalMessage string) {
+
+	// Skip non-error codes
+	if errorCode < 400 || errorCode == 404 {
+		return
+	}
+
+	// Switch based on severity
+	var logLevel logger.LogLevel
+	if errorCode == 400 || errorCode > 422 {
+		logLevel = logger.ERROR
+	} else {
+		logLevel = logger.WARN
+	}
+
+	logger.Data(2, logLevel, "internal error message: "+internalMessage, logger.MakeParameter("code", errorCode))
 }
 
 // Error returns the string error message (only public message)
