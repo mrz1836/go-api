@@ -2,9 +2,9 @@
 **go-api** is a simple example API with support for common implementations
 
 [![Build Status](https://travis-ci.com/mrz1836/go-api.svg?branch=master)](https://travis-ci.com/mrz1836/go-api)
-[![Report](https://goreportcard.com/badge/github.com/mrz1836/go-api?style=flat)](https://goreportcard.com/report/github.com/mrz1836/go-api)
+[![Report](https://goreportcard.com/badge/github.com/mrz1836/go-api?style=flat&v=1)](https://goreportcard.com/report/github.com/mrz1836/go-api)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/b6c2832dee5442c7a79b482114100814)](https://www.codacy.com/app/mrz1818/go-api?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=mrz1836/go-api&amp;utm_campaign=Badge_Grade)
-[![Release](https://img.shields.io/github/release-pre/mrz1836/go-api.svg?style=flat)](https://github.com/mrz1836/go-api/releases)
+[![Release](https://img.shields.io/github/release-pre/mrz1836/go-api.svg?style=flat&v=1)](https://github.com/mrz1836/go-api/releases)
 [![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat)](https://github.com/RichardLitt/standard-readme)
 [![GoDoc](https://godoc.org/github.com/mrz1836/go-api?status.svg&style=flat)](https://godoc.org/github.com/mrz1836/go-api)
 
@@ -162,4 +162,4 @@ Support the development of this project 🙏
 
 ## License
 
-![License](https://img.shields.io/github/license/mrz1836/go-api.svg?style=flat)
+![License](https://img.shields.io/github/license/mrz1836/go-api.svg?style=flat&v=1)
