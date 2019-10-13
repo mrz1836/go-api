@@ -1,9 +1,12 @@
 # go-api
 **go-api** is a simple example API with support for common implementations
 
-| | | | | | | |
-|-|-|-|-|-|-|-|
-| ![License](https://img.shields.io/github/license/mrz1836/go-api.svg?style=flat) | [![Report](https://goreportcard.com/badge/github.com/mrz1836/go-api?style=flat)](https://goreportcard.com/report/github.com/mrz1836/go-api)  | [![Codacy Badge](https://api.codacy.com/project/badge/Grade/b6c2832dee5442c7a79b482114100814)](https://www.codacy.com/app/mrz1818/go-api?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=mrz1836/go-api&amp;utm_campaign=Badge_Grade) |  [![Build Status](https://travis-ci.com/mrz1836/go-api.svg?branch=master)](https://travis-ci.com/mrz1836/go-api)   |  [![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat)](https://github.com/RichardLitt/standard-readme) | [![Release](https://img.shields.io/github/release-pre/mrz1836/go-api.svg?style=flat)](https://github.com/mrz1836/go-api/releases) | [![GoDoc](https://godoc.org/github.com/mrz1836/go-api?status.svg&style=flat)](https://godoc.org/github.com/mrz1836/go-api) |
+[![Build Status](https://travis-ci.com/mrz1836/go-api.svg?branch=master)](https://travis-ci.com/mrz1836/go-api)
+[![Report](https://goreportcard.com/badge/github.com/mrz1836/go-api?style=flat)](https://goreportcard.com/report/github.com/mrz1836/go-api)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/b6c2832dee5442c7a79b482114100814)](https://www.codacy.com/app/mrz1818/go-api?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=mrz1836/go-api&amp;utm_campaign=Badge_Grade)
+[![Release](https://img.shields.io/github/release-pre/mrz1836/go-api.svg?style=flat)](https://github.com/mrz1836/go-api/releases)
+[![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat)](https://github.com/RichardLitt/standard-readme)
+[![GoDoc](https://godoc.org/github.com/mrz1836/go-api?status.svg&style=flat)](https://godoc.org/github.com/mrz1836/go-api)
 
 ## Table of Contents
 - [Installation](#installation)
