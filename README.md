@@ -96,6 +96,7 @@ $ . scripts/rebuild_models.sh
 - [ozzo-validation](https://github.com/go-ozzo/ozzo-validation) - Extensible data validation
 - [viper](https://github.com/spf13/viper) - Go configuration with fangs
 - [SQLBoiler](https://github.com/volatiletech/sqlboiler) - Powerful database ORM & model generation
+- [cron](github.com/robfig/cron) - Scheduler to run cron jobs and task
 
 ## Documentation
 You can view the generated [documentation here](https://godoc.org/github.com/mrz1836/go-api).
@@ -111,6 +112,7 @@ You can view the generated [documentation here](https://godoc.org/github.com/mrz
 - Supports different incoming load balancer setups (/health)
 - Logging each request and whenever you need logs (remote via [LogEntries](https://logentries.com/))
 - Flexible environment & configuration management using [viper](https://github.com/spf13/viper)
+- Built-in scheduler for any cron jobs or delayed tasks
 
 ## Examples & Tests
 All unit tests and [examples](examples/examples.go) run via [Travis CI](https://travis-ci.com/mrz1836/go-api) and uses [Go version 1.13.x](https://golang.org/doc/go1.13). View the [deployment configuration file](.travis.yml).
@@ -148,7 +150,7 @@ View the [examples](examples/examples.go)
 
 ## Maintainers
 
-[@MrZ1836](https://github.com/mrz1836)
+[@MrZ](https://github.com/mrz1836)
 
 ## Contributing
 
