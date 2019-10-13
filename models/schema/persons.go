@@ -101,8 +101,8 @@ type personL struct{}
 
 var (
 	personAllColumns            = []string{"id", "first_name", "middle_name", "last_name", "email", "created_at", "modified_at", "is_deleted"}
-	personColumnsWithoutDefault = []string{"email"}
-	personColumnsWithDefault    = []string{"id", "first_name", "middle_name", "last_name", "created_at", "modified_at", "is_deleted"}
+	personColumnsWithoutDefault = []string{"first_name", "middle_name", "last_name", "email"}
+	personColumnsWithDefault    = []string{"id", "created_at", "modified_at", "is_deleted"}
 	personPrimaryKeyColumns     = []string{"id"}
 )
 
@@ -819,7 +819,6 @@ func (o PersonSlice) UpdateAll(ctx context.Context, exec boil.ContextExecutor, c
 
 var mySQLPersonUniqueColumns = []string{
 	"id",
-	"email",
 }
 
 // Upsert attempts an insert using an executor, and does an update or ignore on conflict.

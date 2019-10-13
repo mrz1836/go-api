@@ -307,8 +307,8 @@ type authL struct{}
 
 var (
 	authAllColumns            = []string{"id", "person_id", "created_at", "modified_at", "password_digest", "yubikey_digest", "yubikey_backup_digest", "email", "email_confirm_token", "email_confirmed", "email_confirm_time", "last_ip_address", "last_login_at", "last_user_agent", "login_count", "reset_force", "reset_password_time", "reset_password_token", "reset_token_expires_at", "locked", "locked_time", "locked_by_user_id", "is_deleted"}
-	authColumnsWithoutDefault = []string{"person_id", "email", "email_confirm_time", "last_login_at", "reset_password_time", "reset_token_expires_at", "locked_time", "locked_by_user_id"}
-	authColumnsWithDefault    = []string{"id", "created_at", "modified_at", "password_digest", "yubikey_digest", "yubikey_backup_digest", "email_confirm_token", "email_confirmed", "last_ip_address", "last_user_agent", "login_count", "reset_force", "reset_password_token", "locked", "is_deleted"}
+	authColumnsWithoutDefault = []string{"person_id", "password_digest", "yubikey_digest", "yubikey_backup_digest", "email", "email_confirm_token", "email_confirm_time", "last_ip_address", "last_login_at", "last_user_agent", "reset_password_time", "reset_password_token", "reset_token_expires_at", "locked_time", "locked_by_user_id"}
+	authColumnsWithDefault    = []string{"id", "created_at", "modified_at", "email_confirmed", "login_count", "reset_force", "locked", "is_deleted"}
 	authPrimaryKeyColumns     = []string{"id"}
 )
 

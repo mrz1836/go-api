@@ -2,16 +2,19 @@ package models
 
 import (
 	"context"
+	"database/sql"
 
 	"github.com/go-ozzo/ozzo-validation"
+	"github.com/go-ozzo/ozzo-validation/is"
 	"github.com/mrz1836/go-api/database"
 	"github.com/mrz1836/go-api/models/schema"
 	"github.com/mrz1836/go-sanitize"
 	"github.com/volatiletech/sqlboiler/boil"
+	"github.com/volatiletech/sqlboiler/queries/qm"
 )
 
 var (
-	// Columns only allowed in create
+	// PersonCreateColumns columns only allowed in create
 	PersonCreateColumns = boil.Greylist(
 		schema.PersonColumns.Email,
 		schema.PersonColumns.FirstName,
@@ -19,7 +22,7 @@ var (
 		schema.PersonColumns.MiddleName,
 	)
 
-	// Columns only allowed in update
+	// PersonUpdateColumns columns only allowed in update
 	PersonUpdateColumns = boil.Whitelist(
 		schema.PersonColumns.Email,
 		schema.PersonColumns.FirstName,
@@ -27,12 +30,12 @@ var (
 		schema.PersonColumns.MiddleName,
 	)
 
-	// Columns only allowed in delete
+	// PersonDeleteColumns columns only allowed in delete
 	PersonDeleteColumns = boil.Whitelist(
 		schema.PersonColumns.IsDeleted,
 	)
 
-	// All fields that can be displayed
+	// PersonAllFields all fields that can be displayed
 	PersonAllFields = []string{
 		schema.PersonColumns.CreatedAt,
 		schema.PersonColumns.Email,
@@ -59,6 +62,15 @@ func NewPersonUsingSchema(person schema.Person) *Person {
 	return &Person{person}
 }
 
+// NewPersonsUsingSchema creates a new model using a schema
+func NewPersonsUsingSchema(personSlice schema.PersonSlice) []Person {
+	var persons []Person
+	for _, person := range personSlice {
+		persons = append(persons, Person{*person})
+	}
+	return persons
+}
+
 // GetPersonByID gets a person by ID
 func GetPersonByID(id uint64) (person *Person, err error) {
 
@@ -68,11 +80,57 @@ func GetPersonByID(id uint64) (person *Person, err error) {
 	// Find the associated record
 	p, err = schema.FindPerson(context.Background(), database.ReadDatabase, id) //todo: turn slice of strings into variadic
 	if err != nil {
+		if err == sql.ErrNoRows {
+			err = nil
+		}
 		return
 	}
 
-	// Create a new person with existing schema
+	// Create a new model with existing schema
 	person = NewPersonUsingSchema(*p)
+
+	return
+}
+
+// GetPersonByEmail gets a person by email address
+func GetPersonByEmail(email string) (person *Person, err error) {
+
+	// Start with a schema
+	var p *schema.Person
+
+	// Find the associated record
+	p, err = schema.Persons(qm.Where(schema.PersonColumns.Email+" = ?", email)).One(context.Background(), database.ReadDatabase)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			err = nil
+		}
+		return
+	}
+
+	// Create a new model with existing schema
+	person = NewPersonUsingSchema(*p)
+
+	return
+}
+
+// GetPersons gets an array of person  //todo: temporary for now
+func GetPersons() (persons []Person, err error) {
+
+	// Start with a schema
+	var p schema.PersonSlice
+
+	// Find the associated record
+	p, err = schema.Persons(
+		qm.Where(schema.PersonColumns.IsDeleted+" = ?", 0)).All(context.Background(), database.ReadDatabase)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			err = nil
+		}
+		return
+	}
+
+	// Create a new model with existing schema
+	persons = NewPersonsUsingSchema(p)
 
 	return
 }
@@ -97,19 +155,17 @@ func (p *Person) Validate() error {
 
 	// Custom validations
 
-	//todo: check for existing email address ?
-
 	// Run the struct validations
 	return validation.ValidateStruct(p,
-		//validation.Field(&p.Email, validation.Required, is.Email), //todo: turn this back on once I have internet
-		validation.Field(&p.FirstName, validation.Required, validation.Length(1, 50)),
-		validation.Field(&p.LastName, validation.Required, validation.Length(1, 50)),
+		validation.Field(&p.Email, validation.Required, is.Email),
+		validation.Field(&p.FirstName, validation.Length(0, 50)),
+		validation.Field(&p.LastName, validation.Length(0, 50)),
 		validation.Field(&p.MiddleName, validation.Length(0, 50)),
 	)
 }
 
 // Save either inserts or updates a model
-func (p *Person) Save(ctx context.Context, columns boil.Columns) (rowsAffected int64, err error) {
+func (p *Person) Save(ctx context.Context, columns boil.Columns, tx *sql.Tx) (rowsAffected int64, err error) {
 
 	// Validate the model
 	err = p.Validate()
@@ -120,9 +176,9 @@ func (p *Person) Save(ctx context.Context, columns boil.Columns) (rowsAffected i
 	// Try to insert the model
 	if p.ID == 0 {
 		rowsAffected = 1
-		err = p.Insert(ctx, database.WriteDatabase, columns)
+		err = p.Insert(ctx, tx, columns)
 	} else {
-		rowsAffected, err = p.Update(ctx, database.WriteDatabase, columns)
+		rowsAffected, err = p.Update(ctx, tx, columns)
 	}
 
 	return
