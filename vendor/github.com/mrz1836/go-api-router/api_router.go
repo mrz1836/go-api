@@ -43,6 +43,7 @@ type Router struct {
 	CrossOriginAllowOriginAll   bool               `json:"cross_origin_allow_origin_all" url:"cross_origin_allow_origin_all"`   // Allow all origins
 	CrossOriginEnabled          bool               `json:"cross_origin_enabled" url:"cross_origin_enabled"`                     // Enable or Disable CrossOrigin
 	HTTPRouter                  *httprouter.Router `json:"-" url:"-"`                                                           // J Schmidt's httprouter
+	SkipLoggingPaths            []string           `json:"skip_logging_paths" url:"skip_logging_paths"`                         // Skip logging on these paths  (IE: /health)
 }
 
 // New returns a router middleware configuration to use for all future requests
@@ -103,16 +104,37 @@ func (r *Router) Request(h httprouter.Handle) httprouter.Handle {
 		// Set cross origin on each request that goes through logging
 		r.SetCrossOriginHeaders(writer, req, ps)
 
-		// Start the log (timer)
-		logger.Printf(logParamsFormat, writer.RequestID, writer.Method, writer.URL, writer.IPAddress, writer.UserAgent, params)
-		start := time.Now()
+		// Do we have paths to skip?
+		// todo: this was added because some requests are confidential or health checks and they
+		//  can't be split apart from the router
+		var skipLogging bool
+		if len(r.SkipLoggingPaths) > 0 {
+			for _, path := range r.SkipLoggingPaths {
+				if path == req.URL.Path {
+					skipLogging = true
+					break
+				}
+			}
+		}
 
-		// Fire the request
-		h(writer, req, ps)
+		// Skip logging this specific request
+		if !skipLogging {
 
-		// Complete the timer and final log
-		elapsed := time.Since(start)
-		logger.Printf(logTimeFormat, writer.RequestID, writer.Method, writer.URL, writer.IPAddress, writer.UserAgent, int64(elapsed/time.Millisecond), writer.Status)
+			// Start the log (timer)
+			logger.Printf(logParamsFormat, writer.RequestID, writer.Method, writer.URL, writer.IPAddress, writer.UserAgent, params)
+			start := time.Now()
+
+			// Fire the request
+			h(writer, req, ps)
+
+			// Complete the timer and final log
+			elapsed := time.Since(start)
+			logger.Printf(logTimeFormat, writer.RequestID, writer.Method, writer.URL, writer.IPAddress, writer.UserAgent, int64(elapsed/time.Millisecond), writer.Status)
+
+		} else {
+			// Fire the request (no logging)
+			h(writer, req, ps)
+		}
 	})
 }
 

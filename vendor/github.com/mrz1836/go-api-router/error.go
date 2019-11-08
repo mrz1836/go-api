@@ -28,7 +28,7 @@ type APIError struct {
 func ErrorFromResponse(w *APIResponseWriter, internalMessage string, publicMessage string, errorCode int, data interface{}) *APIError {
 
 	// Log the error
-	logError(errorCode, internalMessage)
+	logError(errorCode, internalMessage, w.RequestID, w.IPAddress)
 
 	return &APIError{
 		Code:            errorCode,
@@ -50,7 +50,7 @@ func ErrorFromRequest(req *http.Request, internalMessage string, publicMessage s
 	id, _ := GetRequestID(req)
 
 	// Log the error
-	logError(errorCode, internalMessage)
+	logError(errorCode, internalMessage, id, ip)
 
 	// Return an error
 	return &APIError{
@@ -66,7 +66,7 @@ func ErrorFromRequest(req *http.Request, internalMessage string, publicMessage s
 }
 
 // logError will log the internal message and code for diagnosing
-func logError(errorCode int, internalMessage string) {
+func logError(errorCode int, internalMessage, requestID, ipAddress string) {
 
 	// Skip non-error codes
 	if errorCode < 400 || errorCode == 404 {
@@ -81,7 +81,14 @@ func logError(errorCode int, internalMessage string) {
 		logLevel = logger.WARN
 	}
 
-	logger.Data(2, logLevel, "internal error message: "+internalMessage, logger.MakeParameter("code", errorCode))
+	logger.Data(
+		1,
+		logLevel,
+		"internal error message: "+internalMessage,
+		logger.MakeParameter("code", errorCode),
+		logger.MakeParameter("request_id", requestID),
+		logger.MakeParameter("ip_address", ipAddress),
+	)
 }
 
 // Error returns the string error message (only public message)

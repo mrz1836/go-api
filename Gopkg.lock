@@ -10,6 +10,14 @@
   version = "v9"
 
 [[projects]]
+  digest = "1:5be1b1fe09cae6210ad143e91b308a138f90195fc87276d5b6e3c21398800d14"
+  name = "github.com/friendsofgo/errors"
+  packages = ["."]
+  pruneopts = "NUT"
+  revision = "232bd96a4454b12ba4a012b0e3ba3318775206ca"
+  version = "v0.9.2"
+
+[[projects]]
   digest = "1:1b91ae0dc69a41d4c2ed23ea5cffb721ea63f5037ca4b81e6d6771fbb8f45129"
   name = "github.com/fsnotify/fsnotify"
   packages = ["."]
@@ -123,20 +131,20 @@
   version = "v1.1.2"
 
 [[projects]]
-  digest = "1:1e86a617f6b1d2adf3530e8d3265b6e59a3796facb59d62f7d20ef05bad5ead1"
+  digest = "1:52d0380b5ed1a2a1d972f5fec1111e4401cb318b563c68e75136b849f8a36d27"
   name = "github.com/mrz1836/go-api-router"
   packages = ["."]
   pruneopts = "NUT"
-  revision = "5685b4b273fd8a8aa48dfe2733312054a6601284"
-  version = "v0.0.19"
+  revision = "c515d5b236c0766583758e41883a78cab36dc8db"
+  version = "v0.0.22"
 
 [[projects]]
-  digest = "1:7317a0046aa740108f6af9ab687d0756a317f892fb603162c8c5efe6a616961c"
+  digest = "1:62ed774403a4ec1bc105c4356d28e7fbfc2d7fc689eef419c00b92cb436cb96c"
   name = "github.com/mrz1836/go-cache"
   packages = ["."]
   pruneopts = "NUT"
-  revision = "e9cb71e22140274282589a83312af6c9768d2e18"
-  version = "v0.0.7"
+  revision = "3dc9b9383bf7371a6d8bd2fdaba6062bd46dd104"
+  version = "v0.0.9"
 
 [[projects]]
   digest = "1:e9752813079877950aa96e8e3771e22771b49be653576000bddc5da78444e215"
@@ -151,24 +159,24 @@
   name = "github.com/mrz1836/go-parameters"
   packages = ["."]
   pruneopts = "NUT"
-  revision = "0428e1d272c9d810d310a7a0a6056e31877d8c60"
-  version = "v0.0.4"
+  revision = "71a6bc659bc42c10624c2a49a4ce9a516087bf5b"
+  version = "v0.0.5"
 
 [[projects]]
-  digest = "1:384110194c19653beafe331244802f8ebf695a9b9dc19b2baa23e493fa87455e"
+  digest = "1:1913b26f9e2133465bcb3fef6c1c3672bd89b03e3b7e0abc22306ab74d1e8143"
   name = "github.com/mrz1836/go-sanitize"
   packages = ["."]
   pruneopts = "NUT"
-  revision = "d31f4915922afa98d232ab1fe066d66480910ef1"
-  version = "v1.0.7"
+  revision = "5b2ea6a33d21f10f580f708ef6605e549a593009"
+  version = "v1.0.8"
 
 [[projects]]
-  digest = "1:f69389e824367966d302f5bdea902cf906b0e066ad468c4f64a5830c4284f6e4"
+  digest = "1:efec7b15c9f6f20c96a5710fea5d946aabf13018d9e2d2c50a4746f850514f9d"
   name = "github.com/pelletier/go-toml"
   packages = ["."]
   pruneopts = "NUT"
-  revision = "8fe62057ea2d46ce44254c98e84e810044dbe197"
-  version = "v1.5.0"
+  revision = "903d9455db9ff1d7ac1ab199062eca7266dd11a3"
+  version = "v1.6.0"
 
 [[projects]]
   digest = "1:14715f705ff5dfe0ffd6571d7d201dd8e921030f8070321a79380d8ca4ec1a24"
@@ -230,12 +238,20 @@
   version = "v1.0.5"
 
 [[projects]]
-  digest = "1:bdc698c2f611bd436789ce42565d172a0fc38fd3f692d20cd4b288ed314788e9"
+  digest = "1:d29f592254b53958cd387137fd1bcb16634c17407938763e82b76df93b3cbfa0"
   name = "github.com/spf13/viper"
   packages = ["."]
   pruneopts = "NUT"
-  revision = "b5bf975e5823809fb22c7644d008757f78a4259e"
-  version = "v1.4.0"
+  revision = "72b022eb357a56469725dcd03918449e2278d02e"
+  version = "v1.5.0"
+
+[[projects]]
+  digest = "1:f60e4a8af6b6f3940cbdd28b1262221d28b4eb4d31b87bdb7b219f5fc0f278bf"
+  name = "github.com/subosito/gotenv"
+  packages = ["."]
+  pruneopts = "NUT"
+  revision = "2ef7124db659d49edac6aa459693a15ae36c671a"
+  version = "v1.2.0"
 
 [[projects]]
   digest = "1:498d0b37a5c7f5664f2e21de8c85c5694ed197cb25ce245bf25cdd18930035e9"
@@ -265,7 +281,7 @@
   version = "v8.0.0"
 
 [[projects]]
-  digest = "1:7ef5494cb947f0440596ee51c92f2d5b11e4393d604a1942afac7aa422d698ac"
+  digest = "1:adf14d9a96e6c11d4027faec773e5b25dd1640fc041be130c4c3ff9b33375552"
   name = "github.com/volatiletech/sqlboiler"
   packages = [
     "boil",
@@ -279,16 +295,16 @@
     "strmangle",
   ]
   pruneopts = "NUT"
-  revision = "593a7e2d9aeec5e9748e93d7225c95c3896aa558"
-  version = "v3.5.0"
+  revision = "5a51e7228cba48f4f40e542504540fcd8b14b26b"
+  version = "v3.6.0"
 
 [[projects]]
   branch = "master"
-  digest = "1:bb63ec37acf9b935e5f611d90151dfc915811b5c7e2e9730fa3982c71642ccc2"
+  digest = "1:761c2f8e6f99d4ad4a5eb07c41f5d238c28629071a9f5d8288197b6c94eb1a8f"
   name = "golang.org/x/sys"
   packages = ["unix"]
   pruneopts = "NUT"
-  revision = "b09406accb4736d857a32bf9444cd7edae2ffa79"
+  revision = "c1f44814a5cd81a6d1cb589ef1e528bc5d305e07"
 
 [[projects]]
   digest = "1:1093f2eb4b344996604f7d8b29a16c5b22ab9e1b25652140d3fede39f640d5cd"
@@ -306,6 +322,17 @@
   version = "v0.3.2"
 
 [[projects]]
+  branch = "master"
+  digest = "1:c0619d0c0c2f585812ce9f844eafb9c5660f5bd723c9ac0cd60b7fac665d2ac6"
+  name = "golang.org/x/xerrors"
+  packages = [
+    ".",
+    "internal",
+  ]
+  pruneopts = "NUT"
+  revision = "1b5146add8981d58be77b16229c0ff0f8bebd8c1"
+
+[[projects]]
   digest = "1:c25289f43ac4a68d88b02245742347c94f1e108c534dda442188015ff80669b3"
   name = "google.golang.org/appengine"
   packages = ["cloudsql"]
@@ -314,12 +341,12 @@
   version = "v1.6.5"
 
 [[projects]]
-  digest = "1:accc3bfe4e404aa53ac3621470e7cf9fce1efe48f0fabcfe6d12a72579d9d91f"
+  digest = "1:5ad10df0893403ae9fdbd17c6f14814394a635339dd79595600bae52432befcf"
   name = "gopkg.in/yaml.v2"
   packages = ["."]
   pruneopts = "NUT"
-  revision = "f221b8435cfb71e54062f6c6e99e9ade30b124d5"
-  version = "v2.2.4"
+  revision = "f90ceb4f409096b60e2e9076b38b304b8246e5fa"
+  version = "v2.2.5"
 
 [solve-meta]
   analyzer-name = "dep"
