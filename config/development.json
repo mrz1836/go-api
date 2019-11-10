@@ -13,7 +13,8 @@
     "max_connection_lifetime": 60,
     "max_idle_connections": 10,
     "max_idle_timeout": 10,
-    "url": ""
+    "url": "",
+    "use_tls": false
   },
   "database_write": {
     "driver": "mysql",
@@ -36,5 +37,18 @@
     "password": "ThisIsSecureEnough123",
     "port": "3306",
     "user": "apiDbTestUser"
+  },
+  "email": {
+    "aws_ses_access_id": "",
+    "aws_ses_secret_key": "",
+    "from_domain": "example.com",
+    "from_name": "No Reply",
+    "from_username": "no-reply",
+    "mandrill_api_key": "",
+    "postmark_server_token": "",
+    "smtp_host": "mail.example.com",
+    "smtp_password": "ThisIsSecureEnough123",
+    "smtp_port": 25,
+    "smtp_username": "testEmailUser"
   }
 }
