@@ -87,11 +87,17 @@ $ cd ../go-api
 $ . scripts/rebuild_models.sh
 ```
 
+Clear local redis and reload the database
+```bash
+$ . scripts/setup_db.sh && . scripts/flush_redis.sh
+```
+
 ### Package Dependencies
 - [go-api-router](https://github.com/mrz1836/go-api-router) - Fast and lightweight router
 - [go-cache](https://github.com/mrz1836/go-cache) - Redis caching made easy
 - [go-logger](https://github.com/mrz1836/go-logger) - Local or remote logging
 - [go-sanitize](https://github.com/mrz1836/go-sanitize) - Clean data effortlessly
+- [go-mail](https://github.com/mrz1836/go-mail) - Email via multiple providers
 - [goose](https://github.com/pressly/goose) - Database migration
 - [ozzo-validation](https://github.com/go-ozzo/ozzo-validation) - Extensible data validation
 - [viper](https://github.com/spf13/viper) - Go configuration with fangs
@@ -113,6 +119,7 @@ You can view the generated [documentation here](https://godoc.org/github.com/mrz
 - Logging each request and whenever you need logs (remote via [LogEntries](https://logentries.com/))
 - Flexible environment & configuration management using [viper](https://github.com/spf13/viper)
 - Built-in scheduler for any cron jobs or delayed tasks
+- Powerful and easy emailing with support for [Postmark](https://postmarkapp.com), [Mandrill](https://mandrillapp.com), [AWS SES](https://aws.amazon.com/ses/) and [SMTP](https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol)
 
 ## Examples & Tests
 All unit tests and [examples](examples/examples.go) run via [Travis CI](https://travis-ci.com/mrz1836/go-api) and uses [Go version 1.13.x](https://golang.org/doc/go1.13). View the [deployment configuration file](.travis.yml).

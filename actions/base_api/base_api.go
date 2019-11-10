@@ -31,7 +31,6 @@ func RegisterRoutes(router *apirouter.Router) {
 	router.HTTPRouter.HEAD("/"+config.HealthRequestPath, router.SetCrossOriginHeaders)
 
 	// Set the 404 handler (any request not detected)
-	//router.HTTPRouter.NotFound = http.HandlerFunc(notFound)
 	router.HTTPRouter.NotFound = http.HandlerFunc(notFound)
 
 	// Set the method not allowed
