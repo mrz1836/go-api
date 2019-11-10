@@ -8,6 +8,7 @@ import (
 	"github.com/julienschmidt/httprouter"
 	"github.com/mrz1836/go-api-router"
 	"github.com/mrz1836/go-api/config"
+	"github.com/mrz1836/go-api/jobs"
 	"github.com/mrz1836/go-logger"
 )
 
@@ -25,9 +26,9 @@ func RegisterRoutes(router *apirouter.Router) {
 	router.HTTPRouter.OPTIONS("/", router.SetCrossOriginHeaders)
 
 	// Set the health request (used for load balancers)
-	router.HTTPRouter.GET("/health", router.Request(health))
-	router.HTTPRouter.OPTIONS("/health", router.SetCrossOriginHeaders)
-	router.HTTPRouter.HEAD("/health", router.SetCrossOriginHeaders)
+	router.HTTPRouter.GET("/"+config.HealthRequestPath, router.Request(health))
+	router.HTTPRouter.OPTIONS("/"+config.HealthRequestPath, router.SetCrossOriginHeaders)
+	router.HTTPRouter.HEAD("/"+config.HealthRequestPath, router.SetCrossOriginHeaders)
 
 	// Set the 404 handler (any request not detected)
 	//router.HTTPRouter.NotFound = http.HandlerFunc(notFound)
@@ -41,6 +42,7 @@ func RegisterRoutes(router *apirouter.Router) {
 func loadService() (err error) {
 
 	// Load jobs or services
+	jobs.RunExampleJob(true, 5)
 
 	// Done!
 	logger.Data(2, logger.DEBUG, config.ApplicationModeAPI+" dependencies loaded!")
