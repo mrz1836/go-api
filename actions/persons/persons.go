@@ -2,7 +2,6 @@
 package persons
 
 import (
-	"context"
 	"database/sql"
 	"encoding/json"
 	"fmt"
@@ -60,7 +59,7 @@ func createPerson(w http.ResponseWriter, req *http.Request, _ httprouter.Params)
 
 	// Start a new transaction
 	var tx *sql.Tx
-	tx, err = database.NewTx(context.Background())
+	tx, _, err = database.NewTx(config.DatabaseDefaultTxTimeout)
 	if err != nil {
 		apiError := apirouter.ErrorFromRequest(req, fmt.Sprintf("error creating tx: %s", err.Error()), "error creating person", http.StatusExpectationFailed, "")
 		apirouter.ReturnResponse(w, req, apiError.Code, apiError)
@@ -75,7 +74,7 @@ func createPerson(w http.ResponseWriter, req *http.Request, _ httprouter.Params)
 	}
 
 	// Save will insert a new person since we are creating a new model
-	_, err = person.Save(context.Background(), models.PersonCreateColumns, tx)
+	_, err = person.Save(models.PersonCreateColumns, tx)
 	if err != nil {
 		apiError := apirouter.ErrorFromRequest(req, fmt.Sprintf("error creating person: %s", err.Error()), fmt.Sprintf("error creating person: %s", err.Error()), http.StatusExpectationFailed, "")
 		apirouter.ReturnResponse(w, req, apiError.Code, apiError)
@@ -123,7 +122,7 @@ func updatePerson(w http.ResponseWriter, req *http.Request, _ httprouter.Params)
 
 	// Start a new transaction
 	var tx *sql.Tx
-	tx, err = database.NewTx(context.Background())
+	tx, _, err = database.NewTx(config.DatabaseDefaultTxTimeout)
 	if err != nil {
 		apiError := apirouter.ErrorFromRequest(req, fmt.Sprintf("error updating person: %s", err.Error()), "error updating person", http.StatusExpectationFailed, "")
 		apirouter.ReturnResponse(w, req, apiError.Code, apiError)
@@ -132,7 +131,7 @@ func updatePerson(w http.ResponseWriter, req *http.Request, _ httprouter.Params)
 
 	// Save will update an exiting person
 	//var affected int64
-	_, err = person.Save(context.Background(), models.PersonUpdateColumns, tx)
+	_, err = person.Save(models.PersonUpdateColumns, tx)
 	if err != nil {
 		apiError := apirouter.ErrorFromRequest(req, fmt.Sprintf("error saving person: %s", err.Error()), fmt.Sprintf("error updating person: %s", err.Error()), http.StatusExpectationFailed, "")
 		apirouter.ReturnResponse(w, req, apiError.Code, apiError)
@@ -179,7 +178,7 @@ func deletePerson(w http.ResponseWriter, req *http.Request, _ httprouter.Params)
 
 	// Start a new transaction
 	var tx *sql.Tx
-	tx, err = database.NewTx(context.Background())
+	tx, _, err = database.NewTx(config.DatabaseDefaultTxTimeout)
 	if err != nil {
 		apiError := apirouter.ErrorFromRequest(req, fmt.Sprintf("error creating tx: %s", err.Error()), "error deleting person", http.StatusExpectationFailed, "")
 		apirouter.ReturnResponse(w, req, apiError.Code, apiError)
@@ -187,7 +186,7 @@ func deletePerson(w http.ResponseWriter, req *http.Request, _ httprouter.Params)
 	}
 
 	// Save will update an exiting person
-	_, err = person.Save(context.Background(), models.PersonDeleteColumns, tx)
+	_, err = person.Save(models.PersonDeleteColumns, tx)
 	if err != nil {
 		apiError := apirouter.ErrorFromRequest(req, fmt.Sprintf("error saving person: %s", err.Error()), fmt.Sprintf("error deleting person: %s", err.Error()), http.StatusExpectationFailed, "")
 		apirouter.ReturnResponse(w, req, apiError.Code, apiError)
