@@ -165,7 +165,7 @@ func (p *Person) Validate() error {
 }
 
 // Save either inserts or updates a model
-func (p *Person) Save(ctx context.Context, columns boil.Columns, tx *sql.Tx) (rowsAffected int64, err error) {
+func (p *Person) Save(columns boil.Columns, tx *sql.Tx) (rowsAffected int64, err error) {
 
 	// Validate the model
 	err = p.Validate()
@@ -176,9 +176,9 @@ func (p *Person) Save(ctx context.Context, columns boil.Columns, tx *sql.Tx) (ro
 	// Try to insert the model
 	if p.ID == 0 {
 		rowsAffected = 1
-		err = p.Insert(ctx, tx, columns)
+		err = p.Insert(context.Background(), tx, columns)
 	} else {
-		rowsAffected, err = p.Update(ctx, tx, columns)
+		rowsAffected, err = p.Update(context.Background(), tx, columns)
 	}
 
 	return
