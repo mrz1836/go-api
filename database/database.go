@@ -135,8 +135,11 @@ func CloseAllConnections() {
 }
 
 // NewTx creates a new TX
-func NewTx(ctx context.Context) (tx *sql.Tx, err error) {
-	return WriteDatabase.BeginTx(ctx, nil)
+func NewTx(timeout time.Duration) (tx *sql.Tx, cancelMethod context.CancelFunc, err error) {
+	var ctx context.Context
+	ctx, cancelMethod = context.WithTimeout(context.Background(), timeout)
+	tx, err = WriteDatabase.BeginTx(ctx, nil)
+	return
 }
 
 // startWorker starts a worker for the Throttled Query
@@ -159,7 +162,7 @@ func (d *ApiDatabase) Enque(handle func()) {
 	d.worker <- handle
 }
 
-//Close both or any connections
+// Close both or any connections
 func (d *ApiDatabase) Close() {
 	_ = d.DB.Close() // todo: log these errors if needed
 	if d.dBWrite != d.DB {
