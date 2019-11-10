@@ -7,6 +7,8 @@ import (
 	"github.com/gomodule/redigo/redis"
 	"github.com/mrz1836/go-api/config"
 	"github.com/mrz1836/go-api/database"
+	"github.com/mrz1836/go-api/models"
+	"github.com/mrz1836/go-api/notifications"
 	"github.com/mrz1836/go-api/router"
 	"github.com/mrz1836/go-cache"
 	"github.com/mrz1836/go-logger"
@@ -86,6 +88,18 @@ func loadApplication() (err error) {
 
 	// Open the connections
 	err = database.OpenConnection()
+	if err != nil {
+		return
+	}
+
+	// Load notifications
+	err = notifications.StartUp()
+	if err != nil {
+		return
+	}
+
+	// Load models
+	err = models.StartUp()
 
 	return
 }
