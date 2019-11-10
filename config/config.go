@@ -4,7 +4,10 @@ package config
 import (
 	"fmt"
 	"os"
+	"path/filepath"
+	"runtime"
 	"strings"
+	"time"
 
 	"github.com/go-ozzo/ozzo-validation"
 	"github.com/go-ozzo/ozzo-validation/is"
@@ -45,11 +48,13 @@ func (s SchedulerConfig) AddJob(name, spec string, cmd func()) (err error) {
 
 // Config constants used for optimization and value testing
 const (
-	ApplicationModeAPI     = "api"
-	EnvironmentDevelopment = "development"
-	EnvironmentKey         = "API_ENVIRONMENT"
-	EnvironmentProduction  = "production"
-	EnvironmentStaging     = "staging"
+	ApplicationModeAPI       = "api"
+	DatabaseDefaultTxTimeout = 15 * time.Second
+	EnvironmentDevelopment   = "development"
+	EnvironmentKey           = "API_ENVIRONMENT"
+	EnvironmentProduction    = "production"
+	EnvironmentStaging       = "staging"
+	HealthRequestPath        = "health"
 )
 
 // appConfig is the configuration values and associated env vars
@@ -61,6 +66,7 @@ type appConfig struct {
 	DatabaseDebug     bool            `json:"database_debug" mapstructure:"database_debug"`
 	DatabaseRead      databaseConfig  `json:"database_read" mapstructure:"database_read"`
 	DatabaseWrite     databaseConfig  `json:"database_write" mapstructure:"database_write"`
+	Email             emailConfig     `json:"email" mapstructure:"email"`
 	Environment       string          `json:"environment" mapstructure:"environment"`
 	Scheduler         SchedulerConfig `json:"-" mapstructure:"-"`
 	ServerPort        string          `json:"server_port" mapstructure:"server_port"`
@@ -107,17 +113,50 @@ func (d databaseConfig) Validate() error {
 
 // cacheConfig is a configuration for a Redis connection
 type cacheConfig struct {
+	DependencyMode        bool   `json:"dependency_mode" mapstructure:"dependency_mode"`                 // false for digital ocean (not supported)
 	MaxActiveConnections  int    `json:"max_active_connections" mapstructure:"max_active_connections"`   // 0
 	MaxConnectionLifetime int    `json:"max_connection_lifetime" mapstructure:"max_connection_lifetime"` // 0
 	MaxIdleConnections    int    `json:"max_idle_connections" mapstructure:"max_idle_connections"`       // 10
 	MaxIdleTimeout        int    `json:"max_idle_timeout" mapstructure:"max_idle_timeout"`               // 240
 	URL                   string `json:"url" mapstructure:"url"`                                         // redis://localhost:6379
+	UseTLS                bool   `json:"use_tls" mapstructure:"use_tls"`                                 // true for digital ocean (required)
 }
 
 // Validate checks the configuration for specific rules
 func (c cacheConfig) Validate() error {
 	return validation.ValidateStruct(&c,
 		validation.Field(&c.URL, validation.Length(0, 250)), // Testing
+	)
+}
+
+// emailConfig is a configuration for a email services
+type emailConfig struct {
+	AwsSesAccessID      string `json:"aws_ses_access_id" mapstructure:"aws_ses_access_id"`         // 12345
+	AwsSesSecretKey     string `json:"aws_ses_secret_key" mapstructure:"aws_ses_secret_key"`       // 12345
+	FromDomain          string `json:"from_domain" mapstructure:"from_domain"`                     // example.com
+	FromName            string `json:"from_name" mapstructure:"from_name"`                         // Test User
+	FromUsername        string `json:"from_username" mapstructure:"from_username"`                 // testuser
+	MandrillAPIKey      string `json:"mandrill_api_key" mapstructure:"mandrill_api_key"`           // 12345
+	PostmarkServerToken string `json:"postmark_server_token" mapstructure:"postmark_server_token"` // 12345
+	SMTPHost            string `json:"smtp_host" mapstructure:"smtp_host"`                         // example.com
+	SMTPPassword        string `json:"smtp_password" mapstructure:"smtp_password"`                 // secret123
+	SMTPPort            int    `json:"smtp_port" mapstructure:"smtp_port"`                         // 25
+	SMTPUsername        string `json:"smtp_username" mapstructure:"smtp_username"`                 // testuser
+}
+
+// Validate checks the configuration for specific rules
+func (e emailConfig) Validate() error {
+	return validation.ValidateStruct(&e,
+		validation.Field(&e.AwsSesAccessID, validation.Length(0, 100)),
+		validation.Field(&e.AwsSesSecretKey, validation.Length(0, 100)),
+		validation.Field(&e.FromDomain, validation.Required, validation.Length(1, 100)),
+		validation.Field(&e.FromName, validation.Required, validation.Length(1, 100)),
+		validation.Field(&e.FromUsername, validation.Required, validation.Length(1, 100)),
+		validation.Field(&e.MandrillAPIKey, validation.Length(0, 100)),
+		validation.Field(&e.PostmarkServerToken, validation.Length(0, 100)),
+		validation.Field(&e.SMTPHost, validation.Length(0, 255)),
+		validation.Field(&e.SMTPPassword, validation.Length(0, 255)),
+		validation.Field(&e.SMTPUsername, validation.Length(0, 255)),
 	)
 }
 
@@ -191,4 +230,13 @@ func Load() (err error) {
 	Values.Scheduler.CronApp.Start()
 
 	return
+}
+
+// GetCurrentDir gets the current directory for all operating systems
+func GetCurrentDir() string {
+	// Get the current path
+	_, path, _, _ := runtime.Caller(1)
+
+	// Return the file path
+	return filepath.Dir(path)
 }
