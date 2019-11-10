@@ -270,6 +270,8 @@ func (p *Params) GetIntSliceOk(key string) ([]int, bool) {
 			for i, k := range raw {
 				if num, err := strconv.ParseInt(k, 10, 64); err == nil {
 					slice[i] = int(num)
+				} else {
+					return slice, false
 				}
 			}
 			return slice, true
@@ -280,6 +282,8 @@ func (p *Params) GetIntSliceOk(key string) ([]int, bool) {
 				for i, k := range raw {
 					if num, err := strconv.ParseInt(k, 10, 64); err == nil {
 						slice[i] = int(num)
+					} else {
+						return slice, false
 					}
 				}
 				return slice, true
@@ -288,13 +292,15 @@ func (p *Params) GetIntSliceOk(key string) ([]int, bool) {
 			raw := val.([]interface{})
 			slice := make([]int, len(raw))
 			for i, k := range raw {
-				if num, ok := k.(int); ok {
+				if num, found := k.(int); found {
 					slice[i] = num
-				} else if num, ok := k.(float64); ok {
+				} else if num, found := k.(float64); found {
 					slice[i] = int(num)
-				} else if num, ok := k.(string); ok {
+				} else if num, found := k.(string); found {
 					if parsed, err := strconv.ParseInt(num, 10, 64); err == nil {
 						slice[i] = int(parsed)
+					} else {
+						return slice, false
 					}
 				}
 			}
@@ -555,10 +561,8 @@ func (p *Params) Imbue(obj interface{}) {
 		// Get the type and bool if found
 		fieldType, found := typeOfObject.FieldByName(key)
 
-		// Did we get a parameter that is not our object?
+		// Skip parameter if not found on struct
 		if !found {
-			// Error or log
-			log.Println("attempted to set missing param k:", k, "and key as:", key)
 			continue
 		}
 
