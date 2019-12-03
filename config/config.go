@@ -35,7 +35,7 @@ func (s SchedulerConfig) AddJob(name, spec string, cmd func()) (err error) {
 	}
 
 	// Add the cron job
-	_, err = s.CronApp.AddFunc(spec, cmd)
+	err = s.CronApp.AddFunc(spec, cmd)
 	if err != nil {
 		err = fmt.Errorf("error creating cron job %s spec: %s error: %s", name, spec, err.Error())
 		logger.Data(2, logger.ERROR, err.Error())
@@ -188,7 +188,7 @@ func Load() (err error) {
 	}
 
 	// Load configuration from json based on the environment
-	viper.SetConfigFile("./config/" + environment + ".json")
+	viper.SetConfigFile(GetCurrentDir() + "/" + environment + ".json")
 
 	// Set a replacer for replacing double underscore with nested period
 	replacer := strings.NewReplacer(".", "__")

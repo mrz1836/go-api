@@ -25,7 +25,7 @@
 - [MySQL](https://www.mysql.com/) or [MariaDB](https://mariadb.org/) with no password set
 - [Redis](https://redis.io/)
 
-1) **go-api** requires a [supported release of Go](https://golang.org/doc/devel/release.html#policy) and [dep](https://github.com/golang/dep).
+1) **go-api** requires a [supported release of Go](https://golang.org/doc/devel/release.html#policy).
 ```bash
 $ go get -u github.com/mrz1836/go-api
 $ go get -u github.com/pressly/goose/cmd/goose
@@ -56,14 +56,6 @@ Test your connection to **go-api**
 $ curl -X GET 'http://localhost:3000'
 
   Welcome to the Go API!
-```
-
-### Managing Dependencies
-
-Updating dependencies in **go-api**:
-```bash
-$ cd ../go-api
-$ dep ensure -update -v
 ```
 
 ### Managing Environment Variables
