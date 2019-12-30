@@ -1,6 +1,7 @@
 # go-api
 **go-api** is a simple example API with support for common implementations
 
+[![Go](https://img.shields.io/github/go-mod/go-version/mrz1836/go-api)](https://golang.org/)
 [![Build Status](https://travis-ci.com/mrz1836/go-api.svg?branch=master)](https://travis-ci.com/mrz1836/go-api)
 [![Report](https://goreportcard.com/badge/github.com/mrz1836/go-api?style=flat&v=1)](https://goreportcard.com/report/github.com/mrz1836/go-api)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/b6c2832dee5442c7a79b482114100814)](https://www.codacy.com/app/mrz1818/go-api?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=mrz1836/go-api&amp;utm_campaign=Badge_Grade)
