@@ -150,7 +150,9 @@ View the [examples](examples/examples.go)
 
 ## Maintainers
 
-[@MrZ](https://github.com/mrz1836)
+| [<img src="https://github.com/mrz1836.png" height="50" alt="MrZ" />](https://github.com/mrz1836) |
+|:---:|
+| [MrZ](https://github.com/mrz1836) |
 
 ## Contributing
 
