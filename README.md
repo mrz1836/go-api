@@ -115,7 +115,7 @@ You can view the generated [documentation here](https://godoc.org/github.com/mrz
 - Powerful and easy emailing with support for [Postmark](https://postmarkapp.com), [Mandrill](https://mandrillapp.com), [AWS SES](https://aws.amazon.com/ses/) and [SMTP](https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol)
 
 ## Examples & Tests
-All unit tests and [examples](examples/examples.go) run via [Travis CI](https://travis-ci.com/mrz1836/go-api) and uses [Go version 1.13.x](https://golang.org/doc/go1.13). View the [deployment configuration file](.travis.yml).
+All unit tests and [examples](examples/examples.go) run via [Travis CI](https://travis-ci.com/mrz1836/go-api) and uses [Go version 1.14.x](https://golang.org/doc/go1.14). View the [deployment configuration file](.travis.yml).
 
 Run all tests (including integration tests)
 ```bash
