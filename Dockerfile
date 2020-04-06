@@ -1,5 +1,5 @@
 # Get Golang
-FROM golang:1.14-alpine
+FROM golang:1.14.1-alpine
 
 # Version
 LABEL version="1.1" name="Go API Example"
@@ -20,8 +20,8 @@ EXPOSE $API_SERVER_PORT
 COPY . /go/src/github.com/mrz1836/go-api
 
 # Compile and build / Move the go application to the right path (/bin/) (hack)
-RUN go build -i cmd/application/main.go && \
-    go build cmd/application/main.go && \
+RUN go build -i cmd/service/main.go && \
+    go build cmd/service/main.go && \
     mv main /go/bin/
 
 # Run the application
