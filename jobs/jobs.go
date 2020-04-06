@@ -27,7 +27,7 @@ func RunExampleJob(runNow bool, andEveryXMinutes int) {
 	if runNow {
 		exampleJob()
 	}
-	err := config.Values.Scheduler.AddJob("example-job", fmt.Sprintf("@every %dm", andEveryXMinutes), exampleJob)
+	_, err := config.Values.Scheduler.AddJob("example-job", fmt.Sprintf("@every %dm", andEveryXMinutes), exampleJob)
 	if err != nil {
 		logger.Data(2, logger.ERROR, "error adding job: RunExampleJob: "+err.Error())
 	}
