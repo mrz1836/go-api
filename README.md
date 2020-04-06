@@ -86,16 +86,16 @@ $ . scripts/setup_db.sh && . scripts/flush_redis.sh
 ```
 
 ### Package Dependencies
+- [cron](https://github.com/robfig/cron/v3) - Run cron jobs with ease
 - [go-api-router](https://github.com/mrz1836/go-api-router) - Fast and lightweight router
 - [go-cache](https://github.com/mrz1836/go-cache) - Redis caching made easy
 - [go-logger](https://github.com/mrz1836/go-logger) - Local or remote logging
+- [go-mail](https://github.com/mrz1836/go-mail) - Email using multiple providers
 - [go-sanitize](https://github.com/mrz1836/go-sanitize) - Clean data effortlessly
-- [go-mail](https://github.com/mrz1836/go-mail) - Email via multiple providers
 - [goose](https://github.com/pressly/goose) - Database migration
 - [ozzo-validation](https://github.com/go-ozzo/ozzo-validation) - Extensible data validation
-- [viper](https://github.com/spf13/viper) - Go configuration with fangs
 - [SQLBoiler](https://github.com/volatiletech/sqlboiler) - Powerful database ORM & model generation
-- [cron](github.com/robfig/cron) - Scheduler to run cron jobs and task
+- [viper](https://github.com/spf13/viper) - Go configuration with fangs
 
 ## Documentation
 You can view the generated [documentation here](https://godoc.org/github.com/mrz1836/go-api).
