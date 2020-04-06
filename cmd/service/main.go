@@ -1,4 +1,6 @@
-// Package main is the main application
+/*
+Package main is the core service layer for loading the specific service
+*/
 package main
 
 import (
@@ -15,7 +17,7 @@ import (
 	"github.com/volatiletech/sqlboiler/boil"
 )
 
-// main application method
+// main method starts everything for our service
 func main() {
 
 	var err error
@@ -26,8 +28,8 @@ func main() {
 	}
 
 	// Load the services and connections
-	if err = loadApplication(); err != nil {
-		logger.Fatalln("fatal error loading api:", err.Error())
+	if err = loadService(); err != nil {
+		logger.Fatalln("fatal error loading api service:", err.Error())
 	}
 
 	// Defer any connections
@@ -43,29 +45,34 @@ func main() {
 	}()
 
 	// Load the server
-	logger.Data(2, logger.DEBUG, "starting Go "+config.Values.ApplicationMode+" server...", logger.MakeParameter("port", config.Values.ServerPort))
-	logger.Fatalln(http.ListenAndServe(":"+config.Values.ServerPort, router.Handlers()))
+	logger.Data(2, logger.DEBUG, "starting Go "+config.Values.ServiceMode+" server...", logger.MakeParameter("port", config.Values.ServerPort))
+	srv := &http.Server{
+		Addr:         ":" + config.Values.ServerPort,
+		Handler:      router.Handlers(),
+		ReadTimeout:  config.HTTPRequestReadTimeout,
+		WriteTimeout: config.HTTPRequestWriteTimeout,
+	}
+	logger.Fatalln(srv.ListenAndServe())
 }
 
-// loadApplication loads all the required services and connections
-func loadApplication() (err error) {
+// loadService loads all the required services and connections
+func loadService() (err error) {
 
 	// Check the environment and use caching if set
 	if len(config.Values.Cache.URL) > 0 {
 
 		// Attempt to connect to the cache (redis)
-		err = cache.Connect(
+		if err = cache.Connect(
 			config.Values.Cache.URL,
 			config.Values.Cache.MaxActiveConnections,
 			config.Values.Cache.MaxIdleConnections,
 			config.Values.Cache.MaxConnectionLifetime,
 			config.Values.Cache.MaxIdleTimeout,
-			false,
-			redis.DialUseTLS(true),
-		)
-		if err != nil {
+			config.Values.Cache.DependencyMode,
+			redis.DialUseTLS(config.Values.Cache.UseTLS),
+		); err != nil {
 			logger.Data(2, logger.ERROR, "failed to enable cache: "+err.Error()+" - cache is disabled", logger.MakeParameter("url", config.Values.Cache.URL))
-			//return
+			// return
 		} else {
 			config.Values.CacheEnabled = true
 			logger.Data(2, logger.INFO, "cache enabled at: "+config.Values.Cache.URL)
@@ -87,14 +94,12 @@ func loadApplication() (err error) {
 	})
 
 	// Open the connections
-	err = database.OpenConnection()
-	if err != nil {
+	if err = database.OpenConnection(); err != nil {
 		return
 	}
 
 	// Load notifications
-	err = notifications.StartUp()
-	if err != nil {
+	if err = notifications.StartUp(); err != nil {
 		return
 	}
 

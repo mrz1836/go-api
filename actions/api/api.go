@@ -1,12 +1,12 @@
-// Package baseapi is all the base requests and router configuration
-package baseapi
+// Package api is all the base requests and router configuration
+package api
 
 import (
 	"fmt"
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
-	"github.com/mrz1836/go-api-router"
+	apirouter "github.com/mrz1836/go-api-router"
 	"github.com/mrz1836/go-api/config"
 	"github.com/mrz1836/go-api/jobs"
 	"github.com/mrz1836/go-logger"
@@ -44,7 +44,7 @@ func loadService() (err error) {
 	jobs.RunExampleJob(true, 5)
 
 	// Done!
-	logger.Data(2, logger.DEBUG, config.ApplicationModeAPI+" dependencies loaded!")
+	logger.Data(2, logger.DEBUG, config.ServiceModeAPI+" dependencies loaded!")
 	return
 }
 
@@ -61,7 +61,7 @@ func health(w http.ResponseWriter, _ *http.Request, _ httprouter.Params) {
 
 // notFound handles all 404 requests
 func notFound(w http.ResponseWriter, req *http.Request) {
-	//w.Header().Set("Content-Type", "text/plain; charset=utf-8")
+	// w.Header().Set("Content-Type", "text/plain; charset=utf-8")
 	apiError := apirouter.ErrorFromRequest(req, fmt.Sprintf("404 occurred: %s", req.RequestURI), "Whoops - this request is not recognized", http.StatusNotFound, "")
 	apirouter.ReturnResponse(w, req, apiError.Code, apiError)
 	return
