@@ -3,8 +3,8 @@ package router
 
 import (
 	"github.com/julienschmidt/httprouter"
-	"github.com/mrz1836/go-api-router"
-	"github.com/mrz1836/go-api/actions/base_api"
+	apirouter "github.com/mrz1836/go-api-router"
+	"github.com/mrz1836/go-api/actions/api"
 	"github.com/mrz1836/go-api/actions/persons"
 	"github.com/mrz1836/go-api/config"
 )
@@ -15,24 +15,27 @@ func Handlers() *httprouter.Router {
 	// Create a new router
 	r := apirouter.New()
 
-	// Based on application mode
-	if config.Values.ApplicationMode == config.ApplicationModeAPI {
-		r.CrossOriginAllowOriginAll = false
-		r.CrossOriginAllowOrigin = "*"
+	// Based on service mode
+	if config.Values.ServiceMode == config.ServiceModeAPI {
+		// r.CrossOriginAllowOriginAll = false
+		// r.CrossOriginAllowOrigin = "*"
+
+		// This is used for the "Origin" to be returned as the origin
+		r.CrossOriginAllowOriginAll = true
 
 		// Create a middleware stack:
-		//s := apirouter.NewStack()
+		// s := apirouter.NewStack()
 
 		// Use your middleware:
-		//s.Use(passThrough)
+		// s.Use(passThrough)
 
-		baseapi.RegisterRoutes(r)
+		api.RegisterRoutes(r)
 		persons.RegisterRoutes(r)
 
 	} else {
 
 		// Another service
-		//baseAnotherService.RegisterRoutes(r)
+		// baseAnotherService.RegisterRoutes(r)
 	}
 
 	// Return the router
