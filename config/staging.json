@@ -9,6 +9,7 @@
     "password": "replaceThisPassword567"
   },
   "cache": {
+    "dependency_mode": true,
     "max_active_connections": 0,
     "max_connection_lifetime": 60,
     "max_idle_connections": 10,

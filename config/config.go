@@ -9,10 +9,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/go-ozzo/ozzo-validation"
+	"github.com/OrlovEvgeny/go-mcache"
+	validation "github.com/go-ozzo/ozzo-validation"
 	"github.com/go-ozzo/ozzo-validation/is"
 	"github.com/mrz1836/go-logger"
-	"github.com/robfig/cron"
+	"github.com/robfig/cron/v3"
 	"github.com/spf13/viper"
 )
 
@@ -24,8 +25,8 @@ type SchedulerConfig struct {
 	CronApp *cron.Cron
 }
 
-// AddJob adds a new cron job
-func (s SchedulerConfig) AddJob(name, spec string, cmd func()) (err error) {
+// AddJob adds a new cron job and returns the entry ID
+func (s SchedulerConfig) AddJob(name, spec string, cmd func()) (entryID cron.EntryID, err error) {
 
 	// No name or spec?
 	if spec == "" || name == "" {
@@ -35,31 +36,38 @@ func (s SchedulerConfig) AddJob(name, spec string, cmd func()) (err error) {
 	}
 
 	// Add the cron job
-	err = s.CronApp.AddFunc(spec, cmd)
+	entryID, err = s.CronApp.AddFunc(spec, cmd)
 	if err != nil {
 		err = fmt.Errorf("error creating cron job %s spec: %s error: %s", name, spec, err.Error())
 		logger.Data(2, logger.ERROR, err.Error())
 	} else {
-		logger.Data(2, logger.DEBUG, name+" cron job added successfully, spec: "+spec)
+		logger.Data(2, logger.DEBUG, fmt.Sprintf("%s cron job added successfully, spec: [%s] entryID: [%d]", name, spec, entryID))
 	}
 
 	return
 }
 
+// RemoveJob will remove a cron job by entryID (int)
+func (s SchedulerConfig) RemoveJob(entryID cron.EntryID) (err error) {
+	s.CronApp.Remove(entryID)
+	return
+}
+
 // Config constants used for optimization and value testing
 const (
-	ApplicationModeAPI       = "api"
 	DatabaseDefaultTxTimeout = 15 * time.Second
 	EnvironmentDevelopment   = "development"
 	EnvironmentKey           = "API_ENVIRONMENT"
 	EnvironmentProduction    = "production"
 	EnvironmentStaging       = "staging"
 	HealthRequestPath        = "health"
+	HTTPRequestReadTimeout   = 15 * time.Second
+	HTTPRequestWriteTimeout  = 15 * time.Second
+	ServiceModeAPI           = "api"
 )
 
 // appConfig is the configuration values and associated env vars
 type appConfig struct {
-	ApplicationMode   string          `json:"application_mode" mapstructure:"application_mode"`
 	BasicAuth         basicAuthConfig `json:"basic_auth" mapstructure:"basic_auth"`
 	Cache             cacheConfig     `json:"cache" mapstructure:"cache"`
 	CacheEnabled      bool            `json:"-" mapstructure:"-"`
@@ -70,19 +78,21 @@ type appConfig struct {
 	Environment       string          `json:"environment" mapstructure:"environment"`
 	Scheduler         SchedulerConfig `json:"-" mapstructure:"-"`
 	ServerPort        string          `json:"server_port" mapstructure:"server_port"`
+	ServiceMode       string          `json:"service_mode" mapstructure:"service_mode"`
 	UnauthorizedError string          `json:"unauthorized_error" mapstructure:"unauthorized_error"`
 }
 
 // Validate checks the configuration for specific rules
-func (c appConfig) Validate() error {
-	return validation.ValidateStruct(&c,
-		validation.Field(&c.BasicAuth),     // Runs validations on the child struct level
-		validation.Field(&c.Cache),         // Runs validations on the child struct level
-		validation.Field(&c.DatabaseRead),  // Runs validations on the child struct level
-		validation.Field(&c.DatabaseWrite), // Runs validations on the child struct level
-		validation.Field(&c.Environment, validation.Required, validation.In(EnvironmentDevelopment, EnvironmentStaging, EnvironmentProduction)),
-		validation.Field(&c.ServerPort, validation.Required, is.Digit, validation.Length(2, 6)),
-		validation.Field(&c.UnauthorizedError, validation.Required, validation.Length(2, 0)),
+func (a appConfig) Validate() error {
+	return validation.ValidateStruct(&a,
+		validation.Field(&a.BasicAuth),     // Runs validations on the child struct level
+		validation.Field(&a.Cache),         // Runs validations on the child struct level
+		validation.Field(&a.DatabaseRead),  // Runs validations on the child struct level
+		validation.Field(&a.DatabaseWrite), // Runs validations on the child struct level
+		validation.Field(&a.Environment, validation.Required, validation.In(EnvironmentDevelopment, EnvironmentStaging, EnvironmentProduction)),
+		validation.Field(&a.ServerPort, validation.Required, is.Digit, validation.Length(2, 6)),
+		validation.Field(&a.ServiceMode, validation.Required, validation.In(ServiceModeAPI)),
+		validation.Field(&a.UnauthorizedError, validation.Required, validation.Length(2, 0)),
 	)
 }
 
@@ -112,14 +122,17 @@ func (d databaseConfig) Validate() error {
 }
 
 // cacheConfig is a configuration for a Redis connection
+// Most of theses variables are for "redis" configuration
+// MemStore is an internal storage mechanism for the local instance only
 type cacheConfig struct {
-	DependencyMode        bool   `json:"dependency_mode" mapstructure:"dependency_mode"`                 // false for digital ocean (not supported)
-	MaxActiveConnections  int    `json:"max_active_connections" mapstructure:"max_active_connections"`   // 0
-	MaxConnectionLifetime int    `json:"max_connection_lifetime" mapstructure:"max_connection_lifetime"` // 0
-	MaxIdleConnections    int    `json:"max_idle_connections" mapstructure:"max_idle_connections"`       // 10
-	MaxIdleTimeout        int    `json:"max_idle_timeout" mapstructure:"max_idle_timeout"`               // 240
-	URL                   string `json:"url" mapstructure:"url"`                                         // redis://localhost:6379
-	UseTLS                bool   `json:"use_tls" mapstructure:"use_tls"`                                 // true for digital ocean (required)
+	DependencyMode        bool                `json:"dependency_mode" mapstructure:"dependency_mode"`                 // false for digital ocean (not supported)
+	MaxActiveConnections  int                 `json:"max_active_connections" mapstructure:"max_active_connections"`   // 0
+	MaxConnectionLifetime int                 `json:"max_connection_lifetime" mapstructure:"max_connection_lifetime"` // 0
+	MaxIdleConnections    int                 `json:"max_idle_connections" mapstructure:"max_idle_connections"`       // 10
+	MaxIdleTimeout        int                 `json:"max_idle_timeout" mapstructure:"max_idle_timeout"`               // 240
+	MemStore              *mcache.CacheDriver `json:"-" mapstructure:"-"`                                             // In-memory store (local box only)
+	URL                   string              `json:"url" mapstructure:"url"`                                         // redis://localhost:6379
+	UseTLS                bool                `json:"use_tls" mapstructure:"use_tls"`                                 // true for digital ocean (required)
 }
 
 // Validate checks the configuration for specific rules
@@ -195,7 +208,7 @@ func Load() (err error) {
 	viper.SetEnvKeyReplacer(replacer)
 
 	// Set the prefix
-	viper.SetEnvPrefix(ApplicationModeAPI)
+	viper.SetEnvPrefix(ServiceModeAPI)
 
 	// Use env vars
 	viper.AutomaticEnv()
@@ -219,15 +232,19 @@ func Load() (err error) {
 		logger.Data(2, logger.ERROR, fmt.Sprintf("error in %s configuration validation: %s", environment, err.Error()))
 	}
 
-	// Check application mode
-	if Values.ApplicationMode != ApplicationModeAPI {
-		logger.Data(2, logger.ERROR, "invalid value for application mode")
+	// Check service mode
+	if Values.ServiceMode != ServiceModeAPI {
+		logger.Data(2, logger.ERROR, "invalid value for service mode")
 		logger.Fatalln("exiting...")
 	}
 
 	// Load the scheduler and start
 	Values.Scheduler.CronApp = cron.New()
 	Values.Scheduler.CronApp.Start()
+
+	// Load the in-memory cache store
+	// Used for storing values in local memory (with TTL)
+	Values.Cache.MemStore = mcache.New()
 
 	return
 }
