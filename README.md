@@ -1,13 +1,11 @@
 # go-api
-**go-api** is a simple example API with support for common implementations
+> **go-api** is a simple example API with support for common implementations
 
 [![Go](https://img.shields.io/github/go-mod/go-version/mrz1836/go-api)](https://golang.org/)
 [![Build Status](https://travis-ci.com/mrz1836/go-api.svg?branch=master)](https://travis-ci.com/mrz1836/go-api)
 [![Report](https://goreportcard.com/badge/github.com/mrz1836/go-api?style=flat&v=1)](https://goreportcard.com/report/github.com/mrz1836/go-api)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/b6c2832dee5442c7a79b482114100814)](https://www.codacy.com/app/mrz1818/go-api?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=mrz1836/go-api&amp;utm_campaign=Badge_Grade)
 [![Release](https://img.shields.io/github/release-pre/mrz1836/go-api.svg?style=flat&v=1)](https://github.com/mrz1836/go-api/releases)
-[![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat)](https://github.com/RichardLitt/standard-readme)
-[![GoDoc](https://godoc.org/github.com/mrz1836/go-api?status.svg&style=flat)](https://godoc.org/github.com/mrz1836/go-api)
+[![GoDoc](https://godoc.org/github.com/mrz1836/go-api?status.svg&style=flat)](https://pkg.go.dev/github.com/mrz1836/go-api)
 
 ## Table of Contents
 - [Installation](#installation)
@@ -23,7 +21,7 @@
 ## Installation
 
 ### Prerequisite Applications:
-- [MySQL](https://www.mysql.com/) or [MariaDB](https://mariadb.org/) with no password set
+- [MySQL](https://www.mysql.com/) with no password set
 - [Redis](https://redis.io/)
 
 1) **go-api** requires a [supported release of Go](https://golang.org/doc/devel/release.html#policy).
@@ -59,46 +57,8 @@ $ curl -X GET 'http://localhost:3000'
   Welcome to the Go API!
 ```
 
-### Managing Environment Variables
-All environment variables are referenced in the [config](config/config.go).
-
-Edit the [`scripts/set_env.sh`](scripts/set_env.sh) file and modify the environment variables - IE:
-```bash
-export API_SERVER_PORT=3000
-```
-
-### Managing Model Generation
-
-Update the `reset_api_database.sql` if you have issues running the model tests
-```sql
-GRANT ALL ON `dynamic-database-name-generated-from-sql-boiler`.* to 'apiDbTestUser'@'%';
-```
-
-Rebuilding the generated models/schema from the database schema:
-```bash
-$ cd ../go-api
-$ . scripts/rebuild_models.sh
-```
-
-Clear local redis and reload the database
-```bash
-$ . scripts/setup_db.sh && . scripts/flush_redis.sh
-```
-
-### Package Dependencies
-- [cron](https://github.com/robfig/cron/v3) - Run cron jobs with ease
-- [go-api-router](https://github.com/mrz1836/go-api-router) - Fast and lightweight router
-- [go-cache](https://github.com/mrz1836/go-cache) - Redis caching made easy
-- [go-logger](https://github.com/mrz1836/go-logger) - Local or remote logging
-- [go-mail](https://github.com/mrz1836/go-mail) - Email using multiple providers
-- [go-sanitize](https://github.com/mrz1836/go-sanitize) - Clean data effortlessly
-- [goose](https://github.com/pressly/goose) - Database migration
-- [ozzo-validation](https://github.com/go-ozzo/ozzo-validation) - Extensible data validation
-- [SQLBoiler](https://github.com/volatiletech/sqlboiler) - Powerful database ORM & model generation
-- [viper](https://github.com/spf13/viper) - Go configuration with fangs
-
 ## Documentation
-You can view the generated [documentation here](https://godoc.org/github.com/mrz1836/go-api).
+You can view the generated [documentation here](https://pkg.go.dev/github.com/mrz1836/go-api).
 
 ### Features
 - Combination of powerful Go packages all-in-one API solution
@@ -114,39 +74,119 @@ You can view the generated [documentation here](https://godoc.org/github.com/mrz
 - Built-in scheduler for any cron jobs or delayed tasks
 - Powerful and easy emailing with support for [Postmark](https://postmarkapp.com), [Mandrill](https://mandrillapp.com), [AWS SES](https://aws.amazon.com/ses/) and [SMTP](https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol)
 
+<details>
+<summary><strong><code>Package Dependencies</code></strong></summary>
+
+- [cron](https://github.com/robfig/cron/v3) - Run cron jobs with ease
+- [go-api-router](https://github.com/mrz1836/go-api-router) - Fast and lightweight router
+- [go-cache](https://github.com/mrz1836/go-cache) - Redis caching made easy
+- [go-logger](https://github.com/mrz1836/go-logger) - Local or remote logging
+- [go-mail](https://github.com/mrz1836/go-mail) - Email using multiple providers
+- [go-sanitize](https://github.com/mrz1836/go-sanitize) - Clean data effortlessly
+- [goose](https://github.com/pressly/goose) - Database migration
+- [ozzo-validation](https://github.com/go-ozzo/ozzo-validation) - Extensible data validation
+- [SQLBoiler](https://github.com/volatiletech/sqlboiler) - Powerful database ORM & model generation
+- [viper](https://github.com/spf13/viper) - Go configuration with fangs
+</details>
+
+<details>
+<summary><strong><code>Library Deployment</code></strong></summary>
+
+[goreleaser](https://github.com/goreleaser/goreleaser) for easy binary or library deployment to Github and can be installed via: `brew install goreleaser`.
+
+The [.goreleaser.yml](.goreleaser.yml) file is used to configure [goreleaser](https://github.com/goreleaser/goreleaser).
+
+Use `make release-snap` to create a snapshot version of the release, and finally `make release` to ship to production.
+</details>
+
+<details>
+<summary><strong><code>Makefile Commands</code></strong></summary>
+
+View all `makefile` commands
+```bash
+$ make help
+```
+
+List of all current commands:
+```text
+bench                          Run all benchmarks in the Go application
+clean                          Remove previous builds and any test cache data
+clean-mods                     Remove all the Go mod cache
+coverage                       Shows the test coverage
+godocs                         Sync the latest tag with GoDocs
+help                           Show all make commands available
+lint                           Run the Go lint application
+release                        Full production release (creates release in Github)
+release-test                   Full production test release (everything except deploy)
+release-snap                   Test the full release (build binaries)
+run-examples                   Runs all the examples
+tag                            Generate a new tag and push (IE: make tag version=0.0.0)
+tag-remove                     Remove a tag if found (IE: make tag-remove version=0.0.0)
+tag-update                     Update an existing tag to current commit (IE: make tag-update version=0.0.0)
+test                           Runs vet, lint and ALL tests
+test-short                     Runs vet, lint and tests (excludes integration tests)
+update                         Update all project dependencies
+update-releaser                Update the goreleaser application
+vet                            Run the Go vet application
+```
+</details>
+
+<details>
+<summary><strong><code>Model Generation</code></strong></summary>
+
+Update the `reset_api_database.sql` if you have issues running the model tests
+```sql
+GRANT ALL ON `dynamic-database-name-generated-from-sql-boiler`.* to 'apiDbTestUser'@'%';
+```
+
+Rebuilding the generated models/schema from the database schema:
+```bash
+$ cd ../go-api
+$ . scripts/rebuild_models.sh
+```
+
+Clear local redis and reload the database
+```bash
+$ . scripts/setup_db.sh
+$ . scripts/flush_redis.sh
+```
+</details>
+
+<details>
+<summary><strong><code>Environment Variables</code></strong></summary>
+
+All environment variables are referenced in the [config](config/config.go).
+
+Edit the [`scripts/set_env.sh`](scripts/set_env.sh) file and modify the environment variables - IE:
+```bash
+export API_SERVER_PORT=3000
+```
+</details>
+
 ## Examples & Tests
-All unit tests and [examples](examples/examples.go) run via [Travis CI](https://travis-ci.com/mrz1836/go-api) and uses [Go version 1.14.x](https://golang.org/doc/go1.14). View the [deployment configuration file](.travis.yml).
+All unit tests run via [Travis CI](https://travis-ci.com/mrz1836/go-api) and uses [Go version 1.14.x](https://golang.org/doc/go1.14). View the [deployment configuration file](.travis.yml).
 
 Run all tests (including integration tests)
 ```bash
-$ cd ../go-api
-$ go test ./... -v
+$ make test
 ```
 
 Run tests (excluding integration tests)
 ```bash
-$ cd ../go-api
-$ go test ./... -v -test.short
-```
-
-View and run the examples:
-```bash
-$ cd ../go-api/examples
-$ go run examples.go
+$ make test-short
 ```
 
 ## Benchmarks
 Run the Go benchmarks:
 ```bash
-$ cd ../go-api
-$ go test -bench . -benchmem
+$ make bench
 ```
 
 ## Code Standards
 Read more about this Go project's [code standards](CODE_STANDARDS.md).
 
 ## Usage
-View the [examples](examples/examples.go)
+(Coming soon: Examples!)
 
 ## Maintainers
 
