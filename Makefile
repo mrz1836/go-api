@@ -76,6 +76,9 @@ release-test: ## Full production test release (everything except deploy)
 release-snap: ## Test the full release (build binaries)
 	goreleaser --snapshot --skip-publish --rm-dist
 
+run: ## Runs the application
+	go run cmd/application/main.go
+
 run-examples: ## Runs all the examples
 	go run examples/examples.go
 

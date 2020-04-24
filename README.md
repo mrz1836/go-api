@@ -20,24 +20,22 @@
 
 ## Installation
 
-### Prerequisite Applications:
-- [MySQL](https://www.mysql.com/) with no password set
-- [Redis](https://redis.io/)
+**Prerequisite Applications:** Install [Redis](https://redis.io/) and [MySQL](https://www.mysql.com/) with no password set 
 
-1) **go-api** requires a [supported release of Go](https://golang.org/doc/devel/release.html#policy).
+**1)** **go-api** requires a [supported release of Go](https://golang.org/doc/devel/release.html#policy)
 ```bash
 $ go get -u github.com/mrz1836/go-api
 $ make install
 ```
 
-2) Run the API!
+**2)** Run the API
 ```bash
-$ go run cmd/application/main.go
+$ make run
 
     starting Go API server...
 ```
 
-Test your connection to **go-api**
+_Test your connection to the api_
 ```bash
 $ curl -X GET 'http://localhost:3000'
 
@@ -100,9 +98,14 @@ bench                          Run all benchmarks in the Go application
 clean                          Remove previous builds and any test cache data
 clean-mods                     Remove all the Go mod cache
 coverage                       Shows the test coverage
+db                             Creates a fresh database
+env                            Creates a fresh database
 godocs                         Sync the latest tag with GoDocs
+flush-redis                    Wipe out all data in redis
 help                           Show all make commands available
+install                        Run the Custom installation
 lint                           Run the Go lint application
+schema                         Run the Model/schema generation
 release                        Full production release (creates release in Github)
 release-test                   Full production test release (everything except deploy)
 release-snap                   Test the full release (build binaries)
