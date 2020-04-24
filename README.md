@@ -27,23 +27,10 @@
 1) **go-api** requires a [supported release of Go](https://golang.org/doc/devel/release.html#policy).
 ```bash
 $ go get -u github.com/mrz1836/go-api
-$ go get -u github.com/pressly/goose/cmd/goose
-$ go get -u -t github.com/volatiletech/sqlboiler
-$ go get -u github.com/volatiletech/sqlboiler/drivers/sqlboiler-mysql
+$ make install
 ```
 
-2) Set your environment variables (or add to your bash profile):
-```bash
-$ cd ../go-api
-$ . scripts/set_env.sh
-```
-
-3) Setup a fresh database (if you don't have one already)
-```bash
-$ . scripts/setup_db.sh
-```
-
-4) Run the API!
+2) Run the API!
 ```bash
 $ go run cmd/application/main.go
 
@@ -141,14 +128,13 @@ GRANT ALL ON `dynamic-database-name-generated-from-sql-boiler`.* to 'apiDbTestUs
 
 Rebuilding the generated models/schema from the database schema:
 ```bash
-$ cd ../go-api
-$ . scripts/rebuild_models.sh
+$ make schema
 ```
 
 Clear local redis and reload the database
 ```bash
-$ . scripts/setup_db.sh
-$ . scripts/flush_redis.sh
+$ make db
+$ make flush-redis
 ```
 </details>
 
