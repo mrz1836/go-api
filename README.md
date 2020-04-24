@@ -20,9 +20,7 @@
 
 ## Installation
 
-**Prerequisite Applications:** Install [Redis](https://redis.io/) and [MySQL](https://www.mysql.com/) with no password set 
-
-**1)** **go-api** requires a [supported release of Go](https://golang.org/doc/devel/release.html#policy)
+**1)** **go-api** requires a [supported release of Go](https://golang.org/doc/devel/release.html#policy), [Redis](https://redis.io/) and [MySQL](https://www.mysql.com/) with no password set 
 ```bash
 $ go get -u github.com/mrz1836/go-api
 $ make install
