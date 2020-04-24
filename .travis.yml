@@ -23,6 +23,7 @@ notifications:
 # Services required
 services:
  - redis-server
+ - mysql
 
 # Before we run scripts
 before_script:
