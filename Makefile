@@ -3,15 +3,10 @@ COVER=go tool cover
 ## Default Repo Domain
 GIT_DOMAIN=github.com
 
-## Set the Github Token
-#GITHUB_TOKEN=<your_token>
-
-## Default DB user name
+## Default DB credentials (local)
 DB_NAME=api_example
 DB_USER=apiDbTestUser
 DB_PASSWORD=ThisIsSecureEnough123
-
-## Default DB user's password
 
 ## Automatically detect the repo owner and repo name
 REPO_NAME=$(shell basename `git rev-parse --show-toplevel`)
@@ -67,11 +62,11 @@ schema: ## Run the Model/schema generation
 	sqlboiler mysql --wipe && sed -i "" 's/fmt.Fprintf(tmp, "ssl-mode/\/\/fmt.Fprintf(tmp, "ssl-mode/' models/schema/mysql_main_test.go
 
 release: ## Full production release (creates release in Github)
-	 goreleaser --rm-dist
-	 make godocs
+	goreleaser --rm-dist
+	make godocs
 
 release-test: ## Full production test release (everything except deploy)
-	 goreleaser --skip-publish --rm-dist
+	goreleaser --skip-publish --rm-dist
 
 release-snap: ## Test the full release (build binaries)
 	goreleaser --snapshot --skip-publish --rm-dist
