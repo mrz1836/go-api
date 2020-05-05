@@ -68,6 +68,7 @@ install: ## Run the Custom installation
 	@$(MAKE) db
 
 lint: ## Run the Go lint application
+	@if [ "$(shell command -v golint)" == "" ]; then go get -u golang.org/x/lint/golint; fi
 	@golint
 
 schema: ## Run the Model/schema generation
