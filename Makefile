@@ -49,7 +49,7 @@ db: ## Creates a fresh database
 	@mysql -u root < ./database/reset/reset_api_database.sql && goose -dir "./database/sql" mysql "$(DB_USER):$(DB_PASSWORD)@/$(DB_NAME)?parseTime=true" up
 
 env: ## Creates a fresh database
-	. scripts/set_env.sh
+	@ . scripts/set_env.sh
 
 godocs: ## Sync the latest tag with GoDocs
 	@curl https://proxy.golang.org/$(GIT_DOMAIN)/$(REPO_OWNER)/$(REPO_NAME)/@v/$(VERSION_SHORT).info
@@ -68,7 +68,7 @@ install: ## Run the Custom installation
 	@$(MAKE) db
 
 lint: ## Run the Go lint application
-	@if [ "$(shell command -v golint)" == "" ]; then go get -u golang.org/x/lint/golint; fi
+	@if [ "$(shell command -v golint)" = "" ]; then go get -u golang.org/x/lint/golint; fi
 	@golint
 
 schema: ## Run the Model/schema generation

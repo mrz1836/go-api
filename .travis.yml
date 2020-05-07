@@ -25,12 +25,7 @@ services:
  - redis-server
  - mysql
 
-# Before we run scripts
-before_script:
- - go get -u golang.org/x/lint/golint
-
 # Run scripts in parallel
 script:
- - golint
- - go vet cmd/service/main.go
- #- go test -short -v ./...
+ - make lint
+ - make vet
