@@ -14,7 +14,7 @@ require (
 	github.com/julienschmidt/httprouter v1.3.0
 	github.com/kat-co/vala v0.0.0-20170210184112-42e1d8b61f12
 	github.com/mitchellh/mapstructure v1.3.0 // indirect
-	github.com/mrz1836/go-api-router v0.1.17
+	github.com/mrz1836/go-api-router v0.1.18
 	github.com/mrz1836/go-cache v0.1.6
 	github.com/mrz1836/go-logger v0.1.8
 	github.com/mrz1836/go-mail v0.1.6
@@ -30,7 +30,7 @@ require (
 	github.com/volatiletech/inflect v0.0.1 // indirect
 	github.com/volatiletech/null v8.0.0+incompatible
 	github.com/volatiletech/sqlboiler v3.7.1+incompatible
-	golang.org/x/net v0.0.0-20200501053045-e0ff5e5a1de5 // indirect
+	golang.org/x/net v0.0.0-20200506145744-7e3656a0809f // indirect
 	golang.org/x/sys v0.0.0-20200501145240-bc7a7d42d5c3 // indirect
 	golang.org/x/text v0.3.2 // indirect
 	golang.org/x/xerrors v0.0.0-20191204190536-9bdfabe68543 // indirect
