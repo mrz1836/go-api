@@ -1,11 +1,14 @@
 # go-api
 > Example API with support for common implementations
 
-[![Go](https://img.shields.io/github/go-mod/go-version/mrz1836/go-api)](https://golang.org/)
+[![Release](https://img.shields.io/github/release-pre/mrz1836/go-api.svg?logo=github&style=flat&v=1)](https://github.com/mrz1836/go-api/releases)
 [![Build Status](https://travis-ci.com/mrz1836/go-api.svg?branch=master)](https://travis-ci.com/mrz1836/go-api)
 [![Report](https://goreportcard.com/badge/github.com/mrz1836/go-api?style=flat&v=1)](https://goreportcard.com/report/github.com/mrz1836/go-api)
-[![Release](https://img.shields.io/github/release-pre/mrz1836/go-api.svg?style=flat&v=1)](https://github.com/mrz1836/go-api/releases)
-[![GoDoc](https://godoc.org/github.com/mrz1836/go-api?status.svg&style=flat)](https://pkg.go.dev/github.com/mrz1836/go-api)
+[![Go](https://img.shields.io/github/go-mod/go-version/mrz1836/go-api)](https://golang.org/)
+[![Sponsor](https://img.shields.io/badge/sponsor-MrZ-181717.svg?logo=github&style=flat&v=3)](https://github.com/sponsors/mrz1836)
+[![Donate](https://img.shields.io/badge/donate-bitcoin-ff9900.svg?logo=bitcoin&style=flat)](https://mrz1818.com/?tab=tips&af=go-api)
+
+<br/>
 
 ## Table of Contents
 - [Installation](#installation)
@@ -17,6 +20,8 @@
 - [Maintainers](#maintainers)
 - [Contributing](#contributing)
 - [License](#license)
+
+<br/>
 
 ## Installation
 
@@ -40,8 +45,12 @@ curl -X GET 'http://localhost:3000'
   "Welcome to the Go API!"
 ```
 
+<br/>
+
 ## Documentation
-You can view the generated [documentation here](https://pkg.go.dev/github.com/mrz1836/go-api).
+View the generated [documentation](https://pkg.go.dev/github.com/mrz1836/go-api)
+
+[![GoDoc](https://godoc.org/github.com/mrz1836/go-api?status.svg&style=flat)](https://pkg.go.dev/github.com/mrz1836/go-api)
 
 ### Features
 - Combination of powerful Go packages all-in-one API solution
@@ -152,6 +161,8 @@ export API_SERVER_PORT=3000
 ```
 </details>
 
+<br/>
+
 ## Examples & Tests
 All unit tests run via [Travis CI](https://travis-ci.com/mrz1836/go-api) and uses [Go version 1.14.x](https://golang.org/doc/go1.14). View the [deployment configuration file](.travis.yml).
 
@@ -165,17 +176,25 @@ Run tests (excluding integration tests)
 make test-short
 ```
 
+<br/>
+
 ## Benchmarks
 Run the Go benchmarks:
 ```shell script
 make bench
 ```
 
+<br/>
+
 ## Code Standards
 Read more about this Go project's [code standards](CODE_STANDARDS.md).
 
+<br/>
+
 ## Usage
 (Coming soon: Examples!)
+
+<br/>
 
 ## Maintainers
 
@@ -183,13 +202,18 @@ Read more about this Go project's [code standards](CODE_STANDARDS.md).
 |:---:|
 | [MrZ](https://github.com/mrz1836) |
 
+<br/>
+
 ## Contributing
+View the [contributing guidelines](CONTRIBUTING.md) and please follow the [code of conduct](CODE_OF_CONDUCT.md).
 
-View the [contributing guidelines](CONTRIBUTING.md) and follow the [code of conduct](CODE_OF_CONDUCT.md).
+### How can I help?
+All kinds of contributions are welcome :raised_hands:! 
+The most basic way to show your support is to star :star2: the project, or to raise issues :speech_balloon:. 
+You can also support this project by [becoming a sponsor on GitHub](https://github.com/sponsors/mrz1836) :clap: 
+or by making a [**bitcoin donation**](https://mrz1818.com/?tab=tips&af=go-sanitize) to ensure this journey continues indefinitely! :rocket:
 
-Support the development of this project 🙏
-
-[![Donate](https://img.shields.io/badge/donate-bitcoin-brightgreen.svg)](https://mrz1818.com/?tab=tips&af=go-api)
+<br/>
 
 ## License
 

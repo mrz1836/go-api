@@ -1,31 +1,43 @@
 ## Default database name
 ifndef DB_NAME
-override DB_NAME=api_example
+	override DB_NAME=api_example
 endif
 
 ## Default database user
 ifndef DB_USER
-override DB_USER=apiDbTestUser
+	override DB_USER=apiDbTestUser
 endif
 
 ## Default database password
 ifndef DB_PASSWORD
-override DB_PASSWORD=ThisIsSecureEnough123
+	override DB_PASSWORD=ThisIsSecureEnough123
 endif
 
-## Default Repo Domain
-GIT_DOMAIN=github.com
+## Do we have git available?
+HAS_GIT := $(shell command -v git 2> /dev/null)
 
-## Automatically detect the repo owner and repo name
-REPO_NAME=$(shell basename `git rev-parse --show-toplevel`)
-REPO_OWNER=$(shell git config --get remote.origin.url | sed 's/git@$(GIT_DOMAIN)://g' | sed 's/\/$(REPO_NAME).git//g')
+ifdef HAS_GIT
+	## Automatically detect the repo owner and repo name (for local use with Git)
+	REPO_NAME=$(shell basename `git rev-parse --show-toplevel`)
+	REPO_OWNER=$(shell git config --get remote.origin.url | sed 's/git@$(GIT_DOMAIN)://g' | sed 's/\/$(REPO_NAME).git//g')
 
-## Set the version (for go docs)
-VERSION_SHORT=$(shell git describe --tags --always --abbrev=0)
+	## Set the version (for go docs)
+	VERSION_SHORT=$(shell git describe --tags --always --abbrev=0)
+endif
+
+## Not defined? Use default repo name which is the application
+ifeq ($(REPO_NAME),)
+	REPO_NAME="go-api"
+endif
+
+## Not defined? Use default repo owner
+ifeq ($(REPO_OWNER),)
+	REPO_OWNER="mrz1836"
+endif
 
 ## Set the distribution folder
 ifndef DISTRIBUTIONS_DIR
-override DISTRIBUTIONS_DIR=./dist
+	override DISTRIBUTIONS_DIR=./dist
 endif
 
 .PHONY: test lint clean release
