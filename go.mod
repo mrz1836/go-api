@@ -5,7 +5,6 @@ go 1.14
 require (
 	github.com/DATA-DOG/go-sqlmock v1.4.1 // indirect
 	github.com/OrlovEvgeny/go-mcache v0.0.0-20200121124330-1a8195b34f3a
-	github.com/andybalholm/cascadia v1.2.0 // indirect
 	github.com/asaskevich/govalidator v0.0.0-20200428143746-21a406dcc535 // indirect
 	github.com/friendsofgo/errors v0.9.2
 	github.com/fsnotify/fsnotify v1.4.9 // indirect
@@ -18,7 +17,7 @@ require (
 	github.com/mrz1836/go-api-router v0.1.18
 	github.com/mrz1836/go-cache v0.1.6
 	github.com/mrz1836/go-logger v0.1.8
-	github.com/mrz1836/go-mail v0.1.6
+	github.com/mrz1836/go-mail v0.1.7
 	github.com/mrz1836/go-sanitize v1.0.13
 	github.com/pelletier/go-toml v1.7.0 // indirect
 	github.com/pkg/errors v0.9.1
@@ -31,8 +30,8 @@ require (
 	github.com/volatiletech/inflect v0.0.1 // indirect
 	github.com/volatiletech/null v8.0.0+incompatible
 	github.com/volatiletech/sqlboiler v3.7.1+incompatible
-	golang.org/x/net v0.0.0-20200506145744-7e3656a0809f // indirect
-	golang.org/x/sys v0.0.0-20200509044756-6aff5f38e54f // indirect
+	golang.org/x/sys v0.0.0-20200513112337-417ce2331b5c // indirect
 	golang.org/x/xerrors v0.0.0-20191204190536-9bdfabe68543 // indirect
 	gopkg.in/ini.v1 v1.56.0 // indirect
+	gopkg.in/yaml.v2 v2.3.0 // indirect
 )
