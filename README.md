@@ -68,6 +68,7 @@ View the generated [documentation](https://pkg.go.dev/github.com/mrz1836/go-api)
 
 <details>
 <summary><strong><code>Package Dependencies</code></strong></summary>
+<br/>
 
 - [cron](https://github.com/robfig/cron/v3) - Run cron jobs with ease
 - [go-api-router](https://github.com/mrz1836/go-api-router) - Fast and lightweight router
@@ -83,6 +84,7 @@ View the generated [documentation](https://pkg.go.dev/github.com/mrz1836/go-api)
 
 <details>
 <summary><strong><code>Library Deployment</code></strong></summary>
+<br/>
 
 [goreleaser](https://github.com/goreleaser/goreleaser) for easy binary or library deployment to Github and can be installed via: `brew install goreleaser`.
 
@@ -93,6 +95,7 @@ Use `make release-snap` to create a snapshot version of the release, and finally
 
 <details>
 <summary><strong><code>Makefile Commands</code></strong></summary>
+<br/>
 
 View all `makefile` commands
 ```shell script
@@ -101,37 +104,41 @@ make help
 
 List of all current commands:
 ```text
-all                            Runs lint, test-short and vet
-bench                          Run all benchmarks in the Go application
-clean                          Remove previous builds and any test cache data
-clean-mods                     Remove all the Go mod cache
-coverage                       Shows the test coverage
-db                             Creates a fresh database
-env                            Creates a fresh database
-godocs                         Sync the latest tag with GoDocs
-flush-redis                    Wipe out all data in redis
-help                           Show all make commands available
-install                        Run the Custom installation
-lint                           Run the Go lint application
-schema                         Run the Model/schema generation
-release                        Full production release (creates release in Github)
-release-test                   Full production test release (everything except deploy)
-release-snap                   Test the full release (build binaries)
-run                            Runs the application
-run-examples                   Runs all the examples
-tag                            Generate a new tag and push (IE: tag version=0.0.0)
-tag-remove                     Remove a tag if found (IE: tag-remove version=0.0.0)
-tag-update                     Update an existing tag to current commit (IE: tag-update version=0.0.0)
-test                           Runs vet, lint and ALL tests
-test-short                     Runs vet, lint and tests (excludes integration tests)
-update                         Update all project dependencies
-update-releaser                Update the goreleaser application
-vet                            Run the Go vet application
+all                    Runs multiple commands
+clean                  Remove previous builds and any test cache data
+clean-mods             Remove all the Go mod cache
+coverage               Shows the test coverage
+db                     Creates a fresh database
+env                    Creates a fresh database
+flush-redis            Wipe out all data in redis (requires redli)
+godocs                 Sync the latest tag with GoDocs
+help                   Show this help message
+install                Run the Custom installation
+install-go             Install the application (Using Native Go)
+lint                   Run the Go lint application
+release                Full production release (creates release in Github)
+release                Runs common.release then runs godocs
+release-snap           Test the full release (build binaries)
+release-test           Full production test release (everything except deploy)
+replace-version        Replaces the version in HTML/JS (pre-deploy)
+run                    Runs the application
+run-examples           Runs all the examples
+schema                 Run the Model/schema generation
+tag                    Generate a new tag and push (tag version=0.0.0)
+tag-remove             Remove a tag if found (tag-remove version=0.0.0)
+tag-update             Update an existing tag to current commit (tag-update version=0.0.0)
+test                   Runs vet, lint and ALL tests
+test-short             Runs vet, lint and tests (excludes integration tests)
+test-travis            Runs all tests via Travis (also exports coverage)
+test-travis-short      Runs unit tests via Travis (also exports coverage)
+uninstall              Uninstall the application (and remove files)
+vet                    Run the Go vet application
 ```
 </details>
 
 <details>
 <summary><strong><code>Model Generation</code></strong></summary>
+<br/>
 
 Update the `reset_api_database.sql` if you have issues running the model tests
 ```sql
@@ -152,6 +159,7 @@ make flush-redis
 
 <details>
 <summary><strong><code>Environment Variables</code></strong></summary>
+<br/>
 
 All environment variables are referenced in the [config](config/config.go).
 
@@ -197,7 +205,6 @@ Read more about this Go project's [code standards](CODE_STANDARDS.md).
 <br/>
 
 ## Maintainers
-
 | [<img src="https://github.com/mrz1836.png" height="50" alt="MrZ" />](https://github.com/mrz1836) |
 |:---:|
 | [MrZ](https://github.com/mrz1836) |
