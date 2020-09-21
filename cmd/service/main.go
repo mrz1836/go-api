@@ -14,7 +14,7 @@ import (
 	"github.com/mrz1836/go-api/router"
 	"github.com/mrz1836/go-cache"
 	"github.com/mrz1836/go-logger"
-	"github.com/volatiletech/sqlboiler/boil"
+	"github.com/volatiletech/sqlboiler/v4/boil"
 )
 
 // main method starts everything for our service

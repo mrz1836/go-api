@@ -50,8 +50,8 @@ flush-redis: ## Wipe out all data in redis (requires redli)
 
 install: ## Run the Custom installation
 	@go get -u github.com/pressly/goose/cmd/goose
-	@go get -u -t github.com/volatiletech/sqlboiler
-	@go get -u github.com/volatiletech/sqlboiler/drivers/sqlboiler-mysql
+	@go get -u -t github.com/volatiletech/sqlboiler/v4
+	@go get -u github.com/volatiletech/sqlboiler/v4/drivers/sqlboiler-mysql
 	@$(MAKE) env
 	@$(MAKE) db
 

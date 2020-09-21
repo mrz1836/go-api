@@ -8,7 +8,7 @@ import (
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
-	"github.com/mrz1836/go-api-router"
+	apirouter "github.com/mrz1836/go-api-router"
 	"github.com/mrz1836/go-api/config"
 	"github.com/mrz1836/go-api/database"
 	"github.com/mrz1836/go-api/models"
@@ -40,7 +40,7 @@ func createPerson(w http.ResponseWriter, req *http.Request, _ httprouter.Params)
 
 	// Check missing value
 	if len(person.Email) == 0 {
-		apiError := apirouter.ErrorFromRequest(req, fmt.Sprintf("missing field: %s", schema.PersonColumns.Email), fmt.Sprintf("error creating person - missing field: %s", schema.PersonColumns.Email), http.StatusBadRequest, "")
+		apiError := apirouter.ErrorFromRequest(req, fmt.Sprintf("missing field: %s", schema.PersonColumns.Email), fmt.Sprintf("error creating person - missing field: %s", schema.PersonColumns.Email), http.StatusBadRequest, http.StatusBadRequest, "")
 		apirouter.ReturnResponse(w, req, apiError.Code, apiError)
 		return
 	}
@@ -48,11 +48,11 @@ func createPerson(w http.ResponseWriter, req *http.Request, _ httprouter.Params)
 	// Get existing person?
 	existingPerson, err := models.GetPersonByEmail(person.Email)
 	if err != nil {
-		apiError := apirouter.ErrorFromRequest(req, "error getting existing person", fmt.Sprintf("error getting existing offer: %s", err.Error()), http.StatusExpectationFailed, "")
+		apiError := apirouter.ErrorFromRequest(req, "error getting existing person", fmt.Sprintf("error getting existing offer: %s", err.Error()), http.StatusExpectationFailed, http.StatusExpectationFailed, "")
 		apirouter.ReturnResponse(w, req, apiError.Code, apiError)
 		return
 	} else if existingPerson != nil && existingPerson.IsDeleted.Bool {
-		apiError := apirouter.ErrorFromRequest(req, fmt.Sprintf("person has been deleted: %s", person.Email), "account has been disabled", http.StatusExpectationFailed, "")
+		apiError := apirouter.ErrorFromRequest(req, fmt.Sprintf("person has been deleted: %s", person.Email), "account has been disabled", http.StatusExpectationFailed, http.StatusExpectationFailed, "")
 		apirouter.ReturnResponse(w, req, apiError.Code, apiError)
 		return
 	}
@@ -61,7 +61,7 @@ func createPerson(w http.ResponseWriter, req *http.Request, _ httprouter.Params)
 	var tx *sql.Tx
 	tx, _, err = database.NewTx(config.DatabaseDefaultTxTimeout)
 	if err != nil {
-		apiError := apirouter.ErrorFromRequest(req, fmt.Sprintf("error creating tx: %s", err.Error()), "error creating person", http.StatusExpectationFailed, "")
+		apiError := apirouter.ErrorFromRequest(req, fmt.Sprintf("error creating tx: %s", err.Error()), "error creating person", http.StatusExpectationFailed, http.StatusExpectationFailed, "")
 		apirouter.ReturnResponse(w, req, apiError.Code, apiError)
 		return
 	}
@@ -76,7 +76,7 @@ func createPerson(w http.ResponseWriter, req *http.Request, _ httprouter.Params)
 	// Save will insert a new person since we are creating a new model
 	_, err = person.Save(models.PersonCreateColumns, tx)
 	if err != nil {
-		apiError := apirouter.ErrorFromRequest(req, fmt.Sprintf("error creating person: %s", err.Error()), fmt.Sprintf("error creating person: %s", err.Error()), http.StatusExpectationFailed, "")
+		apiError := apirouter.ErrorFromRequest(req, fmt.Sprintf("error creating person: %s", err.Error()), fmt.Sprintf("error creating person: %s", err.Error()), http.StatusExpectationFailed, http.StatusExpectationFailed, "")
 		apirouter.ReturnResponse(w, req, apiError.Code, apiError)
 		return
 	}
@@ -85,7 +85,7 @@ func createPerson(w http.ResponseWriter, req *http.Request, _ httprouter.Params)
 	err = tx.Commit()
 	if err != nil {
 		_ = tx.Rollback()
-		apiError := apirouter.ErrorFromRequest(req, fmt.Sprintf("error creating person: %s", err.Error()), "error creating person", http.StatusExpectationFailed, "")
+		apiError := apirouter.ErrorFromRequest(req, fmt.Sprintf("error creating person: %s", err.Error()), "error creating person", http.StatusExpectationFailed, http.StatusExpectationFailed, "")
 		apirouter.ReturnResponse(w, req, apiError.Code, apiError)
 		return
 	}
@@ -105,14 +105,14 @@ func updatePerson(w http.ResponseWriter, req *http.Request, _ httprouter.Params)
 
 	person, err := models.GetPersonByID(id)
 	if err != nil {
-		apiError := apirouter.ErrorFromRequest(req, fmt.Sprintf("error getting related person: %s", err.Error()), "unable to update person", http.StatusExpectationFailed, "")
+		apiError := apirouter.ErrorFromRequest(req, fmt.Sprintf("error getting related person: %s", err.Error()), "unable to update person", http.StatusExpectationFailed, http.StatusExpectationFailed, "")
 		apirouter.ReturnResponse(w, req, apiError.Code, apiError)
 		return
 	}
 
 	// Test to see if deleted
 	if person.IsDeleted.Bool {
-		apiError := apirouter.ErrorFromRequest(req, fmt.Sprintf("person is marked as deleted: %d", id), "unable to update a deleted record", http.StatusExpectationFailed, "")
+		apiError := apirouter.ErrorFromRequest(req, fmt.Sprintf("person is marked as deleted: %d", id), "unable to update a deleted record", http.StatusExpectationFailed, http.StatusExpectationFailed, "")
 		apirouter.ReturnResponse(w, req, apiError.Code, apiError)
 		return
 	}
@@ -124,16 +124,16 @@ func updatePerson(w http.ResponseWriter, req *http.Request, _ httprouter.Params)
 	var tx *sql.Tx
 	tx, _, err = database.NewTx(config.DatabaseDefaultTxTimeout)
 	if err != nil {
-		apiError := apirouter.ErrorFromRequest(req, fmt.Sprintf("error updating person: %s", err.Error()), "error updating person", http.StatusExpectationFailed, "")
+		apiError := apirouter.ErrorFromRequest(req, fmt.Sprintf("error updating person: %s", err.Error()), "error updating person", http.StatusExpectationFailed, http.StatusExpectationFailed, "")
 		apirouter.ReturnResponse(w, req, apiError.Code, apiError)
 		return
 	}
 
 	// Save will update an exiting person
-	//var affected int64
+	// var affected int64
 	_, err = person.Save(models.PersonUpdateColumns, tx)
 	if err != nil {
-		apiError := apirouter.ErrorFromRequest(req, fmt.Sprintf("error saving person: %s", err.Error()), fmt.Sprintf("error updating person: %s", err.Error()), http.StatusExpectationFailed, "")
+		apiError := apirouter.ErrorFromRequest(req, fmt.Sprintf("error saving person: %s", err.Error()), fmt.Sprintf("error updating person: %s", err.Error()), http.StatusExpectationFailed, http.StatusExpectationFailed, "")
 		apirouter.ReturnResponse(w, req, apiError.Code, apiError)
 		return
 	}
@@ -142,7 +142,7 @@ func updatePerson(w http.ResponseWriter, req *http.Request, _ httprouter.Params)
 	err = tx.Commit()
 	if err != nil {
 		_ = tx.Rollback()
-		apiError := apirouter.ErrorFromRequest(req, fmt.Sprintf("error in commit creating person: %s", err.Error()), "error creating person", http.StatusExpectationFailed, "")
+		apiError := apirouter.ErrorFromRequest(req, fmt.Sprintf("error in commit creating person: %s", err.Error()), "error creating person", http.StatusExpectationFailed, http.StatusExpectationFailed, "")
 		apirouter.ReturnResponse(w, req, apiError.Code, apiError)
 		return
 	}
@@ -162,7 +162,7 @@ func deletePerson(w http.ResponseWriter, req *http.Request, _ httprouter.Params)
 
 	person, err := models.GetPersonByID(id)
 	if err != nil {
-		apiError := apirouter.ErrorFromRequest(req, fmt.Sprintf("error getting related person: %s", err.Error()), "unable to delete person", http.StatusExpectationFailed, "")
+		apiError := apirouter.ErrorFromRequest(req, fmt.Sprintf("error getting related person: %s", err.Error()), "unable to delete person", http.StatusExpectationFailed, http.StatusExpectationFailed, "")
 		apirouter.ReturnResponse(w, req, apiError.Code, apiError)
 		return
 	}
@@ -180,7 +180,7 @@ func deletePerson(w http.ResponseWriter, req *http.Request, _ httprouter.Params)
 	var tx *sql.Tx
 	tx, _, err = database.NewTx(config.DatabaseDefaultTxTimeout)
 	if err != nil {
-		apiError := apirouter.ErrorFromRequest(req, fmt.Sprintf("error creating tx: %s", err.Error()), "error deleting person", http.StatusExpectationFailed, "")
+		apiError := apirouter.ErrorFromRequest(req, fmt.Sprintf("error creating tx: %s", err.Error()), "error deleting person", http.StatusExpectationFailed, http.StatusExpectationFailed, "")
 		apirouter.ReturnResponse(w, req, apiError.Code, apiError)
 		return
 	}
@@ -188,7 +188,7 @@ func deletePerson(w http.ResponseWriter, req *http.Request, _ httprouter.Params)
 	// Save will update an exiting person
 	_, err = person.Save(models.PersonDeleteColumns, tx)
 	if err != nil {
-		apiError := apirouter.ErrorFromRequest(req, fmt.Sprintf("error saving person: %s", err.Error()), fmt.Sprintf("error deleting person: %s", err.Error()), http.StatusExpectationFailed, "")
+		apiError := apirouter.ErrorFromRequest(req, fmt.Sprintf("error saving person: %s", err.Error()), fmt.Sprintf("error deleting person: %s", err.Error()), http.StatusExpectationFailed, http.StatusExpectationFailed, "")
 		apirouter.ReturnResponse(w, req, apiError.Code, apiError)
 		return
 	}
@@ -197,7 +197,7 @@ func deletePerson(w http.ResponseWriter, req *http.Request, _ httprouter.Params)
 	err = tx.Commit()
 	if err != nil {
 		_ = tx.Rollback()
-		apiError := apirouter.ErrorFromRequest(req, fmt.Sprintf("error in commit: %s", err.Error()), "error deleting person", http.StatusExpectationFailed, "")
+		apiError := apirouter.ErrorFromRequest(req, fmt.Sprintf("error in commit: %s", err.Error()), "error deleting person", http.StatusExpectationFailed, http.StatusExpectationFailed, "")
 		apirouter.ReturnResponse(w, req, apiError.Code, apiError)
 		return
 	}

@@ -62,14 +62,14 @@ func health(w http.ResponseWriter, _ *http.Request, _ httprouter.Params) {
 // notFound handles all 404 requests
 func notFound(w http.ResponseWriter, req *http.Request) {
 	// w.Header().Set("Content-Type", "text/plain; charset=utf-8")
-	apiError := apirouter.ErrorFromRequest(req, fmt.Sprintf("404 occurred: %s", req.RequestURI), "Whoops - this request is not recognized", http.StatusNotFound, "")
+	apiError := apirouter.ErrorFromRequest(req, fmt.Sprintf("404 occurred: %s", req.RequestURI), "Whoops - this request is not recognized", http.StatusNotFound, http.StatusNotFound, "")
 	apirouter.ReturnResponse(w, req, apiError.Code, apiError)
 	return
 }
 
 // notAllowed handles all 405 requests
 func notAllowed(w http.ResponseWriter, req *http.Request) {
-	apiError := apirouter.ErrorFromRequest(req, fmt.Sprintf("405 occurred: %s method: %s", req.RequestURI, req.Method), "Whoops - this method is not allowed", http.StatusMethodNotAllowed, "")
+	apiError := apirouter.ErrorFromRequest(req, fmt.Sprintf("405 occurred: %s method: %s", req.RequestURI, req.Method), "Whoops - this method is not allowed", http.StatusMethodNotAllowed, http.StatusMethodNotAllowed, "")
 	apirouter.ReturnResponse(w, req, apiError.Code, apiError)
 	return
 }

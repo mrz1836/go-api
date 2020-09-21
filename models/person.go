@@ -4,13 +4,13 @@ import (
 	"context"
 	"database/sql"
 
-	"github.com/go-ozzo/ozzo-validation"
+	validation "github.com/go-ozzo/ozzo-validation"
 	"github.com/go-ozzo/ozzo-validation/is"
 	"github.com/mrz1836/go-api/database"
 	"github.com/mrz1836/go-api/models/schema"
 	"github.com/mrz1836/go-sanitize"
-	"github.com/volatiletech/sqlboiler/boil"
-	"github.com/volatiletech/sqlboiler/queries/qm"
+	"github.com/volatiletech/sqlboiler/v4/boil"
+	"github.com/volatiletech/sqlboiler/v4/queries/qm"
 )
 
 var (
@@ -78,7 +78,7 @@ func GetPersonByID(id uint64) (person *Person, err error) {
 	var p *schema.Person
 
 	// Find the associated record
-	p, err = schema.FindPerson(context.Background(), database.ReadDatabase, id) //todo: turn slice of strings into variadic
+	p, err = schema.FindPerson(context.Background(), database.ReadDatabase, id) // todo: turn slice of strings into variadic
 	if err != nil {
 		if err == sql.ErrNoRows {
 			err = nil

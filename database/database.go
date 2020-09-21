@@ -10,8 +10,8 @@ import (
 
 	"github.com/mrz1836/go-logger"
 
-	//used for the mysql driver
-	_ "github.com/volatiletech/sqlboiler/drivers/sqlboiler-mysql/driver"
+	// used for the mysql driver
+	_ "github.com/volatiletech/sqlboiler/v4/drivers/sqlboiler-mysql/driver"
 )
 
 // Database constants
