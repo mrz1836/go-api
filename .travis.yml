@@ -22,10 +22,9 @@ notifications:
 
 # Services required
 services:
- - redis-server
+ - redis
  - mysql
 
 # Run scripts in parallel
 script:
- - make lint
- - make vet
+ - make test-short
