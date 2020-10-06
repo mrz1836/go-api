@@ -113,9 +113,10 @@ env                    Creates a fresh database
 flush-redis            Wipe out all data in redis (requires redli)
 godocs                 Sync the latest tag with GoDocs
 help                   Show this help message
+install                Install the application
 install                Run the Custom installation
 install-go             Install the application (Using Native Go)
-lint                   Run the Go lint application
+lint                   Run the golangci-lint application (install if not found)
 release                Full production release (creates release in Github)
 release                Runs common.release then runs godocs
 release-snap           Test the full release (build binaries)
@@ -132,6 +133,7 @@ test-short             Runs vet, lint and tests (excludes integration tests)
 test-travis            Runs all tests via Travis (also exports coverage)
 test-travis-short      Runs unit tests via Travis (also exports coverage)
 uninstall              Uninstall the application (and remove files)
+update-linter          Update the golangci-lint package (macOS only)
 vet                    Run the Go vet application
 ```
 </details>
