@@ -16,10 +16,7 @@ import (
 func RegisterRoutes(router *apirouter.Router) {
 
 	// Load the service dependencies
-	err := loadService()
-	if err != nil {
-		logger.Fatalf("failed to load required service dependencies - error: %s", err.Error())
-	}
+	loadService()
 
 	// Set the main index page (navigating to slash)
 	router.HTTPRouter.GET("/", router.Request(index))
@@ -38,14 +35,13 @@ func RegisterRoutes(router *apirouter.Router) {
 }
 
 // loadService will load all dependencies for the service
-func loadService() (err error) {
+func loadService() {
 
 	// Load jobs or services
 	jobs.RunExampleJob(true, 5)
 
 	// Done!
 	logger.Data(2, logger.DEBUG, config.ServiceModeAPI+" dependencies loaded!")
-	return
 }
 
 // index basic request to /
@@ -64,12 +60,10 @@ func notFound(w http.ResponseWriter, req *http.Request) {
 	// w.Header().Set("Content-Type", "text/plain; charset=utf-8")
 	apiError := apirouter.ErrorFromRequest(req, fmt.Sprintf("404 occurred: %s", req.RequestURI), "Whoops - this request is not recognized", http.StatusNotFound, http.StatusNotFound, "")
 	apirouter.ReturnResponse(w, req, apiError.Code, apiError)
-	return
 }
 
 // notAllowed handles all 405 requests
 func notAllowed(w http.ResponseWriter, req *http.Request) {
 	apiError := apirouter.ErrorFromRequest(req, fmt.Sprintf("405 occurred: %s method: %s", req.RequestURI, req.Method), "Whoops - this method is not allowed", http.StatusMethodNotAllowed, http.StatusMethodNotAllowed, "")
 	apirouter.ReturnResponse(w, req, apiError.Code, apiError)
-	return
 }

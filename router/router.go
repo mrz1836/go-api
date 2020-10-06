@@ -32,11 +32,7 @@ func Handlers() *httprouter.Router {
 		api.RegisterRoutes(r)
 		persons.RegisterRoutes(r)
 
-	} else {
-
-		// Another service
-		// baseAnotherService.RegisterRoutes(r)
-	}
+	} // else (another service mode?)
 
 	// Return the router
 	return r.HTTPRouter

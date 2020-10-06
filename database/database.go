@@ -23,12 +23,12 @@ const (
 // Global database instances
 var (
 	config        Configuration
-	ReadDatabase  *ApiDatabase
-	WriteDatabase *ApiDatabase
+	ReadDatabase  *APIDatabase
+	WriteDatabase *APIDatabase
 )
 
-// ApiDatabase Extends sql.DB
-type ApiDatabase struct {
+// APIDatabase Extends sql.DB
+type APIDatabase struct {
 	*sql.DB                // calls are passed through by default to me
 	dBWrite        *sql.DB // I am read-write, but expensive.  Please only use me for writing.
 	throttleQueue  chan struct{}
@@ -64,9 +64,9 @@ func SetConfiguration(conf Configuration) {
 	config = conf
 }
 
-// NewApiDatabase creates a new database connection
-func NewApiDatabase(read, write *sql.DB) *ApiDatabase {
-	databaseQueue := &ApiDatabase{read, write, nil, nil, nil, nil, nil}
+// NewAPIDatabase creates a new database connection
+func NewAPIDatabase(read, write *sql.DB) *APIDatabase {
+	databaseQueue := &APIDatabase{read, write, nil, nil, nil, nil, nil}
 	databaseQueue.throttleQueue = make(chan struct{}, 10)
 	databaseQueue.statements = make(map[uint32]*sql.Stmt, 30)
 	databaseQueue.worker = make(chan func(), 10000)
@@ -118,8 +118,8 @@ func OpenConnection() (err error) {
 	}
 
 	// Set the new connections
-	ReadDatabase = NewApiDatabase(dB, dBWrite)
-	WriteDatabase = NewApiDatabase(dBWrite, dBWrite)
+	ReadDatabase = NewAPIDatabase(dB, dBWrite)
+	WriteDatabase = NewAPIDatabase(dBWrite, dBWrite)
 
 	return
 }
@@ -143,7 +143,7 @@ func NewTx(timeout time.Duration) (tx *sql.Tx, cancelMethod context.CancelFunc, 
 }
 
 // startWorker starts a worker for the Throttled Query
-func (d *ApiDatabase) startWorker() {
+func (d *APIDatabase) startWorker() {
 	for handle := range d.worker {
 		handle()
 		d.waitGroup.Done()
@@ -151,19 +151,19 @@ func (d *ApiDatabase) startWorker() {
 }
 
 // StopWorker will wait for the queue to empty and then shutdown the worker
-func (d *ApiDatabase) StopWorker() {
+func (d *APIDatabase) StopWorker() {
 	d.waitGroup.Wait()
 	close(d.worker)
 }
 
 // Enque adds a worker
-func (d *ApiDatabase) Enque(handle func()) {
+func (d *APIDatabase) Enque(handle func()) {
 	d.waitGroup.Add(1)
 	d.worker <- handle
 }
 
 // Close both or any connections
-func (d *ApiDatabase) Close() {
+func (d *APIDatabase) Close() {
 	_ = d.DB.Close() // todo: log these errors if needed
 	if d.dBWrite != d.DB {
 		_ = d.dBWrite.Close()
@@ -172,12 +172,12 @@ func (d *ApiDatabase) Close() {
 
 // GetReadDatabase gets the read database connection these are needed for testing because
 // for some reason it can't determine that DeliveryDudesDB extends sql.DB
-func (d *ApiDatabase) GetReadDatabase() *sql.DB {
+func (d *APIDatabase) GetReadDatabase() *sql.DB {
 	return d.DB
 }
 
 // GetWriteDatabase gets the write database connection
-func (d *ApiDatabase) GetWriteDatabase() *sql.DB {
+func (d *APIDatabase) GetWriteDatabase() *sql.DB {
 	return d.dBWrite
 }
 

@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 
 	"github.com/mrz1836/go-api/config"
-	"github.com/mrz1836/go-mail"
+	gomail "github.com/mrz1836/go-mail"
 )
 
 // loadEmailService loads the email service
@@ -38,6 +38,7 @@ func loadEmailService() (service *gomail.MailService, err error) {
 	service.EmailCSS, err = ioutil.ReadFile(filepath.Join(config.GetCurrentDir(), "..", "static", "css", "email.css"))
 	if err != nil {
 		err = fmt.Errorf("error loading email styles: %s", err.Error())
+		return
 	}
 
 	// Start and return the service

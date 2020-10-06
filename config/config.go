@@ -124,14 +124,17 @@ func (d databaseConfig) Validate() error {
 // cacheConfig is a configuration for a Redis connection
 // Most of theses variables are for "redis" configuration
 // MemStore is an internal storage mechanism for the local instance only
+//
+// DO NOT CHANGE ORDER - Optimized for memory (malign)
+//
 type cacheConfig struct {
-	DependencyMode        bool                `json:"dependency_mode" mapstructure:"dependency_mode"`                 // false for digital ocean (not supported)
+	URL                   string              `json:"url" mapstructure:"url"`                                         // redis://localhost:6379
 	MaxActiveConnections  int                 `json:"max_active_connections" mapstructure:"max_active_connections"`   // 0
 	MaxConnectionLifetime int                 `json:"max_connection_lifetime" mapstructure:"max_connection_lifetime"` // 0
 	MaxIdleConnections    int                 `json:"max_idle_connections" mapstructure:"max_idle_connections"`       // 10
 	MaxIdleTimeout        int                 `json:"max_idle_timeout" mapstructure:"max_idle_timeout"`               // 240
 	MemStore              *mcache.CacheDriver `json:"-" mapstructure:"-"`                                             // In-memory store (local box only)
-	URL                   string              `json:"url" mapstructure:"url"`                                         // redis://localhost:6379
+	DependencyMode        bool                `json:"dependency_mode" mapstructure:"dependency_mode"`                 // false for digital ocean (not supported)
 	UseTLS                bool                `json:"use_tls" mapstructure:"use_tls"`                                 // true for digital ocean (required)
 }
 
@@ -252,8 +255,11 @@ func Load() (err error) {
 // GetCurrentDir gets the current directory for all operating systems
 func GetCurrentDir() string {
 	// Get the current path
-	_, path, _, _ := runtime.Caller(1)
+	_, path, _, ok := runtime.Caller(1)
 
 	// Return the file path
-	return filepath.Dir(path)
+	if ok {
+		return filepath.Dir(path)
+	}
+	return ""
 }

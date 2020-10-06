@@ -64,7 +64,7 @@ func NewPersonUsingSchema(person schema.Person) *Person {
 
 // NewPersonsUsingSchema creates a new model using a schema
 func NewPersonsUsingSchema(personSlice schema.PersonSlice) []Person {
-	var persons []Person
+	persons := make([]Person, len(personSlice))
 	for _, person := range personSlice {
 		persons = append(persons, Person{*person})
 	}
