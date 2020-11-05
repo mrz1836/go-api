@@ -37,7 +37,7 @@ func main() {
 
 		// Close the cache connection on exit
 		if config.Values.CacheEnabled {
-			cache.Disconnect()
+			config.Values.Cache.Client.Close()
 		}
 
 		// Close the database on exit
@@ -62,7 +62,7 @@ func loadService() (err error) {
 	if len(config.Values.Cache.URL) > 0 {
 
 		// Attempt to connect to the cache (redis)
-		if err = cache.Connect(
+		if config.Values.Cache.Client, err = cache.Connect(
 			config.Values.Cache.URL,
 			config.Values.Cache.MaxActiveConnections,
 			config.Values.Cache.MaxIdleConnections,

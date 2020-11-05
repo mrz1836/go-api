@@ -12,6 +12,7 @@ import (
 	"github.com/OrlovEvgeny/go-mcache"
 	validation "github.com/go-ozzo/ozzo-validation"
 	"github.com/go-ozzo/ozzo-validation/is"
+	"github.com/mrz1836/go-cache"
 	"github.com/mrz1836/go-logger"
 	"github.com/robfig/cron/v3"
 	"github.com/spf13/viper"
@@ -38,7 +39,7 @@ func (s SchedulerConfig) AddJob(name, spec string, cmd func()) (entryID cron.Ent
 	// Add the cron job
 	entryID, err = s.CronApp.AddFunc(spec, cmd)
 	if err != nil {
-		err = fmt.Errorf("error creating cron job %s spec: %s error: %s", name, spec, err.Error())
+		err = fmt.Errorf("error creating cron job %s spec: %s error: %w", name, spec, err)
 		logger.Data(2, logger.ERROR, err.Error())
 	} else {
 		logger.Data(2, logger.DEBUG, fmt.Sprintf("%s cron job added successfully, spec: [%s] entryID: [%d]", name, spec, entryID))
@@ -128,6 +129,7 @@ func (d databaseConfig) Validate() error {
 // DO NOT CHANGE ORDER - Optimized for memory (malign)
 //
 type cacheConfig struct {
+	Client                *cache.Client       `json:"-" mapstructure:"-"`                                             // client (pool & more)
 	URL                   string              `json:"url" mapstructure:"url"`                                         // redis://localhost:6379
 	MaxActiveConnections  int                 `json:"max_active_connections" mapstructure:"max_active_connections"`   // 0
 	MaxConnectionLifetime int                 `json:"max_connection_lifetime" mapstructure:"max_connection_lifetime"` // 0

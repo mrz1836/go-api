@@ -37,7 +37,7 @@ func loadEmailService() (service *gomail.MailService, err error) {
 	// Set default styles
 	service.EmailCSS, err = ioutil.ReadFile(filepath.Join(config.GetCurrentDir(), "..", "static", "css", "email.css"))
 	if err != nil {
-		err = fmt.Errorf("error loading email styles: %s", err.Error())
+		err = fmt.Errorf("error loading email styles: %w", err)
 		return
 	}
 

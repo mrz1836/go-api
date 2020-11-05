@@ -4,6 +4,7 @@ import (
 	"context"
 	"database/sql"
 
+	"github.com/friendsofgo/errors"
 	validation "github.com/go-ozzo/ozzo-validation"
 	"github.com/go-ozzo/ozzo-validation/is"
 	"github.com/mrz1836/go-api/database"
@@ -80,7 +81,7 @@ func GetPersonByID(id uint64) (person *Person, err error) {
 	// Find the associated record
 	p, err = schema.FindPerson(context.Background(), database.ReadDatabase, id) // todo: turn slice of strings into variadic
 	if err != nil {
-		if err == sql.ErrNoRows {
+		if errors.Is(err, sql.ErrNoRows) {
 			err = nil
 		}
 		return
@@ -101,7 +102,7 @@ func GetPersonByEmail(email string) (person *Person, err error) {
 	// Find the associated record
 	p, err = schema.Persons(qm.Where(schema.PersonColumns.Email+" = ?", email)).One(context.Background(), database.ReadDatabase)
 	if err != nil {
-		if err == sql.ErrNoRows {
+		if errors.Is(err, sql.ErrNoRows) {
 			err = nil
 		}
 		return
@@ -123,7 +124,7 @@ func GetPersons() (persons []Person, err error) {
 	p, err = schema.Persons(
 		qm.Where(schema.PersonColumns.IsDeleted+" = ?", 0)).All(context.Background(), database.ReadDatabase)
 	if err != nil {
-		if err == sql.ErrNoRows {
+		if errors.Is(err, sql.ErrNoRows) {
 			err = nil
 		}
 		return
