@@ -56,7 +56,7 @@ install: ## Run the Custom installation
 	@$(MAKE) db
 
 schema: ## Run the Model/schema generation
-	@sqlboiler mysql --wipe && sed -i "" 's/fmt.Fprintf(tmp, "ssl-mode/\/\/fmt.Fprintf(tmp, "ssl-mode/' models/schema/mysql_main_test.go
+	@sqlboiler mysql --wipe --no-tests && sed -i "" 's/fmt.Fprintf(tmp, "ssl-mode/\/\/fmt.Fprintf(tmp, "ssl-mode/' models/schema/mysql_main_test.go
 
 release:: ## Runs common.release then runs godocs
 	@$(MAKE) godocs
