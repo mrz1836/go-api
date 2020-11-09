@@ -9,13 +9,11 @@ require (
 	github.com/friendsofgo/errors v0.9.2
 	github.com/fsnotify/fsnotify v1.4.9 // indirect
 	github.com/go-ozzo/ozzo-validation v3.6.0+incompatible
-	github.com/go-sql-driver/mysql v1.5.0
 	github.com/gomodule/redigo v1.8.2
 	github.com/julienschmidt/httprouter v1.3.0
-	github.com/kat-co/vala v0.0.0-20170210184112-42e1d8b61f12
 	github.com/magiconair/properties v1.8.4 // indirect
 	github.com/mitchellh/mapstructure v1.3.3 // indirect
-	github.com/mrz1836/go-api-router v0.3.5
+	github.com/mrz1836/go-api-router v0.3.6
 	github.com/mrz1836/go-cache v0.4.1
 	github.com/mrz1836/go-logger v0.2.1
 	github.com/mrz1836/go-mail v0.3.7
@@ -26,9 +24,7 @@ require (
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/spf13/viper v1.7.1
-	github.com/ugorji/go v1.1.13 // indirect
 	github.com/volatiletech/null/v8 v8.1.0
-	github.com/volatiletech/randomize v0.0.1
 	github.com/volatiletech/sqlboiler/v4 v4.3.0
 	github.com/volatiletech/strmangle v0.0.1
 	golang.org/x/net v0.0.0-20201031054903-ff519b6c9102 // indirect
