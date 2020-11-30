@@ -17,7 +17,7 @@ require (
 	github.com/mrz1836/go-cache v0.4.1
 	github.com/mrz1836/go-logger v0.2.4
 	github.com/mrz1836/go-mail v0.3.7
-	github.com/mrz1836/go-sanitize v1.1.1
+	github.com/mrz1836/go-sanitize v1.1.2
 	github.com/pelletier/go-toml v1.8.1 // indirect
 	github.com/robfig/cron/v3 v3.0.1
 	github.com/spf13/afero v1.4.1 // indirect
