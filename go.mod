@@ -15,7 +15,7 @@ require (
 	github.com/mrz1836/go-api-router v0.3.8
 	github.com/mrz1836/go-cache v0.4.3
 	github.com/mrz1836/go-logger v0.2.4
-	github.com/mrz1836/go-mail v0.3.8
+	github.com/mrz1836/go-mail v0.3.9
 	github.com/mrz1836/go-sanitize v1.1.3
 	github.com/pelletier/go-toml v1.8.1 // indirect
 	github.com/robfig/cron/v3 v3.0.1
@@ -26,7 +26,6 @@ require (
 	github.com/volatiletech/null/v8 v8.1.1
 	github.com/volatiletech/sqlboiler/v4 v4.4.0
 	github.com/volatiletech/strmangle v0.0.1
-	golang.org/x/sys v0.0.0-20201101102859-da207088b7d1 // indirect
 	golang.org/x/text v0.3.4 // indirect
 	golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1 // indirect
 	gopkg.in/ini.v1 v1.62.0 // indirect
