@@ -8,7 +8,7 @@ require (
 	github.com/friendsofgo/errors v0.9.2
 	github.com/fsnotify/fsnotify v1.4.9 // indirect
 	github.com/go-ozzo/ozzo-validation v3.6.0+incompatible
-	github.com/gomodule/redigo v1.8.4
+	github.com/gomodule/redigo v1.8.5
 	github.com/julienschmidt/httprouter v1.3.0
 	github.com/magiconair/properties v1.8.4 // indirect
 	github.com/mitchellh/mapstructure v1.3.3 // indirect
