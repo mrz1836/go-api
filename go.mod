@@ -13,7 +13,7 @@ require (
 	github.com/magiconair/properties v1.8.4 // indirect
 	github.com/mitchellh/mapstructure v1.3.3 // indirect
 	github.com/mrz1836/go-api-router v0.3.10
-	github.com/mrz1836/go-cache v0.4.3
+	github.com/mrz1836/go-cache v0.4.4
 	github.com/mrz1836/go-logger v0.2.5
 	github.com/mrz1836/go-mail v0.3.10
 	github.com/mrz1836/go-sanitize v1.1.3
