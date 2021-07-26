@@ -10,7 +10,7 @@ require (
 	github.com/gomodule/redigo v1.8.5
 	github.com/julienschmidt/httprouter v1.3.0
 	github.com/mrz1836/go-api-router v0.3.11
-	github.com/mrz1836/go-cache v0.4.4
+	github.com/mrz1836/go-cache v0.4.5
 	github.com/mrz1836/go-logger v0.2.5
 	github.com/mrz1836/go-mail v0.3.11
 	github.com/mrz1836/go-sanitize v1.1.4
