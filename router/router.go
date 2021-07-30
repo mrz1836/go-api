@@ -35,5 +35,5 @@ func Handlers() *httprouter.Router {
 	} // else (another service mode?)
 
 	// Return the router
-	return r.HTTPRouter
+	return r.HTTPRouter.Router
 }
