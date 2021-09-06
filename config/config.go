@@ -132,9 +132,9 @@ type cacheConfig struct {
 	Client                *cache.Client       `json:"-" mapstructure:"-"`                                             // client (pool & more)
 	URL                   string              `json:"url" mapstructure:"url"`                                         // redis://localhost:6379
 	MaxActiveConnections  int                 `json:"max_active_connections" mapstructure:"max_active_connections"`   // 0
-	MaxConnectionLifetime int                 `json:"max_connection_lifetime" mapstructure:"max_connection_lifetime"` // 0
+	MaxConnectionLifetime time.Duration       `json:"max_connection_lifetime" mapstructure:"max_connection_lifetime"` // 0
 	MaxIdleConnections    int                 `json:"max_idle_connections" mapstructure:"max_idle_connections"`       // 10
-	MaxIdleTimeout        int                 `json:"max_idle_timeout" mapstructure:"max_idle_timeout"`               // 240
+	MaxIdleTimeout        time.Duration       `json:"max_idle_timeout" mapstructure:"max_idle_timeout"`               // 240
 	MemStore              *mcache.CacheDriver `json:"-" mapstructure:"-"`                                             // In-memory store (local box only)
 	DependencyMode        bool                `json:"dependency_mode" mapstructure:"dependency_mode"`                 // false for digital ocean (not supported)
 	UseTLS                bool                `json:"use_tls" mapstructure:"use_tls"`                                 // true for digital ocean (required)

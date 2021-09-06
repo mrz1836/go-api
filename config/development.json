@@ -12,9 +12,9 @@
   "cache": {
     "dependency_mode": true,
     "max_active_connections": 0,
-    "max_connection_lifetime": 60,
+    "max_connection_lifetime": "60s",
     "max_idle_connections": 10,
-    "max_idle_timeout": 10,
+    "max_idle_timeout": "10s",
     "url": "",
     "use_tls": false
   },
