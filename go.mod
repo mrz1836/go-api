@@ -10,7 +10,7 @@ require (
 	github.com/go-sql-driver/mysql v1.6.0 // indirect
 	github.com/gomodule/redigo v1.8.5
 	github.com/julienschmidt/httprouter v1.3.0
-	github.com/mrz1836/go-api-router v0.4.6
+	github.com/mrz1836/go-api-router v0.4.7
 	github.com/mrz1836/go-cache v0.4.5
 	github.com/mrz1836/go-logger v0.2.5
 	github.com/mrz1836/go-mail v0.3.12
@@ -21,5 +21,4 @@ require (
 	github.com/volatiletech/null/v8 v8.1.2
 	github.com/volatiletech/sqlboiler/v4 v4.6.0
 	github.com/volatiletech/strmangle v0.0.1
-	google.golang.org/genproto v0.0.0-20210804223703-f1db76f3300d // indirect
 )
