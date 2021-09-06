@@ -288,8 +288,8 @@ github.com/modern-go/reflect2 v0.0.0-20180701023420-4b7aa43c6742/go.mod h1:bx2lN
 github.com/modern-go/reflect2 v1.0.1/go.mod h1:bx2lNnkwVCuqBIxFjflWJWanXIb3RllmbCylyMrvgv0=
 github.com/mrz1836/go-api-router v0.4.7 h1:hmRfA3epyoMLcCKOzDyLJ9R9PYy1wNvqgfUdhQcq9YY=
 github.com/mrz1836/go-api-router v0.4.7/go.mod h1:eDwYPhlzEhmeV7Fm3x2AE7bhSAyGUIYaj4Hts9SN1c0=
-github.com/mrz1836/go-cache v0.4.5 h1:QygQ7QaEb9kHNE1PHvYZ7NqXhuF9jDQe4gi7cGF+TjM=
-github.com/mrz1836/go-cache v0.4.5/go.mod h1:Y5O8FxhJCEhbbXuNFQxnyZBwLxD7jPh3rDJlUIYV92g=
+github.com/mrz1836/go-cache v0.5.0 h1:XeLb58rcmm0WyLXP3PXu+THUxmtvPgEhJA46gu3T+a8=
+github.com/mrz1836/go-cache v0.5.0/go.mod h1:Y5O8FxhJCEhbbXuNFQxnyZBwLxD7jPh3rDJlUIYV92g=
 github.com/mrz1836/go-logger v0.2.5 h1:n4yQKHalut4MYoZsk9pXVf7bIcW9J/vdl9zYJAE67ts=
 github.com/mrz1836/go-logger v0.2.5/go.mod h1:E4gFkyzOlEb2MmaLaTYO0KUKKcsXB1KeMPhcJIGD5F4=
 github.com/mrz1836/go-mail v0.3.12 h1:mDxiVOSVJA43aX1aF1yiWWyL7OL1eX1a/sy0DZXYb+k=
