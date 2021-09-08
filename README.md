@@ -109,8 +109,10 @@ clean                Remove previous builds and any test cache data
 clean-mods           Remove all the Go mod cache
 coverage             Shows the test coverage
 db                   Creates a fresh database
+diff                 Show the git diff
 env                  Creates a fresh database
 flush-redis          Wipe out all data in redis (requires redli)
+generate             Runs the go generate command in the base of the repo
 godocs               Sync the latest tag with GoDocs
 help                 Show this help message
 install              Install the application
@@ -128,11 +130,13 @@ schema               Run the Model/schema generation
 tag                  Generate a new tag and push (tag version=0.0.0)
 tag-remove           Remove a tag if found (tag-remove version=0.0.0)
 tag-update           Update an existing tag to current commit (tag-update version=0.0.0)
-test                 Runs vet, lint and ALL tests
+test                 Runs lint and ALL tests
 test-ci              Runs all tests via CI (exports coverage)
 test-ci-no-race      Runs all tests via CI (no race) (exports coverage)
 test-ci-short        Runs unit tests via CI (exports coverage)
+test-no-lint         Runs just tests
 test-short           Runs vet, lint and tests (excludes integration tests)
+test-unit            Runs tests and outputs coverage
 uninstall            Uninstall the application (and remove files)
 update-linter        Update the golangci-lint package (macOS only)
 vet                  Run the Go vet application
@@ -176,7 +180,7 @@ export API_SERVER_PORT=3000
 
 ## Examples & Tests
 All unit tests and examples run via [Github Actions](https://github.com/tonicpow/go-paymail/actions) and
-uses [Go version(s) 1.14.x, 1.15.x and 1.16.x](https://golang.org/doc/go1.16). View the [configuration file](.github/workflows/run-tests.yml).
+uses [Go version 1.15.x](https://golang.org/doc/go1.15). View the [configuration file](.github/workflows/run-tests.yml).
 
 Run all tests (including integration tests)
 ```shell script
