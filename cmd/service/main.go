@@ -4,6 +4,7 @@ Package main is the core service layer for loading the specific service
 package main
 
 import (
+	"context"
 	"net/http"
 
 	"github.com/gomodule/redigo/redis"
@@ -63,12 +64,14 @@ func loadService() (err error) {
 
 		// Attempt to connect to the cache (redis)
 		if config.Values.Cache.Client, err = cache.Connect(
+			context.Background(),
 			config.Values.Cache.URL,
 			config.Values.Cache.MaxActiveConnections,
 			config.Values.Cache.MaxIdleConnections,
 			config.Values.Cache.MaxConnectionLifetime,
 			config.Values.Cache.MaxIdleTimeout,
 			config.Values.Cache.DependencyMode,
+			false,
 			redis.DialUseTLS(config.Values.Cache.UseTLS),
 		); err != nil {
 			logger.Data(2, logger.ERROR, "failed to enable cache: "+err.Error()+" - cache is disabled", logger.MakeParameter("url", config.Values.Cache.URL))
