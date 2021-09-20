@@ -11,7 +11,7 @@ require (
 	github.com/go-sql-driver/mysql v1.6.0 // indirect
 	github.com/gomodule/redigo v1.8.5
 	github.com/julienschmidt/httprouter v1.3.0
-	github.com/mrz1836/go-api-router v0.4.7
+	github.com/mrz1836/go-api-router v0.4.8
 	github.com/mrz1836/go-cache v0.6.0
 	github.com/mrz1836/go-logger v0.2.5
 	github.com/mrz1836/go-mail v0.3.13
