@@ -5,7 +5,6 @@ go 1.15
 require (
 	github.com/OrlovEvgeny/go-mcache v0.0.0-20200121124330-1a8195b34f3a
 	github.com/asaskevich/govalidator v0.0.0-20210307081110-f21760c49a8d // indirect
-	github.com/aws/aws-sdk-go v1.40.38 // indirect
 	github.com/friendsofgo/errors v0.9.2
 	github.com/fsnotify/fsnotify v1.5.1 // indirect
 	github.com/go-ozzo/ozzo-validation v3.6.0+incompatible
@@ -15,7 +14,7 @@ require (
 	github.com/mrz1836/go-api-router v0.4.7
 	github.com/mrz1836/go-cache v0.6.0
 	github.com/mrz1836/go-logger v0.2.5
-	github.com/mrz1836/go-mail v0.3.12
+	github.com/mrz1836/go-mail v0.3.13
 	github.com/mrz1836/go-sanitize v1.1.5
 	github.com/pelletier/go-toml v1.9.4 // indirect
 	github.com/robfig/cron/v3 v3.0.1
@@ -24,6 +23,5 @@ require (
 	github.com/volatiletech/null/v8 v8.1.2
 	github.com/volatiletech/sqlboiler/v4 v4.6.0
 	github.com/volatiletech/strmangle v0.0.1
-	golang.org/x/net v0.0.0-20210907225631-ff17edfbf26d // indirect
 	gopkg.in/ini.v1 v1.63.0 // indirect
 )
