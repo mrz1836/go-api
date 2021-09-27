@@ -27,3 +27,5 @@ require (
 	google.golang.org/genproto v0.0.0-20210924002016-3dee208752a0 // indirect
 	google.golang.org/grpc v1.41.0 // indirect
 )
+
+replace github.com/volatiletech/sqlboiler/v4 => github.com/volatiletech/sqlboiler/v4 v4.6.0
