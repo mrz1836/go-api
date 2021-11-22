@@ -19,7 +19,7 @@ require (
 	github.com/robfig/cron/v3 v3.0.1
 	github.com/spf13/viper v1.9.0
 	github.com/volatiletech/null/v8 v8.1.2
-	github.com/volatiletech/sqlboiler/v4 v4.8.1
+	github.com/volatiletech/sqlboiler/v4 v4.8.3
 	github.com/volatiletech/strmangle v0.0.1
 	golang.org/x/net v0.0.0-20211105192438-b53810dc28af // indirect
 	golang.org/x/sys v0.0.0-20211107104306-e0b2ad06fe42 // indirect
