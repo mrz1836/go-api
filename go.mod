@@ -12,16 +12,14 @@ require (
 	github.com/gofrs/uuid v4.2.0+incompatible // indirect
 	github.com/gomodule/redigo v1.8.6
 	github.com/julienschmidt/httprouter v1.3.0
-	github.com/mitchellh/mapstructure v1.4.3 // indirect
 	github.com/mrz1836/go-api-router v0.4.9
 	github.com/mrz1836/go-cache v0.6.3
 	github.com/mrz1836/go-logger v0.2.5
 	github.com/mrz1836/go-mail v0.3.15
 	github.com/mrz1836/go-sanitize v1.1.5
 	github.com/robfig/cron/v3 v3.0.1
-	github.com/spf13/viper v1.9.0
+	github.com/spf13/viper v1.10.0
 	github.com/volatiletech/null/v8 v8.1.2
 	github.com/volatiletech/sqlboiler/v4 v4.8.3
 	github.com/volatiletech/strmangle v0.0.1
-	gopkg.in/ini.v1 v1.66.2 // indirect
 )
