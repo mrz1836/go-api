@@ -18,7 +18,7 @@ require (
 	github.com/mrz1836/go-mail v0.3.15
 	github.com/mrz1836/go-sanitize v1.1.5
 	github.com/robfig/cron/v3 v3.0.1
-	github.com/spf13/viper v1.10.0
+	github.com/spf13/viper v1.10.1
 	github.com/volatiletech/null/v8 v8.1.2
 	github.com/volatiletech/sqlboiler/v4 v4.8.3
 	github.com/volatiletech/strmangle v0.0.1
