@@ -20,7 +20,7 @@ require (
 	github.com/spf13/afero v1.8.1 // indirect
 	github.com/spf13/viper v1.10.1
 	github.com/volatiletech/null/v8 v8.1.2
-	github.com/volatiletech/sqlboiler/v4 v4.9.0
+	github.com/volatiletech/sqlboiler/v4 v4.9.1
 	github.com/volatiletech/strmangle v0.0.2
 	gopkg.in/ini.v1 v1.66.4 // indirect
 )
