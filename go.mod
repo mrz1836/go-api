@@ -13,9 +13,8 @@ require (
 	github.com/mrz1836/go-api-router v0.4.13
 	github.com/mrz1836/go-cache v0.6.5
 	github.com/mrz1836/go-logger v0.2.5
-	github.com/mrz1836/go-mail v0.3.16
+	github.com/mrz1836/go-mail v0.3.17
 	github.com/mrz1836/go-sanitize v1.1.5
-	github.com/mrz1836/go-ses v0.0.20 // indirect
 	github.com/robfig/cron/v3 v3.0.1
 	github.com/spf13/viper v1.12.0
 	github.com/volatiletech/null/v8 v8.1.2
