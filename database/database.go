@@ -9,7 +9,6 @@ import (
 	"time"
 
 	"github.com/mrz1836/go-logger"
-
 	// used for the mysql driver
 	_ "github.com/volatiletech/sqlboiler/v4/drivers/sqlboiler-mysql/driver"
 )
@@ -176,13 +175,14 @@ func (d *APIDatabase) GetReadDatabase() *sql.DB {
 	return d.DB
 }
 
-// GetWriteDatabase gets the write database connection
+// GetWriteDatabase gets the "write database" connection
 func (d *APIDatabase) GetWriteDatabase() *sql.DB {
 	return d.dBWrite
 }
 
 // openDatabaseConnection opens a new database connection
-func openDatabaseConnection(databaseAddress, databaseName, databaseUser, databasePassword string, database **sql.DB, driver string, maxOpenConnections, maxOpenIdle, maxConnectionLifetime int) (err error) {
+func openDatabaseConnection(databaseAddress, databaseName, databaseUser, databasePassword string,
+	database **sql.DB, driver string, maxOpenConnections, maxOpenIdle, maxConnectionLifetime int) (err error) {
 
 	// Start a connection with the database
 	var db *sql.DB

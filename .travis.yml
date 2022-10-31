@@ -6,7 +6,7 @@ language: go
 
 # Version
 go:
- - 1.16.x
+ - 1.17.x
 
 # Environment variables
 env:

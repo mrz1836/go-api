@@ -127,7 +127,6 @@ func (d databaseConfig) Validate() error {
 // MemStore is an internal storage mechanism for the local instance only
 //
 // DO NOT CHANGE ORDER - Optimized for memory (malign)
-//
 type cacheConfig struct {
 	Client                *cache.Client       `json:"-" mapstructure:"-"`                                             // client (pool & more)
 	URL                   string              `json:"url" mapstructure:"url"`                                         // redis://localhost:6379
