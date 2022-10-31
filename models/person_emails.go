@@ -1,6 +1,7 @@
 package models
 
 import (
+	"context"
 	"html/template"
 	"path/filepath"
 
@@ -41,7 +42,7 @@ type EmailExampleData struct {
 }
 
 // SendExampleEmail sends an example email
-func (p *Person) SendExampleEmail() (err error) {
+func (p *Person) SendExampleEmail(ctx context.Context) (err error) {
 
 	// Create the data struct
 	data := new(EmailExampleData)
@@ -63,7 +64,7 @@ func (p *Person) SendExampleEmail() (err error) {
 	}
 
 	// Send the email
-	err = notifications.Service.EmailService.SendEmail(email, gomail.SMTP)
+	err = notifications.Service.EmailService.SendEmail(ctx, email, gomail.SMTP)
 
 	return
 }
