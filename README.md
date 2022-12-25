@@ -2,7 +2,7 @@
 > Example API with support for common implementations
 
 [![Release](https://img.shields.io/github/release-pre/mrz1836/go-api.svg?logo=github&style=flat&v=1)](https://github.com/mrz1836/go-api/releases)
-[![Build Status](https://img.shields.io/github/workflow/status/mrz1836/go-api/run-go-tests?logo=github&v=3)](https://github.com/mrz1836/go-api/actions)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/mrz1836/go-api/run-tests.yml?branch=master&logo=github&v=3)](https://github.com/mrz1836/go-api/actions)
 [![Report](https://goreportcard.com/badge/github.com/mrz1836/go-api?style=flat&v=1)](https://goreportcard.com/report/github.com/mrz1836/go-api)
 [![Go](https://img.shields.io/github/go-mod/go-version/mrz1836/go-api)](https://golang.org/)
 [![Sponsor](https://img.shields.io/badge/sponsor-MrZ-181717.svg?logo=github&style=flat&v=3)](https://github.com/sponsors/mrz1836)
