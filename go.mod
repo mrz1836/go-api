@@ -10,7 +10,7 @@ require (
 	github.com/julienschmidt/httprouter v1.3.0
 	github.com/mrz1836/go-api-router v0.5.1
 	github.com/mrz1836/go-cache v0.8.0
-	github.com/mrz1836/go-logger v0.3.1
+	github.com/mrz1836/go-logger v0.3.2
 	github.com/mrz1836/go-mail v0.4.0
 	github.com/mrz1836/go-sanitize v1.2.0
 	github.com/robfig/cron/v3 v3.0.1
