@@ -11,7 +11,7 @@ require (
 	github.com/mrz1836/go-api-router v0.5.1
 	github.com/mrz1836/go-cache v0.8.0
 	github.com/mrz1836/go-logger v0.3.2
-	github.com/mrz1836/go-mail v0.4.0
+	github.com/mrz1836/go-mail v0.4.1
 	github.com/mrz1836/go-sanitize v1.2.1
 	github.com/robfig/cron/v3 v3.0.1
 	github.com/spf13/viper v1.15.0
@@ -21,10 +21,10 @@ require (
 )
 
 require (
-	github.com/PuerkitoBio/goquery v1.8.0 // indirect
+	github.com/PuerkitoBio/goquery v1.8.1 // indirect
 	github.com/andybalholm/cascadia v1.3.1 // indirect
 	github.com/asaskevich/govalidator v0.0.0-20210307081110-f21760c49a8d // indirect
-	github.com/aws/aws-sdk-go v1.44.126 // indirect
+	github.com/aws/aws-sdk-go v1.44.212 // indirect
 	github.com/aymerick/douceur v0.2.0 // indirect
 	github.com/domodwyer/mailyak v3.1.1+incompatible // indirect
 	github.com/fsnotify/fsnotify v1.6.0 // indirect
@@ -41,8 +41,8 @@ require (
 	github.com/mattbaird/gochimp v0.0.0-20200820164431-f1082bcdf63f // indirect
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	github.com/mrz1836/go-parameters v0.3.0 // indirect
-	github.com/mrz1836/go-ses v0.1.0 // indirect
-	github.com/mrz1836/postmark v1.3.0 // indirect
+	github.com/mrz1836/go-ses v0.1.1 // indirect
+	github.com/mrz1836/postmark v1.4.0 // indirect
 	github.com/newrelic/go-agent/v3 v3.20.3 // indirect
 	github.com/newrelic/go-agent/v3/integrations/nrhttprouter v1.0.1 // indirect
 	github.com/pelletier/go-toml/v2 v2.0.6 // indirect
