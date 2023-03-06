@@ -744,8 +744,8 @@ github.com/mrz1836/go-mail v0.4.0 h1:7wVc57y4i4UnFq/J1bSInib/cyg4Fd6oVoSorB+DP8w
 github.com/mrz1836/go-mail v0.4.0/go.mod h1:qw0KVpv6oE/2O5frAcYHWimPJ+qZT7K/+6J0AYFn8t8=
 github.com/mrz1836/go-parameters v0.3.0 h1:+EbUmyf0MFX6aZCS+6WxrPZ7sWQ1jTn4Ejs0eLGFd8Q=
 github.com/mrz1836/go-parameters v0.3.0/go.mod h1:E3qlPxhpR/nAMsmNqAR9vi0PBYfiz/wpB6m+iNZstJM=
-github.com/mrz1836/go-sanitize v1.2.0 h1:B8HkDSXSkDa6VG49NWWJPVWh6TA8pffnqcB4M1pvRKI=
-github.com/mrz1836/go-sanitize v1.2.0/go.mod h1:5gWo0KQ+acEyiXYM17QSWT7c2E27xaO5hCTSDW6+vbk=
+github.com/mrz1836/go-sanitize v1.2.1 h1:wbie2mroEMUtICMwjfllww/TTxIv8h9aESKU7S6Vuq0=
+github.com/mrz1836/go-sanitize v1.2.1/go.mod h1:/WBhD7PAHL1tz1OljwA2t+k4ne0FF+OCS2p96jOtX00=
 github.com/mrz1836/go-ses v0.1.0 h1:rY0UCukdQHrSgx1Y5JVqsUxKv4iTKSKTc9v+blHwHXM=
 github.com/mrz1836/go-ses v0.1.0/go.mod h1:kJrqX5hKCqK2kIKPS24KnUHNt/5D0l1pw9Lw8h56GlU=
 github.com/mrz1836/postmark v1.3.0 h1:2tFwxvLmAkh5quMXwCfvUdS6WYNrsr1svo1zDEzYROc=
@@ -844,8 +844,9 @@ github.com/stretchr/testify v1.7.0/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/
 github.com/stretchr/testify v1.7.1/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/h/Wwjteg=
 github.com/stretchr/testify v1.7.5/go.mod h1:yNjHg4UonilssWZ8iaSj1OCr/vHnekPRkoO+kdMU+MU=
 github.com/stretchr/testify v1.8.0/go.mod h1:yNjHg4UonilssWZ8iaSj1OCr/vHnekPRkoO+kdMU+MU=
-github.com/stretchr/testify v1.8.1 h1:w7B6lhMri9wdJUVmEZPGGhZzrYTPvgJArz7wNPgYKsk=
 github.com/stretchr/testify v1.8.1/go.mod h1:w2LPCIKwWwSfY2zedu0+kehJoqGctiVI29o6fzry7u4=
+github.com/stretchr/testify v1.8.2 h1:+h33VjcLVPDHtOdpUCuF+7gSuG3yGIftsP1YvFihtJ8=
+github.com/stretchr/testify v1.8.2/go.mod h1:w2LPCIKwWwSfY2zedu0+kehJoqGctiVI29o6fzry7u4=
 github.com/subosito/gotenv v1.3.0/go.mod h1:YzJjq/33h7nrwdY+iHMhEOEEbW0ovIz0tB6t6PwAXzs=
 github.com/subosito/gotenv v1.4.1/go.mod h1:ayKnFf/c6rvx/2iiLrJUk1e6plDbT3edrFNGqEflhK0=
 github.com/subosito/gotenv v1.4.2 h1:X1TuBLAMDFbaTAChgCBLu3DU3UPyELpnF2jjJ2cz/S8=
