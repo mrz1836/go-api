@@ -1,5 +1,5 @@
 # Get Golang
-FROM golang:1.20.7-alpine
+FROM golang:1.21.0-alpine
 
 # Version
 LABEL version="1.1" name="Go API Example"
