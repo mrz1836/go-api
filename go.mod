@@ -9,7 +9,7 @@ require (
 	github.com/gomodule/redigo v1.8.9
 	github.com/julienschmidt/httprouter v1.3.0
 	github.com/mrz1836/go-api-router v0.5.2
-	github.com/mrz1836/go-cache v0.8.1
+	github.com/mrz1836/go-cache v0.8.2
 	github.com/mrz1836/go-logger v0.3.2
 	github.com/mrz1836/go-mail v0.5.1
 	github.com/mrz1836/go-sanitize v1.3.1
@@ -43,7 +43,7 @@ require (
 	github.com/mrz1836/go-parameters v0.3.1 // indirect
 	github.com/mrz1836/go-ses v0.2.0 // indirect
 	github.com/mrz1836/postmark v1.6.0 // indirect
-	github.com/newrelic/go-agent/v3 v3.23.0 // indirect
+	github.com/newrelic/go-agent/v3 v3.24.1 // indirect
 	github.com/newrelic/go-agent/v3/integrations/nrhttprouter v1.0.1 // indirect
 	github.com/pelletier/go-toml/v2 v2.0.8 // indirect
 	github.com/spf13/afero v1.9.5 // indirect
@@ -58,8 +58,8 @@ require (
 	golang.org/x/sys v0.11.0 // indirect
 	golang.org/x/text v0.12.0 // indirect
 	golang.org/x/xerrors v0.0.0-20220907171357-04be3eba64a2 // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20230530153820-e85fd2cbaebc // indirect
-	google.golang.org/grpc v1.56.1 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20230815205213-6bfd019c3878 // indirect
+	google.golang.org/grpc v1.57.0 // indirect
 	google.golang.org/protobuf v1.31.0 // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
