@@ -8,7 +8,7 @@ require (
 	github.com/go-ozzo/ozzo-validation v3.6.0+incompatible
 	github.com/gomodule/redigo v1.8.9
 	github.com/julienschmidt/httprouter v1.3.0
-	github.com/mrz1836/go-api-router v0.6.0
+	github.com/mrz1836/go-api-router v0.6.1
 	github.com/mrz1836/go-cache v0.9.0
 	github.com/mrz1836/go-logger v0.3.2
 	github.com/mrz1836/go-mail v0.5.1
@@ -37,7 +37,7 @@ require (
 	github.com/gorilla/mux v1.8.0 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
-	github.com/klauspost/compress v1.17.1 // indirect
+	github.com/klauspost/compress v1.17.2 // indirect
 	github.com/magiconair/properties v1.8.7 // indirect
 	github.com/matryer/respond v1.0.1 // indirect
 	github.com/mattbaird/gochimp v0.0.0-20200820164431-f1082bcdf63f // indirect
@@ -45,7 +45,7 @@ require (
 	github.com/mrz1836/go-parameters v0.3.1 // indirect
 	github.com/mrz1836/go-ses v0.2.0 // indirect
 	github.com/mrz1836/postmark v1.6.0 // indirect
-	github.com/newrelic/go-agent/v3 v3.26.0 // indirect
+	github.com/newrelic/go-agent/v3 v3.27.0 // indirect
 	github.com/newrelic/go-agent/v3/integrations/nrhttprouter v1.0.2 // indirect
 	github.com/pelletier/go-toml/v2 v2.1.0 // indirect
 	github.com/sagikazarmark/locafero v0.3.0 // indirect
@@ -67,8 +67,8 @@ require (
 	golang.org/x/sys v0.13.0 // indirect
 	golang.org/x/text v0.13.0 // indirect
 	golang.org/x/xerrors v0.0.0-20220907171357-04be3eba64a2 // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20231012201019-e917dd12ba7a // indirect
-	google.golang.org/grpc v1.58.3 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20231016165738-49dd2c1f3d0b // indirect
+	google.golang.org/grpc v1.59.0 // indirect
 	google.golang.org/protobuf v1.31.0 // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
