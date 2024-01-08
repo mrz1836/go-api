@@ -17,7 +17,7 @@ require (
 	github.com/spf13/viper v1.18.2
 	github.com/volatiletech/null/v8 v8.1.2
 	github.com/volatiletech/sqlboiler/v4 v4.15.0
-	github.com/volatiletech/strmangle v0.0.5
+	github.com/volatiletech/strmangle v0.0.6
 )
 
 require (
