@@ -386,8 +386,8 @@ github.com/modocache/gover v0.0.0-20171022184752-b58185e213c5/go.mod h1:caMODM3P
 github.com/montanaflynn/stats v0.6.6/go.mod h1:etXPPgVO6n31NxCd9KQUMvCM+ve0ruNzt6R8Bnaayow=
 github.com/mrz1836/go-api-router v0.7.2 h1:/BXAAzbhYsjsMACITfR58RH1agK+JraDsT9VWjaKVqo=
 github.com/mrz1836/go-api-router v0.7.2/go.mod h1:Q1uiOk+f76Yw19mI10VfaedqnyHrl05x7/Nwz+QOs5Q=
-github.com/mrz1836/go-cache v0.9.3 h1:SxDowagONmPmtIt9HgCK+dAHYBTfoyGYj/rt/dti8io=
-github.com/mrz1836/go-cache v0.9.3/go.mod h1:kmtrLVW/wt/JBr1rE783eo04O9b36Emmfj1E/YyqAfA=
+github.com/mrz1836/go-cache v0.9.4 h1:xK4Q7XqfOrID3BhvZsxma8QTyIGYG6wuHy3N6pi3lik=
+github.com/mrz1836/go-cache v0.9.4/go.mod h1:M+l5VNmL6juG4vYJtHv7OzM0ZtO2zTaN4APaU7aHn78=
 github.com/mrz1836/go-logger v0.3.3 h1:L/u+So5yrsYi7KhkFWlZ8v28cmoHt6aB7X8uVEIEHu8=
 github.com/mrz1836/go-logger v0.3.3/go.mod h1:hlP6K2fnTcisDbcYw9u3eV+1TW5jCsYUfoujA4+38NY=
 github.com/mrz1836/go-mail v0.6.1 h1:s1fsODyfPD4fcBKR7t1eWpqEF4q20xAkftxT/62PtuE=
