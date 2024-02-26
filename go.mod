@@ -6,7 +6,7 @@ require (
 	github.com/OrlovEvgeny/go-mcache v0.0.0-20200121124330-1a8195b34f3a
 	github.com/friendsofgo/errors v0.9.2
 	github.com/go-ozzo/ozzo-validation v3.6.0+incompatible
-	github.com/gomodule/redigo v1.8.9
+	github.com/gomodule/redigo v1.9.2
 	github.com/julienschmidt/httprouter v1.3.0
 	github.com/mrz1836/go-api-router v0.7.2
 	github.com/mrz1836/go-cache v0.9.4
