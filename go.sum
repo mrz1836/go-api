@@ -385,8 +385,8 @@ github.com/modocache/gover v0.0.0-20171022184752-b58185e213c5/go.mod h1:caMODM3P
 github.com/montanaflynn/stats v0.6.6/go.mod h1:etXPPgVO6n31NxCd9KQUMvCM+ve0ruNzt6R8Bnaayow=
 github.com/mrz1836/go-api-router v0.7.3 h1:YWJIUwh4vx78TFVOABPAFORt+JPtONAOVAmaRw9VXm4=
 github.com/mrz1836/go-api-router v0.7.3/go.mod h1:lWxDDWqyWSKp8mXRqwaS1T0K57gifz6Ags32d4Wk4t0=
-github.com/mrz1836/go-cache v0.9.5 h1:sE3yy+3A6s2vVF/mwnzjFJ4RW1yAqpoPeWSRkqBBm2o=
-github.com/mrz1836/go-cache v0.9.5/go.mod h1:gfnCipOAQsclek8lZGiU8vhCSe63xVxp7E4BwM0U8dI=
+github.com/mrz1836/go-cache v0.9.6 h1:/b6S3hDCxdVR1MKW179mLKauxqra5R3mdnNhLRJcqPU=
+github.com/mrz1836/go-cache v0.9.6/go.mod h1:6p9IPFOFOdUxU8F72XdqH37PBoPvyhbwQnQFvUGmLcA=
 github.com/mrz1836/go-logger v0.3.3 h1:L/u+So5yrsYi7KhkFWlZ8v28cmoHt6aB7X8uVEIEHu8=
 github.com/mrz1836/go-logger v0.3.3/go.mod h1:hlP6K2fnTcisDbcYw9u3eV+1TW5jCsYUfoujA4+38NY=
 github.com/mrz1836/go-mail v0.6.2 h1:NC7WkZuySYjR1Hpfq47IR+9ca4BPVQPG9q+ZYGcywac=
@@ -977,8 +977,8 @@ google.golang.org/genproto v0.0.0-20220421151946-72621c1f0bd3/go.mod h1:8w6bsBMX
 google.golang.org/genproto v0.0.0-20220429170224-98d788798c3e/go.mod h1:8w6bsBMX6yCPbAVTeqQHvzxW0EIFigd5lZyahWgyfDo=
 google.golang.org/genproto v0.0.0-20220505152158-f39f71e6c8f3/go.mod h1:RAyBrSAP7Fh3Nc84ghnVLDPuV51xc9agzmm4Ph6i0Q4=
 google.golang.org/genproto v0.0.0-20220519153652-3a47de7e79bd/go.mod h1:RAyBrSAP7Fh3Nc84ghnVLDPuV51xc9agzmm4Ph6i0Q4=
-google.golang.org/genproto/googleapis/rpc v0.0.0-20240308144416-29370a3891b7 h1:em/y72n4XlYRtayY/cVj6pnVzHa//BDA1BdoO+z9mdE=
-google.golang.org/genproto/googleapis/rpc v0.0.0-20240308144416-29370a3891b7/go.mod h1:UCOku4NytXMJuLQE5VuqA5lX3PcHCBo8pxNyvkf4xBs=
+google.golang.org/genproto/googleapis/rpc v0.0.0-20240318140521-94a12d6c2237 h1:NnYq6UN9ReLM9/Y01KWNOWyI5xQ9kbIms5GGJVwS/Yc=
+google.golang.org/genproto/googleapis/rpc v0.0.0-20240318140521-94a12d6c2237/go.mod h1:WtryC6hu0hhx87FDGxWCDptyssuo68sk10vYjF+T9fY=
 google.golang.org/grpc v1.19.0/go.mod h1:mqu4LbDTu4XGKhr4mRzUsmM4RtVoemTSY81AxZiDr8c=
 google.golang.org/grpc v1.20.1/go.mod h1:10oTOabMzJvdu6/UiuZezV6QK5dSlG84ov/aaiqXj38=
 google.golang.org/grpc v1.21.1/go.mod h1:oYelfM1adQP15Ek0mdvEgi9Df8B9CZIaU1084ijfRaM=
