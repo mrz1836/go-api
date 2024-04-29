@@ -12,7 +12,7 @@ require (
 	github.com/mrz1836/go-cache v0.9.7
 	github.com/mrz1836/go-logger v0.3.3
 	github.com/mrz1836/go-mail v0.6.2
-	github.com/mrz1836/go-sanitize v1.3.1
+	github.com/mrz1836/go-sanitize v1.3.2
 	github.com/robfig/cron/v3 v3.0.1
 	github.com/spf13/viper v1.18.2
 	github.com/volatiletech/null/v8 v8.1.2
