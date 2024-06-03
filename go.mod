@@ -14,7 +14,7 @@ require (
 	github.com/mrz1836/go-mail v0.6.2
 	github.com/mrz1836/go-sanitize v1.3.2
 	github.com/robfig/cron/v3 v3.0.1
-	github.com/spf13/viper v1.18.2
+	github.com/spf13/viper v1.19.0
 	github.com/volatiletech/null/v8 v8.1.2
 	github.com/volatiletech/sqlboiler/v4 v4.16.2
 	github.com/volatiletech/strmangle v0.0.6
@@ -45,7 +45,7 @@ require (
 	github.com/mrz1836/postmark v1.6.4 // indirect
 	github.com/newrelic/go-agent/v3 v3.31.0 // indirect
 	github.com/newrelic/go-agent/v3/integrations/nrhttprouter v1.0.2 // indirect
-	github.com/pelletier/go-toml/v2 v2.1.0 // indirect
+	github.com/pelletier/go-toml/v2 v2.2.2 // indirect
 	github.com/sagikazarmark/locafero v0.4.0 // indirect
 	github.com/sagikazarmark/slog-shim v0.1.0 // indirect
 	github.com/sourcegraph/conc v0.3.0 // indirect
