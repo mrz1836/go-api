@@ -387,8 +387,8 @@ github.com/mrz1836/go-api-router v0.7.3 h1:YWJIUwh4vx78TFVOABPAFORt+JPtONAOVAmaR
 github.com/mrz1836/go-api-router v0.7.3/go.mod h1:lWxDDWqyWSKp8mXRqwaS1T0K57gifz6Ags32d4Wk4t0=
 github.com/mrz1836/go-cache v0.10.0 h1:BxWXJLBoxScJ901jRdpR7df6wFmi98GfQIvth/OLkmg=
 github.com/mrz1836/go-cache v0.10.0/go.mod h1:Vkgi6swUiz6ENdz2JfOTjDFfJQsRU9hEdzLIwme2GXM=
-github.com/mrz1836/go-logger v0.3.3 h1:L/u+So5yrsYi7KhkFWlZ8v28cmoHt6aB7X8uVEIEHu8=
-github.com/mrz1836/go-logger v0.3.3/go.mod h1:hlP6K2fnTcisDbcYw9u3eV+1TW5jCsYUfoujA4+38NY=
+github.com/mrz1836/go-logger v0.3.4 h1:ueEbOTQzHjrYfIRtSijoG8jS3ZZS+/uzlvbzorUuo5o=
+github.com/mrz1836/go-logger v0.3.4/go.mod h1:AqUZ4p9BI5/9UME+KbWdBOVDZT0Q5wdqc3Mnu7e8nNM=
 github.com/mrz1836/go-mail v0.6.4 h1:0A68p65gPwlwvu3M/wG8M/ZTJOsYNLioAxrTl4sqslY=
 github.com/mrz1836/go-mail v0.6.4/go.mod h1:/LinY++yqlyIrNOcIUVcq4lloa8yWTsrERf1m7xqv/o=
 github.com/mrz1836/go-parameters v0.4.1 h1:8ElvGs8hzk0/hz2t5an2FmS9SPfWozGn2nXUvYwI+Uk=
