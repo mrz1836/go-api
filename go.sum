@@ -386,8 +386,8 @@ github.com/mrz1836/go-api-router v0.7.3 h1:YWJIUwh4vx78TFVOABPAFORt+JPtONAOVAmaR
 github.com/mrz1836/go-api-router v0.7.3/go.mod h1:lWxDDWqyWSKp8mXRqwaS1T0K57gifz6Ags32d4Wk4t0=
 github.com/mrz1836/go-cache v0.10.0 h1:BxWXJLBoxScJ901jRdpR7df6wFmi98GfQIvth/OLkmg=
 github.com/mrz1836/go-cache v0.10.0/go.mod h1:Vkgi6swUiz6ENdz2JfOTjDFfJQsRU9hEdzLIwme2GXM=
-github.com/mrz1836/go-logger v0.3.4 h1:ueEbOTQzHjrYfIRtSijoG8jS3ZZS+/uzlvbzorUuo5o=
-github.com/mrz1836/go-logger v0.3.4/go.mod h1:AqUZ4p9BI5/9UME+KbWdBOVDZT0Q5wdqc3Mnu7e8nNM=
+github.com/mrz1836/go-logger v0.3.5 h1:EYC9sOl3T2QfU8F7Cz+7esilHZsCXeWOoLDhna7EpNk=
+github.com/mrz1836/go-logger v0.3.5/go.mod h1:671FjY7dkZelQXBSAZOhOqBTf+N6BOSo0pDM3km4Nx8=
 github.com/mrz1836/go-mail v0.6.4 h1:0A68p65gPwlwvu3M/wG8M/ZTJOsYNLioAxrTl4sqslY=
 github.com/mrz1836/go-mail v0.6.4/go.mod h1:/LinY++yqlyIrNOcIUVcq4lloa8yWTsrERf1m7xqv/o=
 github.com/mrz1836/go-parameters v0.4.1 h1:8ElvGs8hzk0/hz2t5an2FmS9SPfWozGn2nXUvYwI+Uk=
@@ -494,8 +494,8 @@ github.com/stretchr/testify v1.7.1/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/
 github.com/stretchr/testify v1.7.5/go.mod h1:yNjHg4UonilssWZ8iaSj1OCr/vHnekPRkoO+kdMU+MU=
 github.com/stretchr/testify v1.8.0/go.mod h1:yNjHg4UonilssWZ8iaSj1OCr/vHnekPRkoO+kdMU+MU=
 github.com/stretchr/testify v1.8.4/go.mod h1:sz/lmYIOXD/1dqDmKjjqLyZ2RngseejIcXlSw2iwfAo=
-github.com/stretchr/testify v1.9.0 h1:HtqpIVDClZ4nwg75+f6Lvsy/wHu+3BoSGCbBAcpTsTg=
 github.com/stretchr/testify v1.9.0/go.mod h1:r2ic/lqez/lEtzL7wO/rwa5dbSLXVDPFyf8C91i36aY=
+github.com/stretchr/testify v1.10.0 h1:Xv5erBjTwe/5IxqUQTdXv5kgmIvbHo3QQyRwhJsOfJA=
 github.com/subosito/gotenv v1.3.0/go.mod h1:YzJjq/33h7nrwdY+iHMhEOEEbW0ovIz0tB6t6PwAXzs=
 github.com/subosito/gotenv v1.4.1/go.mod h1:ayKnFf/c6rvx/2iiLrJUk1e6plDbT3edrFNGqEflhK0=
 github.com/subosito/gotenv v1.6.0 h1:9NlTDc1FTs4qu0DDq7AEtTPNw6SVm7uBMsUCUjABIf8=
