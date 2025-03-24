@@ -180,7 +180,7 @@ export API_SERVER_PORT=3000
 
 ## Examples & Tests
 All unit tests and examples run via [GitHub Actions](https://github.com/tonicpow/go-paymail/actions) and
-uses [Go version 1.19.x](https://golang.org/doc/go1.19). View the [configuration file](.github/workflows/run-tests.yml).
+uses [Go version 1.23.x](https://golang.org/doc/go1.23). View the [configuration file](.github/workflows/run-tests.yml).
 
 Run all tests (including integration tests)
 ```shell script
