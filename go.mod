@@ -1,6 +1,7 @@
 module github.com/mrz1836/go-api
 
 go 1.19
+toolchain go1.24.1
 
 require (
 	github.com/OrlovEvgeny/go-mcache v0.0.0-20200121124330-1a8195b34f3a
@@ -11,7 +12,7 @@ require (
 	github.com/mrz1836/go-api-router v0.7.3
 	github.com/mrz1836/go-cache v0.10.0
 	github.com/mrz1836/go-logger v0.3.5
-	github.com/mrz1836/go-mail v0.6.4
+	github.com/mrz1836/go-mail v0.7.0
 	github.com/mrz1836/go-sanitize v1.3.4
 	github.com/robfig/cron/v3 v3.0.1
 	github.com/spf13/viper v1.19.0
@@ -21,10 +22,10 @@ require (
 )
 
 require (
-	github.com/PuerkitoBio/goquery v1.9.2 // indirect
-	github.com/andybalholm/cascadia v1.3.2 // indirect
+	github.com/PuerkitoBio/goquery v1.10.2 // indirect
+	github.com/andybalholm/cascadia v1.3.3 // indirect
 	github.com/asaskevich/govalidator v0.0.0-20230301143203-a9d515a09cc2 // indirect
-	github.com/aws/aws-sdk-go v1.54.1 // indirect
+	github.com/aws/aws-sdk-go v1.55.6 // indirect
 	github.com/aymerick/douceur v0.2.0 // indirect
 	github.com/domodwyer/mailyak v3.1.1+incompatible // indirect
 	github.com/fsnotify/fsnotify v1.7.0 // indirect
@@ -41,8 +42,8 @@ require (
 	github.com/mattbaird/gochimp v0.0.0-20200820164431-f1082bcdf63f // indirect
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	github.com/mrz1836/go-parameters v0.4.1 // indirect
-	github.com/mrz1836/go-ses v0.3.2 // indirect
-	github.com/mrz1836/postmark v1.6.5 // indirect
+	github.com/mrz1836/go-ses v0.3.3 // indirect
+	github.com/mrz1836/postmark v1.7.1 // indirect
 	github.com/newrelic/go-agent/v3 v3.33.0 // indirect
 	github.com/newrelic/go-agent/v3/integrations/nrhttprouter v1.0.2 // indirect
 	github.com/pelletier/go-toml/v2 v2.2.2 // indirect
@@ -59,9 +60,9 @@ require (
 	go.uber.org/atomic v1.9.0 // indirect
 	go.uber.org/multierr v1.9.0 // indirect
 	golang.org/x/exp v0.0.0-20240318143956-a85f2c67cd81 // indirect
-	golang.org/x/net v0.36.0 // indirect
-	golang.org/x/sys v0.30.0 // indirect
-	golang.org/x/text v0.22.0 // indirect
+	golang.org/x/net v0.37.0 // indirect
+	golang.org/x/sys v0.31.0 // indirect
+	golang.org/x/text v0.23.0 // indirect
 	golang.org/x/xerrors v0.0.0-20220907171357-04be3eba64a2 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20240528184218-531527333157 // indirect
 	google.golang.org/grpc v1.64.1 // indirect
