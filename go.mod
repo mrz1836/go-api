@@ -9,7 +9,7 @@ require (
 	github.com/go-ozzo/ozzo-validation v3.6.0+incompatible
 	github.com/gomodule/redigo v1.9.2
 	github.com/julienschmidt/httprouter v1.3.0
-	github.com/mrz1836/go-api-router v0.7.3
+	github.com/mrz1836/go-api-router v0.9.0
 	github.com/mrz1836/go-cache v0.12.0
 	github.com/mrz1836/go-logger v0.3.5
 	github.com/mrz1836/go-mail v0.7.0
@@ -40,11 +40,11 @@ require (
 	github.com/matryer/respond v1.0.1 // indirect
 	github.com/mattbaird/gochimp v0.0.0-20200820164431-f1082bcdf63f // indirect
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
-	github.com/mrz1836/go-parameters v0.4.1 // indirect
+	github.com/mrz1836/go-parameters v0.6.0 // indirect
 	github.com/mrz1836/go-ses v0.3.3 // indirect
 	github.com/mrz1836/postmark v1.7.1 // indirect
 	github.com/newrelic/go-agent/v3 v3.37.0 // indirect
-	github.com/newrelic/go-agent/v3/integrations/nrhttprouter v1.0.2 // indirect
+	github.com/newrelic/go-agent/v3/integrations/nrhttprouter v1.1.3 // indirect
 	github.com/pelletier/go-toml/v2 v2.2.2 // indirect
 	github.com/sagikazarmark/locafero v0.4.0 // indirect
 	github.com/sagikazarmark/slog-shim v0.1.0 // indirect
