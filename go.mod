@@ -10,7 +10,7 @@ require (
 	github.com/gomodule/redigo v1.9.2
 	github.com/julienschmidt/httprouter v1.3.0
 	github.com/mrz1836/go-api-router v0.7.3
-	github.com/mrz1836/go-cache v0.10.0
+	github.com/mrz1836/go-cache v0.12.0
 	github.com/mrz1836/go-logger v0.3.5
 	github.com/mrz1836/go-mail v0.7.0
 	github.com/mrz1836/go-sanitize v1.3.4
@@ -32,7 +32,6 @@ require (
 	github.com/go-sql-driver/mysql v1.7.1 // indirect
 	github.com/gofrs/uuid v4.4.0+incompatible // indirect
 	github.com/golang-jwt/jwt v3.2.2+incompatible // indirect
-	github.com/golang/protobuf v1.5.4 // indirect
 	github.com/gorilla/css v1.0.1 // indirect
 	github.com/gorilla/mux v1.8.1 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
@@ -44,7 +43,7 @@ require (
 	github.com/mrz1836/go-parameters v0.4.1 // indirect
 	github.com/mrz1836/go-ses v0.3.3 // indirect
 	github.com/mrz1836/postmark v1.7.1 // indirect
-	github.com/newrelic/go-agent/v3 v3.33.0 // indirect
+	github.com/newrelic/go-agent/v3 v3.37.0 // indirect
 	github.com/newrelic/go-agent/v3/integrations/nrhttprouter v1.0.2 // indirect
 	github.com/pelletier/go-toml/v2 v2.2.2 // indirect
 	github.com/sagikazarmark/locafero v0.4.0 // indirect
@@ -64,9 +63,9 @@ require (
 	golang.org/x/sys v0.31.0 // indirect
 	golang.org/x/text v0.23.0 // indirect
 	golang.org/x/xerrors v0.0.0-20220907171357-04be3eba64a2 // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20240528184218-531527333157 // indirect
-	google.golang.org/grpc v1.64.1 // indirect
-	google.golang.org/protobuf v1.34.1 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20250313205543-e70fdf4c4cb4 // indirect
+	google.golang.org/grpc v1.71.0 // indirect
+	google.golang.org/protobuf v1.36.5 // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
