@@ -51,13 +51,13 @@ env: ## Creates a fresh database
 flush-redis: ## Wipe out all data in redis (requires redli)
 	@redli --raw FLUSHALL
 
-.PHONY: install
-install: ## Run the Custom installation
-	@go get -u github.com/pressly/goose/cmd/goose
-	@go get -u -t github.com/volatiletech/sqlboiler/v4
-	@go get -u github.com/volatiletech/sqlboiler/v4/drivers/sqlboiler-mysql
-	@$(MAKE) env
-	@$(MAKE) db
+#.PHONY: install
+#install: ## Run the Custom installation
+#	@go get -u github.com/pressly/goose/cmd/goose
+#	@go get -u -t github.com/volatiletech/sqlboiler/v4
+#	@go get -u github.com/volatiletech/sqlboiler/v4/drivers/sqlboiler-mysql
+#	@$(MAKE) env
+#	@$(MAKE) db
 
 .PHONY: schema
 schema: ## Run the Model/schema generation
