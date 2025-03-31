@@ -2,6 +2,8 @@ module github.com/mrz1836/go-api
 
 go 1.23.0
 
+toolchain go1.24.1
+
 require (
 	github.com/OrlovEvgeny/go-mcache v0.0.0-20200121124330-1a8195b34f3a
 	github.com/friendsofgo/errors v0.9.2
@@ -12,7 +14,7 @@ require (
 	github.com/mrz1836/go-cache v0.12.0
 	github.com/mrz1836/go-logger v0.3.5
 	github.com/mrz1836/go-mail v0.7.0
-	github.com/mrz1836/go-sanitize v1.3.4
+	github.com/mrz1836/go-sanitize v1.3.5
 	github.com/robfig/cron/v3 v3.0.1
 	github.com/spf13/viper v1.20.0
 	github.com/volatiletech/null/v8 v8.1.2
