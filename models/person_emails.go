@@ -51,7 +51,7 @@ func (p *Person) SendExampleEmail(ctx context.Context) (err error) {
 
 	// Start a new email
 	email := notifications.Service.EmailService.NewEmail()
-	email.Recipients = append(email.Recipients, data.Person.Email)
+	email.Recipients = append(email.Recipients, data.Email)
 	email.FromName = "Acme"
 	email.Subject = "Your example email subject line"
 	email.Tags = append(email.Tags, "example_tag")
