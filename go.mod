@@ -13,7 +13,7 @@ require (
 	github.com/mrz1836/go-api-router v0.10.3
 	github.com/mrz1836/go-cache v0.12.1
 	github.com/mrz1836/go-logger v0.3.5
-	github.com/mrz1836/go-mail v0.7.0
+	github.com/mrz1836/go-mail v0.7.1
 	github.com/mrz1836/go-sanitize v1.3.5
 	github.com/robfig/cron/v3 v3.0.1
 	github.com/spf13/viper v1.20.1
@@ -24,7 +24,7 @@ require (
 
 require (
 	filippo.io/edwards25519 v1.1.0 // indirect
-	github.com/PuerkitoBio/goquery v1.10.2 // indirect
+	github.com/PuerkitoBio/goquery v1.10.3 // indirect
 	github.com/andybalholm/cascadia v1.3.3 // indirect
 	github.com/asaskevich/govalidator v0.0.0-20230301143203-a9d515a09cc2 // indirect
 	github.com/aws/aws-sdk-go v1.55.6 // indirect
@@ -42,7 +42,7 @@ require (
 	github.com/mattbaird/gochimp v0.0.0-20200820164431-f1082bcdf63f // indirect
 	github.com/mrz1836/go-parameters v0.6.1 // indirect
 	github.com/mrz1836/go-ses v0.3.3 // indirect
-	github.com/mrz1836/postmark v1.7.1 // indirect
+	github.com/mrz1836/postmark v1.7.2 // indirect
 	github.com/newrelic/go-agent/v3 v3.38.0 // indirect
 	github.com/newrelic/go-agent/v3/integrations/nrhttprouter v1.1.3 // indirect
 	github.com/pelletier/go-toml/v2 v2.2.4 // indirect
