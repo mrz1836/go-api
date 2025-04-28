@@ -12,7 +12,7 @@ require (
 	github.com/julienschmidt/httprouter v1.3.0
 	github.com/mrz1836/go-api-router v0.10.3
 	github.com/mrz1836/go-cache v0.12.1
-	github.com/mrz1836/go-logger v0.3.5
+	github.com/mrz1836/go-logger v0.3.6
 	github.com/mrz1836/go-mail v0.7.1
 	github.com/mrz1836/go-sanitize v1.3.5
 	github.com/robfig/cron/v3 v3.0.1
