@@ -10,9 +10,9 @@ require (
 	github.com/go-ozzo/ozzo-validation v3.6.0+incompatible
 	github.com/gomodule/redigo v1.9.2
 	github.com/julienschmidt/httprouter v1.3.0
-	github.com/mrz1836/go-api-router v0.10.3
+	github.com/mrz1836/go-api-router v0.10.4
 	github.com/mrz1836/go-cache v0.12.1
-	github.com/mrz1836/go-logger v0.3.5
+	github.com/mrz1836/go-logger v0.3.6
 	github.com/mrz1836/go-mail v0.7.1
 	github.com/mrz1836/go-sanitize v1.3.5
 	github.com/robfig/cron/v3 v3.0.1
@@ -60,8 +60,8 @@ require (
 	golang.org/x/sys v0.32.0 // indirect
 	golang.org/x/text v0.24.0 // indirect
 	golang.org/x/xerrors v0.0.0-20240903120638-7835f813f4da // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20250414145226-207652e42e2e // indirect
-	google.golang.org/grpc v1.71.1 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20250421163800-61c742ae3ef0 // indirect
+	google.golang.org/grpc v1.72.0 // indirect
 	google.golang.org/protobuf v1.36.6 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
