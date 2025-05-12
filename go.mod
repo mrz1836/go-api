@@ -10,7 +10,7 @@ require (
 	github.com/go-ozzo/ozzo-validation v3.6.0+incompatible
 	github.com/gomodule/redigo v1.9.2
 	github.com/julienschmidt/httprouter v1.3.0
-	github.com/mrz1836/go-api-router v0.10.4
+	github.com/mrz1836/go-api-router v0.11.1
 	github.com/mrz1836/go-cache v0.12.1
 	github.com/mrz1836/go-logger v0.3.6
 	github.com/mrz1836/go-mail v0.7.1
@@ -43,7 +43,7 @@ require (
 	github.com/mrz1836/go-parameters v0.6.1 // indirect
 	github.com/mrz1836/go-ses v0.3.3 // indirect
 	github.com/mrz1836/postmark v1.7.2 // indirect
-	github.com/newrelic/go-agent/v3 v3.38.0 // indirect
+	github.com/newrelic/go-agent/v3 v3.39.0 // indirect
 	github.com/newrelic/go-agent/v3/integrations/nrhttprouter v1.1.3 // indirect
 	github.com/pelletier/go-toml/v2 v2.2.4 // indirect
 	github.com/sagikazarmark/locafero v0.9.0 // indirect
@@ -56,11 +56,11 @@ require (
 	github.com/volatiletech/inflect v0.0.1 // indirect
 	github.com/volatiletech/randomize v0.0.1 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
-	golang.org/x/net v0.39.0 // indirect
-	golang.org/x/sys v0.32.0 // indirect
-	golang.org/x/text v0.24.0 // indirect
+	golang.org/x/net v0.40.0 // indirect
+	golang.org/x/sys v0.33.0 // indirect
+	golang.org/x/text v0.25.0 // indirect
 	golang.org/x/xerrors v0.0.0-20240903120638-7835f813f4da // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20250421163800-61c742ae3ef0 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20250505200425-f936aa4a68b2 // indirect
 	google.golang.org/grpc v1.72.0 // indirect
 	google.golang.org/protobuf v1.36.6 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
