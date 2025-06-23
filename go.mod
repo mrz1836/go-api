@@ -10,7 +10,7 @@ require (
 	github.com/go-ozzo/ozzo-validation v3.6.0+incompatible
 	github.com/gomodule/redigo v1.9.2
 	github.com/julienschmidt/httprouter v1.3.0
-	github.com/mrz1836/go-api-router v0.11.2
+	github.com/mrz1836/go-api-router v0.11.3
 	github.com/mrz1836/go-cache v0.12.1
 	github.com/mrz1836/go-logger v0.3.6
 	github.com/mrz1836/go-mail v0.7.1
@@ -40,7 +40,7 @@ require (
 	github.com/jmespath/go-jmespath v0.4.0 // indirect
 	github.com/matryer/respond v1.0.1 // indirect
 	github.com/mattbaird/gochimp v0.0.0-20200820164431-f1082bcdf63f // indirect
-	github.com/mrz1836/go-parameters v0.6.3 // indirect
+	github.com/mrz1836/go-parameters v0.7.0 // indirect
 	github.com/mrz1836/go-ses v0.3.3 // indirect
 	github.com/mrz1836/postmark v1.7.2 // indirect
 	github.com/newrelic/go-agent/v3 v3.39.0 // indirect
@@ -52,16 +52,16 @@ require (
 	github.com/spf13/cast v1.7.1 // indirect
 	github.com/spf13/pflag v1.0.6 // indirect
 	github.com/subosito/gotenv v1.6.0 // indirect
-	github.com/ugorji/go/codec v1.2.14 // indirect
+	github.com/ugorji/go/codec v1.3.0 // indirect
 	github.com/volatiletech/inflect v0.0.1 // indirect
 	github.com/volatiletech/randomize v0.0.1 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
-	golang.org/x/net v0.40.0 // indirect
+	golang.org/x/net v0.41.0 // indirect
 	golang.org/x/sys v0.33.0 // indirect
-	golang.org/x/text v0.25.0 // indirect
+	golang.org/x/text v0.26.0 // indirect
 	golang.org/x/xerrors v0.0.0-20240903120638-7835f813f4da // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20250519155744-55703ea1f237 // indirect
-	google.golang.org/grpc v1.72.2 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20250603155806-513f23925822 // indirect
+	google.golang.org/grpc v1.73.0 // indirect
 	google.golang.org/protobuf v1.36.6 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
