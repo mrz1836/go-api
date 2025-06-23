@@ -79,8 +79,8 @@ github.com/mrz1836/go-mail v0.7.1 h1:2Mgw6oDk1ey0ASL7uyXshRLF6azEK7mcRRbfa4kNssc
 github.com/mrz1836/go-mail v0.7.1/go.mod h1:gp8E6rVxWaEvwfcz77F0m/McpXy4/DMMdhO21WQbsq0=
 github.com/mrz1836/go-parameters v0.7.0 h1:EQAgVH3Nfh6X7YmMsc7Xq6H0LchbmXUypboHb0j8Ra0=
 github.com/mrz1836/go-parameters v0.7.0/go.mod h1:2EiZmt4KhVPwLldPANI+Bg8tgslT430IH97qdyoIufI=
-github.com/mrz1836/go-sanitize v1.3.5 h1:FPvYD1Q6cqAaOY97fx77TYhdlwWegDl1gab0toAbnv4=
-github.com/mrz1836/go-sanitize v1.3.5/go.mod h1:w3j9KyYxbIGwzNKaMvTXpz2LW8YrOHkrXKHRXVeL07I=
+github.com/mrz1836/go-sanitize v1.4.4 h1:VQ9TPnpH6JjPZOszUX42N71CSPmVebJh2BR51+bf04s=
+github.com/mrz1836/go-sanitize v1.4.4/go.mod h1:w3j9KyYxbIGwzNKaMvTXpz2LW8YrOHkrXKHRXVeL07I=
 github.com/mrz1836/go-ses v0.3.3 h1:6jKKwMv6p6jGOy1eur7hxssr0bpUkNiiEe4vDpGbcw4=
 github.com/mrz1836/go-ses v0.3.3/go.mod h1:Ty57rcCTjtudUWsd8Gl63+O8VGFvAUy3YDM/VwVJVZQ=
 github.com/mrz1836/postmark v1.7.2 h1:NeneL9aQs8fpaaqxZfuaYlNwKIzZ2Xuhf03bR22bcTY=
